@@ -5,8 +5,10 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel app.ts -d dist",
-    "start": "npm run build && nodemon app.ts"
+    "build": "tsc",
+    "start": "NODE_ENV=production npm run build && node ./dist/index.js",
+    "dev": "NODE_ENV=development nodemon --watch '*' --exec 'ts-node' start.ts"
+    
   },
   "keywords": [],
   "author": "",

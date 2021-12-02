@@ -1,5 +1,5 @@
 import "dotenv-defaults/config";
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import nodemailer from "nodemailer";
 
 // mailgun secrets for POST request via Mailgun
@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const postMailgun = async (req: Request, res: Response, next: any) => {
+export const postMailgun = async (req: Request, res: Response, next: NextFunction) => {
   try {
     if (process.env.NODE_ENV === "production") {
       await transporter.sendMail(req.body);
