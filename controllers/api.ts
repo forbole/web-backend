@@ -1,4 +1,5 @@
-import express, { Request, Response } from "express";
+import "dotenv-defaults/config";
+import { Request, Response } from "express";
 import nodemailer from "nodemailer";
 
 // mailgun secrets for POST request via Mailgun

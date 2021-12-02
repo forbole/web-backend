@@ -1,16 +1,13 @@
-// const express = require("express");
 import "dotenv-defaults/config";
 import express, {Request, Response, NextFunction} from "express"
 import { HttpException } from './exceptions/HttpException'
 const cors = require("cors");
-// import cors from 'cors'
 
 const PORT = process.env.PORT || 3000;
 
 const app = express();
 
 const routes = require("./routes/api");
-// import api_routes from "./routes/api"
 
 const url = process.env.PUBLIC_URL;
 
