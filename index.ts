@@ -38,4 +38,4 @@ const url = process.env.PUBLIC_URL;
     }
 })();
 
-module.exports = app
+export default app
