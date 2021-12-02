@@ -1,5 +1,4 @@
-const app = require('./app.ts')
-// import {app} from './app'
+const app = require('./index');
 const PORT = process.env.PORT || 3000;
 const url = process.env.PUBLIC_URL;
 
