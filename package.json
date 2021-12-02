@@ -5,8 +5,10 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel app.ts -d dist",
-    "start": "npm run build && nodemon app.ts"
+    "prebuild": "rimraf ./build",
+    "build": "tsc",
+    "start": "NODE_ENV=production npm run build && node ./dist/index.ts",
+    "dev": "NODE_ENV=development nodemon start.ts"
   },
   "keywords": [],
   "author": "",
