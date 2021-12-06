@@ -1,41 +1,45 @@
 import "dotenv-defaults/config";
 import express, {Request, Response, NextFunction} from "express"
-import { HttpException } from './exceptions/HttpException'
+import { v1 } from './routers'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const cors = require("cors");
 
 const PORT = process.env.PORT || 3000;
-
 const app = express();
 
-const routes = require("./routes/api");
+// middlewares
+app.use(express.json());
 
-const url = process.env.PUBLIC_URL;
+app.use(cors());
 
-(async () => {
-  try {
-    app.use(cors());
+app.use('/api/v1/', v1);
 
-    app.use("/api", routes);
+// 404 middleware
+app.use((_req, _res, next) => {
+  const error = new Error('Not found') as ResponseError;
+  error.status = 404;
+  next(error);
+});
 
-    // error handler
-    app.use((err: HttpException, req: Request, res: Response, next: NextFunction) => {
-      res.status(err?.status || 500).json({
-        message: err?.message || 'Internal server error.',
-        stack: err?.stack,
-        error: err,
-      })
-    })
-
-    // app.listen(PORT, (err?: any) => {
-    //   if (err) throw err;
-    //   console.log(`> Ready on ${url}`);
-    //   console.log(`> ENV:  ${process.env.NODE_ENV}`);
-    //   console.log(`> PORT:  ${process.env.PORT}`);
-    // });
-    } catch (e) {
-      console.error(e);
-      process.exit(1);
+// error handler middleware
+app.use((error: ResponseError, _req: Request, res: Response, _next: NextFunction) => {
+  res.status(error.status || 500).send({
+    error: {
+      status: error.status || 500,
+      message: error.message || 'Internal Server Error',
     }
-})();
+  });
+});
+
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, (error?: any) => {
+    if (error) throw error;
+    console.log(`> Ready at http://localhost:${PORT}`);
+    console.log(`> ENV: ${process.env.NODE_ENV}`);
+    console.log(`> PORT: ${PORT}`);
+  });
+}
+
 
 export default app
