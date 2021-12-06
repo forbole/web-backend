@@ -1,5 +1,5 @@
 import "dotenv-defaults/config";
-import express, {Request, Response, NextFunction} from "express"
+import express, { Request, Response, NextFunction } from "express"
 import { v1 } from './routers'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
