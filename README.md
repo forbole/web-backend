@@ -1,6 +1,6 @@
 # Web backend
 
-A node server using express and handle various **APIS** request for frontend apps.
+A node server using express and handling various **APIs** requests for frontend apps.
 
 ## Available Scripts
 
@@ -27,7 +27,7 @@ All the below listed API endpoints return `200` when a request is successful, an
 
 #### POST `/contact`
 
-Requesting to send information/e-mails/feekbacks to Forbole e-mail address.
+Requesting to send information/e-mails/feedbacks to Forbole e-mail address.
 
 Upon the request is successful, a `200` status will br returned with the success message as below:
 
@@ -37,4 +37,4 @@ Upon the request is successful, a `200` status will br returned with the success
 }
 ```
 
-**This repo is in active development**
+**This repo is in active development.**
