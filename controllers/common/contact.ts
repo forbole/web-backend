@@ -1,4 +1,3 @@
-import "dotenv-defaults/config";
 import { Request, Response, NextFunction } from "express";
 import nodemailer from "nodemailer";
 
