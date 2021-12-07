@@ -5,6 +5,7 @@ A node server using express and handling various **APIs** requests for frontend 
 ## Available Scripts
 
 In this project directory, you can run:
+
 `npm start`
 Runs the server in production mode pointing to the build in the `dist` folder.
 
