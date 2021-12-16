@@ -5,14 +5,17 @@ FROM node:14-alpine AS node
 
 FROM node AS builder
 
+ENV NODE_ENV=production
+
 # Use /app as the CWD
 WORKDIR /app
 
 # Copy package.json and package-lock.json to /app
-COPY package*.json ./
+# COPY package*.json ./
+COPY ["package.json", "package-lock.json*", "./"]
 
 # Install all dependencies
-RUN npm i
+RUN npm install --production
 
 # Copy the rest of the code
 COPY . .
