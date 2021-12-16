@@ -14,6 +14,11 @@ app.use(cors());
 
 app.use('/api/v1/', v1);
 
+// checking for response
+app.get('/', (_req: Request, res: Response, _next: NextFunction) => {
+  res.send('testing successful')
+})
+
 // 404 middleware
 app.use((_req, _res, next) => {
   const error = new Error('Not found') as ResponseError;
