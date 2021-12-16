@@ -14,9 +14,13 @@ app.use(cors());
 
 app.use('/api/v1/', v1);
 
-// checking for response
-app.get('/', (_req: Request, res: Response, _next: NextFunction) => {
-  res.send('testing successful')
+// health check api
+app.get('/ping', (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    return res.status(200).send('pong')
+  } catch (err) {
+    next(err)
+  }
 })
 
 // 404 middleware
