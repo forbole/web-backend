@@ -1,4 +1,4 @@
-FROM node:14-alphine AS node
+FROM node:14-alpine AS node
 
 
 # Builder stage
@@ -28,3 +28,5 @@ RUN mkdir -p /app/dist
 
 # Use /app as CWD
 WORKDIR /app
+
+CMD ["node", "dist/index.js"]
