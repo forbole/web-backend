@@ -14,6 +14,15 @@ app.use(cors());
 
 app.use('/api/v1/', v1);
 
+// health check api
+app.get('/ping', (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    return res.status(200).send('pong')
+  } catch (err) {
+    next(err)
+  }
+})
+
 // 404 middleware
 app.use((_req, _res, next) => {
   const error = new Error('Not found') as ResponseError;
