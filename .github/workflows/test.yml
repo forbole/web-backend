@@ -16,10 +16,11 @@ jobs:
       PUBLIC_URL: http://localhost:3000
     steps:
       - uses: actions/checkout@v2
+      - name: Run build check
       - uses: actions/setup-node@v2
         with:
           node-version: 12.x # will run `npm install` command
-      - run: |
+        cmd: |
         npm install
         npm run build
       - run: npm test
