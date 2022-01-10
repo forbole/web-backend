@@ -41,7 +41,7 @@ app.use((error: ResponseError, _req: Request, res: Response, _next: NextFunction
 });
 
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, (error?: any) => {
+  app.listen(PORT, (error?: unknown) => {
     if (error) throw error;
     console.log(`> Ready at http://localhost:${PORT}`);
     console.log(`> ENV: ${process.env.NODE_ENV}`);

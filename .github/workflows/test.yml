@@ -10,7 +10,7 @@ jobs:
           cmd: install # will run `yarn install` command
       - uses: borales/actions-yarn@v2.0.0
         with:
-          cmd: run lint # will run `yarn build` command
+          cmd: npm run lint # will run `yarn build` command
   Build-test:
     runs-on: ubuntu-latest
     env:
@@ -19,9 +19,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: borales/actions-yarn@v2.0.0
         with:
-          cmd: install # will run `yarn install` command
+          cmd: npm install # will run `npm install` command
       - name: Run build check
-        run: yarn build
-      - run: npm run test
+        run: npm run build
+      - run: npm test
         env:
           CI: true
