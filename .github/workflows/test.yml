@@ -9,7 +9,7 @@ jobs:
         run: npm install
       - name: Run lint check
         run: npm run lint
-  Unit-tests:
+  Unit-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
