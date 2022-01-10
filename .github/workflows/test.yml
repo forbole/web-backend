@@ -5,24 +5,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup node 12
-        uses: actions/setup-node@v2
-        with:
-          node-version: 12.x
-          cmd: npm run lint
-  Build-test:
+      - name: Install modules
+        run: npm install
+      - name: Run lint check
+        run: npm run lint
+  Unit-tests:
     runs-on: ubuntu-latest
-    env:
-      PUBLIC_URL: http://localhost:3000
     steps:
       - uses: actions/checkout@v2
-      - name: Run build check
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 12.x # will run `npm install` command
-        cmd: |
-        npm install
-        npm run build
-      - run: npm test
-        env:
-          CI: true
+      - name: Install modules
+        run: npm ci
+      - name: Run tests
+        run: npm test -- --coverage
