@@ -18,9 +18,11 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          cmd: npm install # will run `npm install` command
+          node-version: 12.x # will run `npm install` command
       - name: Run build check
-        run: npm run build
+        run: |
+        npm install
+        npm run build
       - run: npm test
         env:
           CI: true
