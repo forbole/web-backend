@@ -1,11 +1,35 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import express, { Request, Response, NextFunction } from "express"
 import { v1 } from './routers'
+import { ApolloServer, BaseContext } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import http from 'http';
+import {typeDefs} from "./graphql/typedefs";
+import { resolvers } from "./graphql/resolvers";
+import { CosmosAPI } from "./graphql/routes/cosmos-api";
+import cors from 'cors';
+import bodyParser from 'body-parser';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const cors = require("cors");
+interface ContextValue {
+  dataSources?: {
+    cosmosAPI: CosmosAPI;
+  };
+}
 
-const PORT = process.env.PORT || 3000;
+(async () => {
+
+const PORT = process.env.PORT || 4000;
 const app = express();
+const httpServer = http.createServer(app);
+
+// Set up Apollo Server
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+});
+await server.start();
 
 // middlewares
 app.use(express.json());
@@ -13,6 +37,27 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/v1/', v1);
+
+app.use(
+  cors(),
+  bodyParser.json(),
+  expressMiddleware(server),
+);
+
+
+app.use('/graphql', cors<cors.CorsRequest>(), bodyParser.json(), expressMiddleware(server, {context: async ({req}) => {
+  const {cache} = server;
+  // const {dataSources} =req.headers;
+  // console.log('express', req, res)
+  console.log('cosmos API', CosmosAPI);
+  return ({
+    dataSources: {
+      cosmosAPI: new CosmosAPI({cache}),
+    },
+    // req
+  });
+},}))
+
 
 // health check api
 app.get('/ping', (_req: Request, res: Response, next: NextFunction) => {
@@ -40,14 +85,28 @@ app.use((error: ResponseError, _req: Request, res: Response, _next: NextFunction
   });
 });
 
-if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, (error?: any) => {
-    if (error) throw error;
-    console.log(`> Ready at http://localhost:${PORT}`);
-    console.log(`> ENV: ${process.env.NODE_ENV}`);
-    console.log(`> PORT: ${PORT}`);
-  });
-}
+await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
+// const server = new ApolloServer<ContextValue>({
+//   typeDefs,
+//   resolvers,
+// });
 
+// const { url } = await startStandaloneServer(server, {
+//   context: async ({ req }) => {
+//     const { cache } = server;
+//     return {
+//       dataSources: {
+//         moviesAPI: new CosmosAPI({ cache }),
+//       },
+//     };
+//   },
+// });
 
-export default app
+//
+// app.listen(({ url }) => {
+//   console.log(`Apollo server is listening on ${url}`);
+// }); 
+console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+})();
+
+// export default app
