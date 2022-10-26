@@ -1,19 +1,36 @@
+import { GraphQLScalarType, Kind } from 'graphql';
+
 // The GraphQL schema
 export const typeDefs = `#graphql
+  scalar Date
+
   type Query {
-    cosmosUsersCount: UserData
+    cosmosUsersCount: [UsersCountResult]
   }
-  type UserData {
-    status: String
-    data: Data
-  }
-  type Data {
-    result: [Result]
-  }
-  type Result {
-    metric: String
-    value: [String]
+
+  type UsersCountResult {
+    date: Date
+    usersCount: String
   }
 `;
+
+export const dateScalar = new GraphQLScalarType({
+  name: 'Date',
+  description: 'Date custom scalar type',
+  serialize(value: Date) {
+    return value.getTime(); // Convert outgoing Date to integer for JSON
+  },
+  parseValue(value: number) {
+    return new Date(value); // Convert incoming integer to Date
+  },
+  parseLiteral(ast) {
+    if (ast.kind === Kind.INT) {
+      // Convert hard-coded AST string to integer and then to Date
+      return new Date(parseInt(ast.value, 10));
+    }
+    // Invalid hard-coded value (not an integer)
+    return null;
+  },
+});
 
 // module.exports = typeDefs;

@@ -11,6 +11,9 @@ import { CosmosAPI } from "./graphql/routes/cosmos-api";
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config()
+
 interface ContextValue {
   dataSources?: {
     cosmosAPI: CosmosAPI;
@@ -38,23 +41,12 @@ app.use(cors());
 
 app.use('/api/v1/', v1);
 
-app.use(
-  cors(),
-  bodyParser.json(),
-  expressMiddleware(server),
-);
-
-
-app.use('/graphql', cors<cors.CorsRequest>(), bodyParser.json(), expressMiddleware(server, {context: async ({req}) => {
+app.use('/graphql', cors<cors.CorsRequest>(), bodyParser.json(), expressMiddleware(server, {context: async (req) => {
   const {cache} = server;
-  // const {dataSources} =req.headers;
-  // console.log('express', req, res)
-  console.log('cosmos API', CosmosAPI);
   return ({
     dataSources: {
       cosmosAPI: new CosmosAPI({cache}),
     },
-    // req
   });
 },}))
 

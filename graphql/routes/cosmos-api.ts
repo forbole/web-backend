@@ -3,21 +3,22 @@ import { RESTDataSource } from '@apollo/datasource-rest';
 import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
 
 export class CosmosAPI extends RESTDataSource {
-    initialize: any;
+    // initialize: any;
     // override baseURL = `http://${process.env.PROMETHEUS_URL}/prometheus/api/v1/query?query=`
-
-    // constructor(options: { cache: KeyValueCache }) {
-    //     super(options); // this sends our server's `cache` through
-    // }
+    override baseURL = `http://${process.env.PROMETHEUS_URL}/prometheus/api/v1/`
 
     constructor(options: { cache: KeyValueCache }) {
-        super(options);
-        this.baseURL = `http://45.118.133.142:9090/prometheus/api/v1/query?query=`;
-        this.initialize({}); // calling initialize() function with empty object is the key
-      }
+        super(options); // this sends our server's `cache` through
+    }
+
+    // constructor(options: { cache: KeyValueCache }) {
+    //     super(options);
+    //     this.baseURL = `http://45.118.133.142:9090/prometheus/api/v1/query?query=`;
+    //     this.initialize({}); // calling initialize() function with empty object is the key
+    //   }
 
     async getAllCosmosUsers(): Promise<any> {
-        return this.get<any>(`sum(tendermint_validator_delegators_total)`);
+        return this.get<any>(`query?query=sum(tendermint_validator_delegators_total)`);
     }
 
 }
