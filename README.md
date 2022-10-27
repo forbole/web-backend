@@ -42,7 +42,7 @@ Upon the request is successful, a `200` status will br returned with the success
 
 In **non-production** environments, an embedded version of Apollo Sandbox is shown on Apollo Server 4's landing page, served at `http://localhost:4000/graphql`.
 
-##### Example query of `total no. of users staked to Forbole on all Cosmos SDK chains` on Sandbox:
+#### Example query of `total no. of users staked to Forbole on all Cosmos SDK chains` on Sandbox:
 
 ```graphql
 query Query {
@@ -52,7 +52,7 @@ query Query {
 }
 ```
 
-##### Example Response
+#### Example Response:
 
 ```json
 {
@@ -68,7 +68,9 @@ query Query {
 
 In **production** environments, when `NODE_ENV` is `production`, users can query data as follows:
 
-##### POST `/contact` querying `total no. of users staked to Forbole on all Cosmos SDK chains`
+#### POST `/graphql`
+
+##### querying `total no. of users staked to Forbole on all Cosmos SDK chains`:
 
 ```zsh
 curl --request POST \
@@ -77,7 +79,7 @@ curl --request POST \
   --data '{"query":"query {cosmosUsersCount{usersCount}}"}'
 ```
 
-##### Example Response
+#### Example Response:
 
 ```zsh
 {"data":{"cosmosUsersCount":[{"usersCount":"36511"}]}}
