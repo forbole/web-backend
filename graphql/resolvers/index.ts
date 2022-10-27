@@ -45,5 +45,13 @@ export const resolvers = {
       const { result } = data
       const val = result.map((res) => ({metric: {chain_id: res.metric.chain_id, instance: res.metric.instance, validator_address: res.metric.validator_address}, commissionRate: res.value[1]}))
       return val;
-    }
+    },
+    eachCosmosUnbondingTime: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.cosmosAPI.getEachCosmosUnbondingTime();
+      const { status, data } = response
+      if (status === "error") return console.log(response.error)
+      const { result } = data
+      const val = result.map((res) => ({metric: {chain_id: res.metric.chain_id, instance: res.metric.instance}, unbondingTime: `${Math.floor(res.value[1] / 86400)} days`}))
+      return val;
+    },
 }};

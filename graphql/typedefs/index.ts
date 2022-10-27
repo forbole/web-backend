@@ -9,7 +9,8 @@ export const typeDefs = `#graphql
     eachCosmosTVL: [EachCosmosTVLResult]
     allCosmosTVL: [CosmosTVLResult]
     eachCosmosBondedToken: [EachCosmosBondedTokenResult]
-    eachCosmosCommission: [EachCosmosCommission]
+    eachCosmosCommission: [EachCosmosCommissionResult]
+    eachCosmosUnbondingTime: [EachCosmosUnbondingTimeResult]
   }
 
   type UsersCountResult {
@@ -42,7 +43,7 @@ export const typeDefs = `#graphql
     instance: String
   }
 
-  type EachCosmosCommission {
+  type EachCosmosCommissionResult {
     metric: EachCosmosCommissionMetric
     commissionRate: String
   }
@@ -51,6 +52,16 @@ export const typeDefs = `#graphql
     chain_id: String
     instance: String
     validator_address: String
+  }
+
+  type EachCosmosUnbondingTimeResult {
+    metric: EachCosmosUnbondingTimeMetric
+    unbondingTime: String
+  }
+
+  type EachCosmosUnbondingTimeMetric {
+    chain_id: String
+    instance: String
   }
 `;
 
