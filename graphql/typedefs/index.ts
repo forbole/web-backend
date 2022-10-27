@@ -6,13 +6,25 @@ export const typeDefs = `#graphql
 
   type Query {
     cosmosUsersCount: [UsersCountResult]
+    cosmosChainTVL: [TVLResult]
   }
 
   type UsersCountResult {
-    date: Date
     usersCount: String
   }
-`;
+
+  type TVLResult {
+    metric: TVLMetric
+    TVL: String
+  }
+
+  type TVLMetric {
+    chain_id: String
+    denom: String
+    instance: String
+    validator_address: String
+  }
+  `;
 
 export const dateScalar = new GraphQLScalarType({
   name: 'Date',
