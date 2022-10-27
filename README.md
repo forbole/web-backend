@@ -38,7 +38,7 @@ Upon the request is successful, a `200` status will br returned with the success
 }
 ```
 
-#### Getting response from `/graphql`
+### `/graphql`
 
 In **non-production** environments, Apollo Server 4's landing page is an embedded version of Apollo Sandbox (served at `http://localhost:4000/graphql`).
 
