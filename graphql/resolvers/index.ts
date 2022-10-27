@@ -14,7 +14,15 @@ export const resolvers = {
         // console.log('val', val)
         return val;
     },
-    cosmosChainTVL: async (_: any, __: any, { dataSources }: any) => {
+    allCosmosTVL: async (_:any, __:any, {dataSources}: any) => {
+      const response = await dataSources.cosmosAPI.getAllCosmosTVL();
+        const { status, data } = response
+        if (status === "error") return console.log(response.error)
+        const { result } = data
+        const val = result.map((res) => ({cosmosTVL: res.value[1]}))
+        return val;
+    },
+    eachCosmosTVL: async (_: any, __: any, { dataSources }: any) => {
         const response = await dataSources.cosmosAPI.getEachCosmosChainTVL();
         const { status, data } = response
         if (status === "error") return console.log(response.error)

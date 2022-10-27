@@ -21,6 +21,10 @@ export class CosmosAPI extends RESTDataSource {
         return this.get<any>(`query?query=sum(tendermint_validator_delegators_total)`);
     }
 
+    async getAllCosmosTVL(): Promise<any> {
+        return this.get<any>(`query?query=sum (tendermint_validator_voting_power_total * on (denom) group_left token_price)`)
+    }
+
     async getEachCosmosChainTVL(): Promise<any> {
         return this.get<any>(`query?query=tendermint_validator_voting_power_total%20*%20on%20%28denom%29%20group_left%20token_price`)
     }

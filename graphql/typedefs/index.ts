@@ -6,14 +6,19 @@ export const typeDefs = `#graphql
 
   type Query {
     cosmosUsersCount: [UsersCountResult]
-    cosmosChainTVL: [TVLResult]
+    eachCosmosTVL: [EachCosmosTVLResult]
+    allCosmosTVL: [CosmosTVLResult]
   }
 
   type UsersCountResult {
     usersCount: String
   }
 
-  type TVLResult {
+  type CosmosTVLResult {
+    cosmosTVL: String
+  }
+
+  type EachCosmosTVLResult {
     metric: TVLMetric
     TVL: String
   }
