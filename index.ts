@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import express, { Request, Response, NextFunction } from "express"
 import { v1 } from './routers'
-import { ApolloServer, BaseContext } from '@apollo/server';
+import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import http from 'http';
@@ -78,26 +78,7 @@ app.use((error: ResponseError, _req: Request, res: Response, _next: NextFunction
 });
 
 await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
-// const server = new ApolloServer<ContextValue>({
-//   typeDefs,
-//   resolvers,
-// });
 
-// const { url } = await startStandaloneServer(server, {
-//   context: async ({ req }) => {
-//     const { cache } = server;
-//     return {
-//       dataSources: {
-//         moviesAPI: new CosmosAPI({ cache }),
-//       },
-//     };
-//   },
-// });
-
-//
-// app.listen(({ url }) => {
-//   console.log(`Apollo server is listening on ${url}`);
-// }); 
 console.log(`🚀 Server ready at http://localhost:4000/graphql`);
 })();
 
