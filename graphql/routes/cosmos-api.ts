@@ -29,4 +29,8 @@ export class CosmosAPI extends RESTDataSource {
         return this.get<any>(`query?query=tendermint_validator_voting_power_total%20*%20on%20%28denom%29%20group_left%20token_price`)
     }
 
+    async getEachCosmosBondedToken(): Promise<any> {
+        return this.get<any>(`query?query=tendermint_bonded_token`)
+    }
+
 }

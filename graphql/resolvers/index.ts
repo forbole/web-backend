@@ -29,5 +29,13 @@ export const resolvers = {
         const { result } = data
         const val = result.map((res) => ({metric: {chain_id: res.metric.chain_id, denom: res.metric.denom, instance: res.metric.instance, validator_address: res.metric.validator_address}, TVL: res.value[1]}))
         return val;
+    },
+    eachCosmosBondedToken: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.cosmosAPI.getEachCosmosBondedToken();
+      const { status, data } = response
+        if (status === "error") return console.log(response.error)
+        const { result } = data
+        const val = result.map((res) => ({metric: {chain_id: res.metric.chain_id, denom: res.metric.denom, instance: res.metric.instance, validator_address: res.metric.validator_address}, bondedToken: res.value[1]}))
+        return val;
     }
 }};

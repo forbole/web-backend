@@ -8,6 +8,7 @@ export const typeDefs = `#graphql
     cosmosUsersCount: [UsersCountResult]
     eachCosmosTVL: [EachCosmosTVLResult]
     allCosmosTVL: [CosmosTVLResult]
+    eachCosmosBondedToken: [EachCosmosBondedTokenResult]
   }
 
   type UsersCountResult {
@@ -29,7 +30,16 @@ export const typeDefs = `#graphql
     instance: String
     validator_address: String
   }
-  `;
+
+  type EachCosmosBondedTokenResult {
+    metric: BondedTokenMetric
+    bondedToken: String
+  }
+  type BondedTokenMetric {
+    chain_id: String
+    instance: String
+  }
+`;
 
 export const dateScalar = new GraphQLScalarType({
   name: 'Date',
