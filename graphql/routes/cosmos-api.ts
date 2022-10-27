@@ -41,4 +41,8 @@ export class CosmosAPI extends RESTDataSource {
         return this.get<any>(`query?query=tendermint_unbonding_time`)
     }
 
+    async getEachCosmosAPY(): Promise<any> {
+        return this.get<any>(`query?query=(tendermint_inflation_rate * (1 - tendermint_community_tax_rate)) / (tendermint_bonded_token / tendermint_circulating_supply)`)
+    }
+
 }
