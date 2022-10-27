@@ -1,6 +1,6 @@
 # Web backend
 
-A node server using express and handling various **APIs** requests for frontend apps.
+Express API server in Node.js that serves up REST API and GraphQL endpoints, handling various **APIs** requests for all frontend apps.
 
 ## Available Scripts
 
@@ -10,7 +10,7 @@ In this project directory, you can run:
 Runs the server in production mode pointing to the build in the `dist` folder.
 
 `npm run dev`
-Runs the server in development mode on `http://localhost:3000/`.
+Runs the server in development mode on `http://localhost:4000/`.
 
 `npm run build`
 Builds the server for production to the `dist` folder.
@@ -36,6 +36,51 @@ Upon the request is successful, a `200` status will br returned with the success
 {
   "success": "true"
 }
+```
+
+#### Getting response from `/graphql`
+
+In **non-production** environments, Apollo Server 4's landing page is an embedded version of Apollo Sandbox (served at `http://localhost:4000/graphql`).
+
+##### Example query of `total of users staked to Forbole on all Cosmos chains` on Sandbox:
+
+```graphql
+query Query {
+  cosmosUsersCount {
+    usersCount
+  }
+}
+```
+
+##### Example Response
+
+```json
+{
+  "data": {
+    "cosmosUsersCount": [
+      {
+        "usersCount": "36511"
+      }
+    ]
+  }
+}
+```
+
+In **production** environments (when `NODE_ENV` is `production`), users can query data as follows:
+
+##### POST `/contact` querying `total of users staked to Forbole on all Cosmos chains`
+
+```zsh
+curl --request POST \
+  --header 'content-type: application/json' \
+  --url http://localhost:4000/graphql \
+  --data '{"query":"query {cosmosUsersCount{usersCount}}"}'
+```
+
+##### Example Response
+
+```zsh
+{"data":{"cosmosUsersCount":[{"usersCount":"36511"}]}}
 ```
 
 **This repo is in active development.**
