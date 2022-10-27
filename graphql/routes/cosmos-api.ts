@@ -33,4 +33,8 @@ export class CosmosAPI extends RESTDataSource {
         return this.get<any>(`query?query=tendermint_bonded_token`)
     }
 
+    async getEachCosmosCommission(): Promise<any> {
+        return this.get<any>(`query?query=tendermint_validator_commission_rate`)
+    }
+
 }
