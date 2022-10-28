@@ -24,7 +24,7 @@ Upon the request is successful, a `200` status will br returned with the success
 
 ### Graphql
 
-#### Public endpoint for data querying:
+#### Public Graphql endpoint for data querying:
 
 [An external link to our public GraphQL APIs](https://api.forbole.com/graphql)
 
