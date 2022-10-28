@@ -47,7 +47,7 @@ query Query {
   "data": {
     "cosmosUsersCount": [
       {
-        "usersCount": "36511"
+        "usersCount": "36517"
       }
     ]
   }
