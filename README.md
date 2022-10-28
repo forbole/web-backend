@@ -63,14 +63,14 @@ In **production** environments, when `NODE_ENV` is `production`, users can query
 ```zsh
 curl --request POST \
   --header 'content-type: application/json' \
-  --url http://localhost:4000/graphql \
+  --url https://api.forbole.com/graphql \
   --data '{"query":"query {cosmosUsersCount{usersCount}}"}'
 ```
 
 #### Example Response:
 
 ```zsh
-{"data":{"cosmosUsersCount":[{"usersCount":"36511"}]}}
+{"data":{"cosmosUsersCount":[{"usersCount":"36517"}]}}
 ```
 
 ## Available Scripts
