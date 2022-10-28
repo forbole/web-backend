@@ -2,22 +2,6 @@
 
 Express API server in Node.js that serves up REST API and GraphQL endpoints, handling various **APIs** requests for all frontend apps.
 
-## Available Scripts
-
-In this project directory, you can run:
-
-`npm start`
-Runs the server in production mode pointing to the build in the `dist` folder.
-
-`npm run dev`
-Runs the server in development mode on `http://localhost:4000/`.
-
-`npm run build`
-Builds the server for production to the `dist` folder.
-
-`npm test`
-Runs any test in the folder marked as \*.spec.ts or \*.test.ts using jest.
-
 ## APIs
 
 ### Responses
@@ -39,6 +23,10 @@ Upon the request is successful, a `200` status will br returned with the success
 ```
 
 ### Graphql
+
+#### Public Graphql endpoint for data querying:
+
+[An external link to our public GraphQL APIs](https://api.forbole.com/graphql)
 
 In **non-production** environments, an embedded version of Apollo Sandbox is shown on Apollo Server 4's landing page, served at `http://localhost:4000/graphql`.
 
@@ -84,5 +72,21 @@ curl --request POST \
 ```zsh
 {"data":{"cosmosUsersCount":[{"usersCount":"36511"}]}}
 ```
+
+## Available Scripts
+
+In this project directory, you can run:
+
+`npm start`
+Runs the server in production mode pointing to the build in the `dist` folder.
+
+`npm run dev`
+Runs the server in development mode on `http://localhost:4000/`.
+
+`npm run build`
+Builds the server for production to the `dist` folder.
+
+`npm test`
+Runs any test in the folder marked as \*.spec.ts or \*.test.ts using jest.
 
 **This repo is in active development.**
