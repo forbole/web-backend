@@ -57,4 +57,12 @@ export const resolvers = {
       const val = result.map((res) => ({metric: {chain_id: res.metric.chain_id, instance: res.metric.instance}, APY: res.value[1]}))
       return val;
     },
+    eachCosmosTokenSupply: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.cosmosAPI.getEachCosmosTokenSupply();
+      const { status, data } = response
+      if (status === "error") return console.log(response.error)
+      const { result } = data
+      const val = result.map((res) => ({metric: {chain_id: res.metric.chain_id, instance: res.metric.instance}, supply: res.value[1]}))
+      return val;
+    }
 }};
