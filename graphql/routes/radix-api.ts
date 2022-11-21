@@ -10,9 +10,12 @@ export class RadixAPI extends RESTDataSource {
     }
 
     async getStakedRadix(body): Promise<any> {
-        return this.post<any>(`validator`, {headers: {
-            'Content-Type': 'application/json',
-          }, body});
+        return this.post<any>('validator', {
+            headers: {
+                'Content-Type': 'application/json',
+            }, 
+            body
+        });
     }
 
     async getTotalRadixSupply(body): Promise<any> {
