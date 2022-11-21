@@ -14,5 +14,14 @@ export class RadixAPI extends RESTDataSource {
             'Content-Type': 'application/json',
           }, body});
     }
+
+    async getTotalRadixSupply(body): Promise<any> {
+        return this.post<any>('token/native', {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body
+        });
+    }
     
 }
