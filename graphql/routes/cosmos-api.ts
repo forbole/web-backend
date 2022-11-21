@@ -38,7 +38,11 @@ export class CosmosAPI extends RESTDataSource {
     }
 
     async getEachCosmosTokenSupply(): Promise<any> {
-        return this.get<any>(`query?query=tendermint_circulating_supply`);
+        return this.get<any>(`query?query=tendermint_circulating_supply`)
+    }
+
+    async getEachCosmosInflationRate(): Promise<any> {
+        return this.get<any>(`query?query=tendermint_inflation_rate`)
     }
 
 }

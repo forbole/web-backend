@@ -65,6 +65,14 @@ export const resolvers = {
       const val = result.map((res) => ({metric: {chain_id: res.metric.chain_id, instance: res.metric.instance}, supply: res.value[1]}))
       return val;
     },
+    eachCosmosInflationRate: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.cosmosAPI.getEachCosmosInflationRate();
+      const { status, data } = response
+      if (status === "error") return console.log(response.error)
+      const { result } = data
+      const val = result.map((res) => ({metric: {chain_id: res.metric.chain_id, instance: res.metric.instance}, inflationRate: res.value[1]}))
+      return val;
+    },
     allRadixStakedTokens: async (_:any, __:any, { dataSources }: any) => {
       const JSONbody = {
         'network_identifier': {

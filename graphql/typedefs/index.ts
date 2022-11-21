@@ -10,6 +10,7 @@ export const typeDefs = `#graphql
     eachCosmosUnbondingTime: [EachCosmosUnbondingTimeResult]
     eachCosmosAPY: [EachCosmosAPYResult]
     eachCosmosTokenSupply: [EachCosmosTokenSupplyResult]
+    eachCosmosInflationRate: [EachCosmosInflationRateResult]
     allRadixStakedTokens: RadixStakedTokensResult
     allRadixTotalSupply: RadixTokenSupplyResult
     elrondAPY: [ElrondAPYResult]
@@ -42,11 +43,11 @@ export const typeDefs = `#graphql
   }
 
   type EachCosmosBondedTokenResult {
-    metric: BondedTokenMetric
+    metric: ChainIdAndInstanceMetric
     bondedToken: String
   }
 
-  type BondedTokenMetric {
+  type ChainIdAndInstanceMetric {
     chain_id: String
     instance: String
   }
@@ -63,28 +64,23 @@ export const typeDefs = `#graphql
   }
 
   type EachCosmosUnbondingTimeResult {
-    metric: EachCosmosUnbondingTimeMetric
+    metric: ChainIdAndInstanceMetric
     unbondingTime: String
   }
 
-  type EachCosmosUnbondingTimeMetric {
-    chain_id: String
-    instance: String
-  }
-
   type EachCosmosAPYResult {
-    metric: EachCosmosAPYMetric
+    metric: ChainIdAndInstanceMetric
     APY: String
   }
 
-  type EachCosmosAPYMetric {
-    chain_id: String
-    instance: String
+  type EachCosmosTokenSupplyResult {
+    metric: ChainIdAndInstanceMetric
+    supply: String
   }
 
-  type EachCosmosTokenSupplyResult {
-    metric: EachCosmosAPYMetric
-    supply: String
+  type EachCosmosInflationRateResult {
+    metric: ChainIdAndInstanceMetric
+    inflationRate: String 
   }
 
   type RadixStakedTokensResult {
