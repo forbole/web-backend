@@ -24,4 +24,8 @@ export class ElrondAPI extends RESTDataSource {
    async getElrondBondedToken(): Promise<any> {
         return this.get<any>(`query?query=elrond_provider_locked`)
    }
+
+   async getElrondTotalSupply(): Promise<any> {
+        return this.get<any>(`query?query=elrond_total_supply`)
+   }
 }

@@ -123,5 +123,13 @@ export const resolvers = {
       const { result } = data
       const val = result.map((res) => ({metric: {validator_address: res.metric.provider_address, instance: "elrond"}, bondedToken: res.value[1]}))
       return val;
+    },
+    elrondTotalSupply: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.elrondAPI.getElrondTotalSupply();
+      const { status, data } = response
+      if (status === "error") return console.log(response.error)
+      const { result } = data
+      const val = result.map((res) => ({metric: {instance: "elrond"}, totalSupply: res.value[1]}))
+      return val;
     }
 }};
