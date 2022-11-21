@@ -28,4 +28,8 @@ export class ElrondAPI extends RESTDataSource {
    async getElrondTotalSupply(): Promise<any> {
         return this.get<any>(`query?query=elrond_total_supply`)
    }
+
+   async getElrondCirculatingSupply(): Promise<any> {
+    return this.get<any>(`query?query=elrond_circulating_supply`)
+}
 }
