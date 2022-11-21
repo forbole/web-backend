@@ -99,5 +99,13 @@ export const resolvers = {
       const { result } = data
       const val = result.map((res) => ({metric: {validator_address: res.metric.provider_address, instance: "elrond"}, APY: res.value[1] * 100}))
       return val;
+    },
+    elrondTVL: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.elrondAPI.getElrondTVL();
+      const { status, data } = response
+      if (status === "error") return console.log(response.error)
+      const { result } = data
+      const val = result.map((res) => ({metric: {instance: "elrond"}, TVL: res.value[1]}))
+      return val
     }
 }};
