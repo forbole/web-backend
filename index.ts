@@ -7,8 +7,7 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import http from 'http';
 import {typeDefs} from "./graphql/typedefs";
 import { resolvers } from "./graphql/resolvers";
-import { CosmosAPI } from "./graphql/routes/cosmos-api";
-import { RadixAPI } from "graphql/routes/radix-api";
+import { CosmosAPI, ElrondAPI, RadixAPI } from "./graphql/routes";
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
@@ -19,6 +18,7 @@ interface ContextValue {
   dataSources?: {
     cosmosAPI: CosmosAPI;
     radixAPI: RadixAPI;
+    elrondAPI: ElrondAPI;
   };
 }
 
@@ -48,7 +48,8 @@ app.use('/graphql', cors<cors.CorsRequest>(), bodyParser.json(), expressMiddlewa
   return ({
     dataSources: {
       cosmosAPI: new CosmosAPI({cache}),
-      radixAPI: new RadixAPI({cache})
+      radixAPI: new RadixAPI({cache}),
+      elrondAPI: new ElrondAPI({cache})
     },
   });
 },}))

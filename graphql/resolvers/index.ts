@@ -91,5 +91,13 @@ export const resolvers = {
       const { token_supply } = token
       const val = {metric: {instance: 'radix'}, supply: token_supply?.value}
       return val;
+    },
+    elrondAPY: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.elrondAPI.getElrondAPY();
+      const { status, data } = response
+      if (status === "error") return console.log(response.error)
+      const { result } = data
+      const val = result.map((res) => ({metric: {validator_address: res.metric.provider_address, instance: "elrond"}, APY: res.value[1] * 100}))
+      return val;
     }
 }};

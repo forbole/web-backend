@@ -12,6 +12,7 @@ export const typeDefs = `#graphql
     eachCosmosTokenSupply: [EachCosmosTokenSupplyResult]
     allRadixStakedTokens: RadixStakedTokensResult
     allRadixTotalSupply: RadixTokenSupplyResult
+    elrondAPY: [ElrondAPYResult]
   }
 
   type UsersCountResult {
@@ -97,6 +98,11 @@ export const typeDefs = `#graphql
 
   type RadixSupplyMetric {
     instance: String
+  }
+
+  type ElrondAPYResult {
+    metric: RadixMetric
+    APY: String
   }
 
 `;
