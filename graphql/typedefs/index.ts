@@ -18,6 +18,7 @@ export const typeDefs = `#graphql
     elrondBondedToken: [ElrondBondedTokenResult]
     elrondTotalSupply: [ElrondTotalSupplyResult]
     elrondCirculatingSupply: [ElrondCirculatingSupplyResult]
+    elrondUsers: [ElrondUsersResult]
   }
 
   type UsersCountResult {
@@ -133,6 +134,11 @@ export const typeDefs = `#graphql
   type ElrondCirculatingSupplyResult {
     metric: InstanceOnlyMetric
     circulatingSupply: String
+  }
+
+  type ElrondUsersResult {
+    metric: InstanceOnlyMetric
+    usersCount: String
   }
 
 `;

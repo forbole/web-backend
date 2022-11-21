@@ -30,6 +30,10 @@ export class ElrondAPI extends RESTDataSource {
    }
 
    async getElrondCirculatingSupply(): Promise<any> {
-    return this.get<any>(`query?query=elrond_circulating_supply`)
-}
+        return this.get<any>(`query?query=elrond_circulating_supply`)
+   }
+
+   async getElrondUsers(): Promise<any> {
+        return this.get<any>(`query?query=elrond_provider_num_users`)
+   }
 }
