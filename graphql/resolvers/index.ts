@@ -155,5 +155,10 @@ export const resolvers = {
       const { result } = data
       const val = result.map((res) => ({metric: {instance: "elrond"}, usersCount: res.value[1]}))
       return val;
+    },
+    elrondUnbondingTime: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.elrondAPI.getElrondUnbondingTime();
+      const val = {metric: {instance: "elrond"}, unbondingTime: `${response} days`}
+      return val;
     }
 }};

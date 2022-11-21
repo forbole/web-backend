@@ -36,4 +36,9 @@ export class ElrondAPI extends RESTDataSource {
    async getElrondUsers(): Promise<any> {
         return this.get<any>(`query?query=elrond_provider_num_users`)
    }
+
+   async getElrondUnbondingTime(): Promise<any> {
+        const unbondingTime = 10
+        return unbondingTime
+   }
 }
