@@ -16,4 +16,8 @@ export class ElrondAPI extends RESTDataSource {
     async getElrondTVL(): Promise<any> {
         return this.get<any>(`query?query=elrond_provider_locked * on (denom) token_price`)
     }
+
+   async getElrondCommission(): Promise<any> {
+        return this.get<any>(`query?query=elrond_provider_service_fee`)
+   }
 }

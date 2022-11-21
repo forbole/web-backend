@@ -14,6 +14,7 @@ export const typeDefs = `#graphql
     allRadixTotalSupply: RadixTokenSupplyResult
     elrondAPY: [ElrondAPYResult]
     elrondTVL: [ElrondTVLResult]
+    elrondCommission: [ElrondCommissionResult]
   }
 
   type UsersCountResult {
@@ -83,11 +84,11 @@ export const typeDefs = `#graphql
   }
 
   type RadixStakedTokensResult {
-    metric: RadixMetric
+    metric: AddressAndInstanceMetric
     bondedToken: String
   }
 
-  type RadixMetric {
+  type AddressAndInstanceMetric {
     validator_address: String
     instance: String
   }
@@ -102,13 +103,18 @@ export const typeDefs = `#graphql
   }
 
   type ElrondAPYResult {
-    metric: RadixMetric
+    metric: AddressAndInstanceMetric
     APY: String
   }
 
   type ElrondTVLResult {
     metric: InstanceOnlyMetric
     TVL: String
+  }
+
+  type ElrondCommissionResult {
+    metric: AddressAndInstanceMetric
+    commissionRate: String
   }
 
 `;
