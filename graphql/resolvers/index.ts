@@ -64,5 +64,20 @@ export const resolvers = {
       const { result } = data
       const val = result.map((res) => ({metric: {chain_id: res.metric.chain_id, instance: res.metric.instance}, supply: res.value[1]}))
       return val;
+    },
+    allRadixStakedTokens: async (_:any, __:any, { dataSources }: any) => {
+      const JSONbody = {
+        'network_identifier': {
+            'network': 'mainnet'
+        },
+        'validator_identifier': {
+            'address': 'rv1qtkl4r2x86cn5nujyx7cnd6rup5tkuvvm7qqp0ycxa6fgv246k6d6nrq0kz'
+        }
+      }
+      const response = await dataSources.radixAPI.getStakedRadix(JSONbody);
+      const { validator } = response
+      const {validator_identifier, stake} = validator
+      const val = {metric: {validator_address: validator_identifier?.address, instance: 'radix'}, bondedToken: stake.value}
+      return val;
     }
 }};

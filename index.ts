@@ -8,6 +8,7 @@ import http from 'http';
 import {typeDefs} from "./graphql/typedefs";
 import { resolvers } from "./graphql/resolvers";
 import { CosmosAPI } from "./graphql/routes/cosmos-api";
+import { RadixAPI } from "graphql/routes/radix-api";
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
@@ -17,6 +18,7 @@ require('dotenv').config()
 interface ContextValue {
   dataSources?: {
     cosmosAPI: CosmosAPI;
+    radixAPI: RadixAPI;
   };
 }
 
@@ -46,6 +48,7 @@ app.use('/graphql', cors<cors.CorsRequest>(), bodyParser.json(), expressMiddlewa
   return ({
     dataSources: {
       cosmosAPI: new CosmosAPI({cache}),
+      radixAPI: new RadixAPI({cache})
     },
   });
 },}))

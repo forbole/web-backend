@@ -10,6 +10,7 @@ export const typeDefs = `#graphql
     eachCosmosUnbondingTime: [EachCosmosUnbondingTimeResult]
     eachCosmosAPY: [EachCosmosAPYResult]
     eachCosmosTokenSupply: [EachCosmosTokenSupplyResult]
+    allRadixStakedTokens: RadixStakedTokensResult
   }
 
   type UsersCountResult {
@@ -77,4 +78,15 @@ export const typeDefs = `#graphql
     metric: EachCosmosAPYMetric
     supply: String
   }
+
+  type RadixStakedTokensResult {
+    metric: RadixMetric
+    bondedToken: String
+  }
+
+  type RadixMetric {
+    validator_address: String
+    instance: String
+  }
+
 `;
