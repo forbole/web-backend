@@ -15,6 +15,7 @@ export const typeDefs = `#graphql
     elrondAPY: [ElrondAPYResult]
     elrondTVL: [ElrondTVLResult]
     elrondCommission: [ElrondCommissionResult]
+    elrondBondedToken: [ElrondBondedTokenResult]
   }
 
   type UsersCountResult {
@@ -115,6 +116,11 @@ export const typeDefs = `#graphql
   type ElrondCommissionResult {
     metric: AddressAndInstanceMetric
     commissionRate: String
+  }
+
+  type ElrondBondedTokenResult {
+    metric: AddressAndInstanceMetric
+    bondedToken: String
   }
 
 `;

@@ -20,4 +20,8 @@ export class ElrondAPI extends RESTDataSource {
    async getElrondCommission(): Promise<any> {
         return this.get<any>(`query?query=elrond_provider_service_fee`)
    }
+
+   async getElrondBondedToken(): Promise<any> {
+        return this.get<any>(`query?query=elrond_provider_locked`)
+   }
 }
