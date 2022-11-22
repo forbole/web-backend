@@ -101,8 +101,6 @@ query CosmosUsersQuery {
 }
 ```
 
----
-
 ##### TVL for each chain
 
 ```graphql
