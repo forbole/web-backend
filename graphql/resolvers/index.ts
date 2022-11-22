@@ -222,5 +222,10 @@ export const resolvers = {
       })
       const val = { metric: {validator_address, instance: "solana"}, commissionRate}
       return val;
+    },
+    solanaUnbondingTime: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.solanaAPI.getSolanaUnbondingTime();
+      const val = {metric: {instance: "solana"}, unbondingTime: `${response} days`}
+      return val;
     }
 }};

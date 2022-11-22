@@ -25,4 +25,9 @@ export class SolanaAPI extends RESTDataSource {
         return this.get<any>(`query?query=solana_validator_commission_rate`)
     }
 
+    async getSolanaUnbondingTime(): Promise<any> {
+        const unbondingTime = 10
+        return unbondingTime
+   }
+
 }
