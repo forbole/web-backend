@@ -100,6 +100,11 @@ export const resolvers = {
       const val = {metric: {instance: 'radix'}, supply: token_supply?.value}
       return val;
     },
+    radixUnbondingTime:  async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.radixAPI.getRadixUnbondingTime();
+      const val = {metric: {instance: "radix"}, unbondingTime: response}
+      return val;
+    },
     elrondAPY: async (_:any, __:any, { dataSources }: any) => {
       const response = await dataSources.elrondAPI.getElrondAPY();
       const { status, data } = response

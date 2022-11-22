@@ -26,5 +26,10 @@ export class RadixAPI extends RESTDataSource {
             body
         });
     }
+
+    async getRadixUnbondingTime(): Promise<any> {
+        const unbondingTime = '1-3 weeks (500 epochs)'
+        return unbondingTime
+    }
     
 }

@@ -13,6 +13,7 @@ export const typeDefs = `#graphql
     eachCosmosInflationRate: [EachCosmosInflationRateResult]
     allRadixStakedTokens: RadixStakedTokensResult
     allRadixTotalSupply: RadixTokenSupplyResult
+    radixUnbondingTime: RadixUnbondingTimeResult
     elrondAPY: [ElrondAPYResult]
     elrondTVL: [ElrondTVLResult]
     elrondCommission: [ElrondCommissionResult]
@@ -102,6 +103,11 @@ export const typeDefs = `#graphql
   type RadixTokenSupplyResult {
     metric: InstanceOnlyMetric
     supply: String
+  }
+
+  type RadixUnbondingTimeResult {
+    metric: InstanceOnlyMetric
+    unbondingTime: String
   }
 
   type InstanceOnlyMetric {
