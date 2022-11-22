@@ -73,7 +73,7 @@ curl --request POST \
 {"data":{"cosmosUsersCount":[{"usersCount":"36517"}]}}
 ```
 
-#### All possible query fields and sample responses
+#### All query fields and sample responses:
 
 ### Cosmos-SDK
 
