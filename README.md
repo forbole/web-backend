@@ -73,20 +73,28 @@ curl --request POST \
 {"data":{"cosmosUsersCount":[{"usersCount":"36517"}]}}
 ```
 
-## Available Scripts
+### All possible query and sample responses from `/graphql`
 
-In this project directory, you can run:
+#### Cosmos Users
 
-`npm start`
-Runs the server in production mode pointing to the build in the `dist` folder.
+```graphql
+query CosmosUsersQuery {
+  cosmosUsersCount {
+    usersCount
+  }
+}
+```
 
-`npm run dev`
-Runs the server in development mode on `http://localhost:4000/`.
-
-`npm run build`
-Builds the server for production to the `dist` folder.
-
-`npm test`
-Runs any test in the folder marked as \*.spec.ts or \*.test.ts using jest.
+```json
+{
+  "data": {
+    "cosmosUsersCount": [
+      {
+        "usersCount": "46851"
+      }
+    ]
+  }
+}
+```
 
 **This repo is in active development.**
