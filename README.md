@@ -73,7 +73,9 @@ curl --request POST \
 {"data":{"cosmosUsersCount":[{"usersCount":"36517"}]}}
 ```
 
-### All possible query and sample responses from `/graphql`
+### All possible queries and sample responses from `/graphql`
+
+### Cosmos-SDK
 
 #### Cosmos Users
 
