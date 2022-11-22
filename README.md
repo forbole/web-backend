@@ -73,11 +73,11 @@ curl --request POST \
 {"data":{"cosmosUsersCount":[{"usersCount":"36517"}]}}
 ```
 
-### All possible queries and sample responses from `/graphql`
+### All possible query fields and sample responses
 
 ### Cosmos-SDK
 
-#### Cosmos Users
+#### Users Count
 
 ```graphql
 query CosmosUsersQuery {
@@ -87,12 +87,59 @@ query CosmosUsersQuery {
 }
 ```
 
+returns total Cosmos users count
+
 ```json
 {
   "data": {
     "cosmosUsersCount": [
       {
         "usersCount": "46851"
+      }
+    ]
+  }
+}
+```
+
+#### TVL on each chain
+
+```graphql
+query CosmosTVLQuery {
+  eachCosmosTVL {
+    metric {
+      chain_id
+      denom
+      instance
+      validator_address
+    }
+    TVL
+  }
+}
+```
+
+returns TVL for each chain
+
+```json
+{
+  "data": {
+    "eachCosmosTVL": [
+      {
+        "metric": {
+          "chain_id": "agoric-3",
+          "denom": "bld",
+          "instance": "agoric",
+          "validator_address": "agoricvaloper1pcc069wu2utgnf5qsm6n2pk2x8xt6cah954t4g"
+        },
+        "TVL": "1008639.7739459188"
+      },
+      {
+        "metric": {
+          "chain_id": "akashnet-2",
+          "denom": "akt",
+          "instance": "akash",
+          "validator_address": "akashvaloper14kn0kk33szpwus9nh8n87fjel8djx0y0uzn073"
+        },
+        "TVL": "2805559.7188507"
       }
     ]
   }
