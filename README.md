@@ -58,7 +58,7 @@ In **production** environments, when `NODE_ENV` is `production`, users can query
 
 #### POST `/graphql`
 
-##### querying `total no. of users staked to Forbole on all Cosmos SDK chains`:
+##### querying total no. of users staked to Forbole on all Cosmos SDK chains:
 
 ```zsh
 curl --request POST \
@@ -67,13 +67,13 @@ curl --request POST \
   --data '{"query":"query {cosmosUsersCount{usersCount}}"}'
 ```
 
-#### Example Response:
+##### Example Response:
 
 ```zsh
 {"data":{"cosmosUsersCount":[{"usersCount":"36517"}]}}
 ```
 
-##### All possible query fields and sample responses
+#### All possible query fields and sample responses
 
 ### Cosmos-SDK
 
