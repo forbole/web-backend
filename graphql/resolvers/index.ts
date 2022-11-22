@@ -190,5 +190,20 @@ export const resolvers = {
       })
       const val = { metric: {validator_address, instance: "solana"}, bondedToken}
       return val;
+    },
+    solanaTVL: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.solanaAPI.getSolanaTVL();
+      const { status, data } = response
+      if (status === "error") return console.log(response.error)
+      const { result } = data
+      let validator_address = ""
+      let TVL = 0
+      result.map((res, i) => {
+        TVL += parseInt(res.value[1]); 
+        if (i === 1) validator_address = res.metric.validator_address; 
+        return ({validator_address, TVL})
+      })
+      const val = { metric: {validator_address, instance: "solana"}, TVL}
+      return val;
     }
 }};

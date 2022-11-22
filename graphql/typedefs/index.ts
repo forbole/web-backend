@@ -23,6 +23,7 @@ export const typeDefs = `#graphql
     elrondUnbondingTime: ElrondUnbondingTimeResult
     solanaUsers: SolanaUsersResult
     solanaBondedToken: SolanaBondedTokenResult
+    solanaTVL: SolanaTVLResult
   }
 
   type UsersCountResult {
@@ -153,6 +154,11 @@ export const typeDefs = `#graphql
   type SolanaBondedTokenResult {
     metric: AddressAndInstanceMetric
     bondedToken: String
+  }
+
+  type SolanaTVLResult {
+    metric: AddressAndInstanceMetric
+    TVL: String
   }
 
 `;
