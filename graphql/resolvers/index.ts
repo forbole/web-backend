@@ -160,5 +160,20 @@ export const resolvers = {
       const response = await dataSources.elrondAPI.getElrondUnbondingTime();
       const val = {metric: {instance: "elrond"}, unbondingTime: `${response} days`}
       return val;
+    },
+    solanaUsers: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.solanaAPI.getSolanaUsers();
+      const { status, data } = response
+      if (status === "error") return console.log(response.error)
+      const { result } = data
+      let validator_address = ""
+      let usersCount = 0
+      result.map((res, i) => {
+        usersCount += parseInt(res.value[1]); 
+        if (i === 1) validator_address = res.metric.validator_address; 
+        return ({validator_address, usersCount})
+      })
+      const val = { metric: {validator_address, instance: "solana"}, usersCount}
+      return val;
     }
 }};

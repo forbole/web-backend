@@ -41,4 +41,5 @@ export class ElrondAPI extends RESTDataSource {
         const unbondingTime = 10
         return unbondingTime
    }
+   
 }
