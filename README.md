@@ -73,11 +73,13 @@ curl --request POST \
 {"data":{"cosmosUsersCount":[{"usersCount":"36517"}]}}
 ```
 
-### All possible query fields and sample responses
+##### All possible query fields and sample responses
 
 ### Cosmos-SDK
 
 ---
+
+##### Cosmos users count
 
 ```graphql
 query CosmosUsersQuery {
@@ -86,8 +88,6 @@ query CosmosUsersQuery {
   }
 }
 ```
-
-returns total Cosmos users count
 
 ```json
 {
@@ -103,6 +103,8 @@ returns total Cosmos users count
 
 ---
 
+##### TVL for each chain
+
 ```graphql
 query CosmosTVLQuery {
   eachCosmosTVL {
@@ -116,8 +118,6 @@ query CosmosTVLQuery {
   }
 }
 ```
-
-returns TVL for each chain
 
 ```json
 {
