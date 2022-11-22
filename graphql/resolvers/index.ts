@@ -205,5 +205,22 @@ export const resolvers = {
       })
       const val = { metric: {validator_address, instance: "solana"}, TVL}
       return val;
+    },
+    solanaCommission: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.solanaAPI.getSolanaCommission();
+      const { status, data } = response
+      if (status === "error") return console.log(response.error)
+      const { result } = data
+      let validator_address = ""
+      let commissionRate = 0
+      result.map((res, i) => {
+        if (i === 1) {
+          commissionRate = parseInt(res.value[1]) / 100; 
+          validator_address = res.metric.validator_address; 
+        }
+        return ({validator_address, commissionRate})
+      })
+      const val = { metric: {validator_address, instance: "solana"}, commissionRate}
+      return val;
     }
 }};

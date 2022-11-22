@@ -21,4 +21,8 @@ export class SolanaAPI extends RESTDataSource {
         return this.get<any>(`query?query=solana_validator_staked{} * on (denom) group_left token_price`)
     }
 
+    async getSolanaCommission(): Promise<any> {
+        return this.get<any>(`query?query=solana_validator_commission_rate`)
+    }
+
 }

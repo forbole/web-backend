@@ -24,6 +24,7 @@ export const typeDefs = `#graphql
     solanaUsers: SolanaUsersResult
     solanaBondedToken: SolanaBondedTokenResult
     solanaTVL: SolanaTVLResult
+    solanaCommission: SolanaCommissionResult
   }
 
   type UsersCountResult {
@@ -159,6 +160,11 @@ export const typeDefs = `#graphql
   type SolanaTVLResult {
     metric: AddressAndInstanceMetric
     TVL: String
+  }
+
+  type SolanaCommissionResult {
+    metric: AddressAndInstanceMetric
+    commissionRate: String
   }
 
 `;
