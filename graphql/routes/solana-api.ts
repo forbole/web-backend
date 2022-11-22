@@ -11,5 +11,10 @@ export class SolanaAPI extends RESTDataSource {
 
     async getSolanaUsers(): Promise<any> {
         return this.get<any>(`query?query=solana_validator_delegators_count`)
-   }
+    }
+
+    async getStakedSolana(): Promise<any> {
+        return this.get<any>(`query?query=solana_validator_staked`)
+    }
+    
 }
