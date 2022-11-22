@@ -77,6 +77,8 @@ curl --request POST \
 
 ### Cosmos-SDK
 
+---
+
 ```graphql
 query CosmosUsersQuery {
   cosmosUsersCount {
@@ -98,6 +100,8 @@ returns total Cosmos users count
   }
 }
 ```
+
+---
 
 ```graphql
 query CosmosTVLQuery {
