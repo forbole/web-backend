@@ -941,4 +941,21 @@ query OasisCommission {
 
 ```
 
+##### Oasis TVL
+
+```graphql
+query OasisTVL {
+  oasisTVL {
+    metric {
+      instance
+    }
+    TVL
+  }
+}
+```
+
+```json
+
+```
+
 **This repo is in active development.**

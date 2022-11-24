@@ -30,6 +30,7 @@ export const typeDefs = `#graphql
     oasisUsers: [OasisUsersResult]
     oasisBondedToken: [OasisBondedTokenResult]
     oasisCommission: [OasisCommissionResult]
+    oasisTVL: [OasisTVLResult]
   }
 
   type UsersCountResult {
@@ -195,6 +196,11 @@ export const typeDefs = `#graphql
   type OasisCommissionResult {
     metric: AddressAndInstanceMetric
     commissionRate: String
+  }
+
+  type OasisTVLResult {
+    metric: InstanceOnlyMetric
+    TVL: String
   }
 
 `;

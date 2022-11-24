@@ -256,5 +256,13 @@ export const resolvers = {
       const { result } = data
       const val = result.map((res) => ({metric: {instance: "oasis", validator_address: res.metric.identity}, commissionRate: res.value[1]}))
       return val;
+    },
+    oasisTVL: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.oasisAPI.getOasisTVL();
+      const { status, data } = response
+      if (status === "error") return console.log(response.error)
+      const { result } = data
+      const val = result.map((res) => ({metric: {instance: "oasis"}, TVL: res.value[1]}))
+      return val;
     }
 }};

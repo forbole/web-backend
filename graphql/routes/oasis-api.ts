@@ -20,4 +20,8 @@ export class OasisAPI extends RESTDataSource {
     async getOasisCommission(): Promise<any> {
         return this.get<any>(`query?query=oasis_validator_commission_rate`);
     }
+
+    async getOasisTVL(): Promise<any> {
+        return this.get<any>(`query?query=oasis_validator_voting_power_total  * on (denom) token_price`);
+    }
 }
