@@ -425,4 +425,58 @@ query RadixUnbondingTime {
 }
 ```
 
+##### Token supply on Radix
+
+```graphql
+query RadixTotalSupply {
+  allRadixTotalSupply {
+    metric {
+      instance
+    }
+    supply
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "allRadixTotalSupply": {
+      "metric": {
+        "instance": "radix"
+      },
+      "supply": "12437533004384111600000000000"
+    }
+  }
+}
+```
+
+##### Bonded token count on Radix
+
+```graphql
+query RadixStakedTokens {
+  allRadixStakedTokens {
+    metric {
+      instance
+      validator_address
+    }
+    bondedToken
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "allRadixStakedTokens": {
+      "metric": {
+        "instance": "radix",
+        "validator_address": "rv1qtkl4r2x86cn5nujyx7cnd6rup5tkuvvm7qqp0ycxa6fgv246k6d6nrq0kz"
+      },
+      "bondedToken": "99262229515026013586744372"
+    }
+  }
+}
+```
+
 **This repo is in active development.**
