@@ -280,4 +280,41 @@ query CosmosUnbondingTime {
 }
 ```
 
+##### APY on each Cosmos chain
+
+```graphql
+query CosmosAPY {
+  eachCosmosAPY {
+    metric {
+      chain_id
+      instance
+    }
+    APY
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "eachCosmosAPY": [
+      {
+        "metric": {
+          "chain_id": "agoric-3",
+          "instance": "agoric"
+        },
+        "APY": "0.12656730188847093"
+      },
+      {
+        "metric": {
+          "chain_id": "akashnet-2",
+          "instance": "akash"
+        },
+        "APY": "0.14549280922278507"
+      }
+    ]
+  }
+}
+```
+
 **This repo is in active development.**
