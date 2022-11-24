@@ -79,6 +79,8 @@ curl --request POST \
 
 ---
 
+9 schemas
+
 ##### Cosmos user count
 
 ```graphql
@@ -313,6 +315,112 @@ query CosmosAPY {
         "APY": "0.14549280922278507"
       }
     ]
+  }
+}
+```
+
+##### Inflation rate on each Cosmos chain
+
+```graphql
+query CosmosInflationRate {
+  eachCosmosInflationRate {
+    metric {
+      chain_id
+      instance
+    }
+    inflationRate
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "eachCosmosInflationRate": [
+      {
+        "metric": {
+          "chain_id": "agoric-3",
+          "instance": "agoric"
+        },
+        "inflationRate": "0.05"
+      },
+      {
+        "metric": {
+          "chain_id": "akashnet-2",
+          "instance": "akash"
+        },
+        "inflationRate": "0.10937958859040699"
+      }
+    ]
+  }
+}
+```
+
+##### Token supply on each Cosmos chain
+
+```graphql
+query CosmosTokenSupply {
+  eachCosmosTokenSupply {
+    metric {
+      instance
+      chain_id
+    }
+    supply
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "eachCosmosTokenSupply": [
+      {
+        "metric": {
+          "instance": "agoric",
+          "chain_id": "agoric-3"
+        },
+        "supply": "1016094606.900574"
+      },
+      {
+        "metric": {
+          "instance": "akash",
+          "chain_id": "akashnet-2"
+        },
+        "supply": "204170361.815201"
+      }
+    ]
+  }
+}
+```
+
+### Radix
+
+---
+
+3 schemas
+
+##### Unbonding time on Radix
+
+```graphql
+query RadixUnbondingTime {
+  radixUnbondingTime {
+    metric {
+      instance
+    }
+    unbondingTime
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "radixUnbondingTime": {
+      "metric": {
+        "instance": "radix"
+      },
+      "unbondingTime": "1-3 weeks (500 epochs)"
+    }
   }
 }
 ```
