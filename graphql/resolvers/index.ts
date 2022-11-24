@@ -232,5 +232,13 @@ export const resolvers = {
       const response = await dataSources.solanaAPI.getSolanaUnbondingTime();
       const val = {metric: {instance: "solana"}, unbondingTime: `${response} days`}
       return val;
+    },
+    oasisUsers: async (_:any, __:any, { dataSources }: any) => {
+      const response = await dataSources.oasisAPI.getOasisUsers();
+      const { status, data } = response
+      if (status === "error") return console.log(response.error)
+      const { result } = data
+      const val = result.map((res) => ({metric: {instance: "oasis", validator_address: res.metric.identity}, usersCount: res.value[1]}))
+      return val;
     }
 }};

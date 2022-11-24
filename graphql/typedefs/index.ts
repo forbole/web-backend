@@ -27,6 +27,7 @@ export const typeDefs = `#graphql
     solanaTVL: SolanaTVLResult
     solanaCommission: SolanaCommissionResult
     solanaUnbondingTime: SolanaUnbondingTimeResult
+    oasisUsers: [OasisUsersResult]
   }
 
   type UsersCountResult {
@@ -177,6 +178,11 @@ export const typeDefs = `#graphql
   type SolanaUnbondingTimeResult {
     metric: InstanceOnlyMetric
     unbondingTime: String
+  }
+
+  type OasisUsersResult {
+    metric: AddressAndInstanceMetric
+    usersCount: String
   }
 
 `;
