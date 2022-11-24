@@ -203,7 +203,7 @@ query CosmosBondedToken {
 }
 ```
 
-##### Comission rate for each Cosmos chain
+##### Commission rate for each Cosmos chain
 
 ```graphql
 query CosmosCommission {
@@ -237,6 +237,43 @@ query CosmosCommission {
           "validator_address": "akashvaloper14kn0kk33szpwus9nh8n87fjel8djx0y0uzn073"
         },
         "commissionRate": "0.03"
+      }
+    ]
+  }
+}
+```
+
+##### Unbonding time on each Cosmos chain
+
+```graphql
+query CosmosUnbondingTime {
+  eachCosmosUnbondingTime {
+    metric {
+      chain_id
+      instance
+    }
+    unbondingTime
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "eachCosmosUnbondingTime": [
+      {
+        "metric": {
+          "chain_id": "agoric-3",
+          "instance": "agoric"
+        },
+        "unbondingTime": "21 days"
+      },
+      {
+        "metric": {
+          "chain_id": "akashnet-2",
+          "instance": "akash"
+        },
+        "unbondingTime": "21 days"
       }
     ]
   }
