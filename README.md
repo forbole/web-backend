@@ -33,7 +33,7 @@ In **non-production** environments, an embedded version of Apollo Sandbox is sho
 ##### querying of `total no. of users staked to Forbole on all Cosmos SDK chains` on Sandbox:
 
 ```graphql
-query Query {
+query ExampleQuery {
   cosmosUsersCount {
     usersCount
   }
@@ -79,7 +79,7 @@ curl --request POST \
 
 ---
 
-##### Cosmos users count
+##### Cosmos user count
 
 ```graphql
 query CosmosUsersQuery {
@@ -166,10 +166,10 @@ query CosmosTVLQuery {
 }
 ```
 
-##### Bonded token on each Cosmos chain
+##### Bonded token count on each Cosmos chain
 
 ```graphql
-query EachCosmosBondedToken {
+query CosmosBondedToken {
   eachCosmosBondedToken {
     metric {
       chain_id
@@ -197,6 +197,46 @@ query EachCosmosBondedToken {
           "instance": "akash"
         },
         "bondedToken": "150424797.691372"
+      }
+    ]
+  }
+}
+```
+
+##### Comission rate for each Cosmos chain
+
+```graphql
+query CosmosCommission {
+  eachCosmosCommission {
+    metric {
+      chain_id
+      instance
+      validator_address
+    }
+    commissionRate
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "eachCosmosCommission": [
+      {
+        "metric": {
+          "chain_id": "agoric-3",
+          "instance": "agoric",
+          "validator_address": "agoricvaloper1pcc069wu2utgnf5qsm6n2pk2x8xt6cah954t4g"
+        },
+        "commissionRate": "0.1"
+      },
+      {
+        "metric": {
+          "chain_id": "akashnet-2",
+          "instance": "akash",
+          "validator_address": "akashvaloper14kn0kk33szpwus9nh8n87fjel8djx0y0uzn073"
+        },
+        "commissionRate": "0.03"
       }
     ]
   }
