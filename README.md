@@ -938,7 +938,19 @@ query OasisCommission {
 ```
 
 ```json
-
+{
+  "data": {
+    "oasisCommission": [
+      {
+        "metric": {
+          "instance": "oasis",
+          "validator_address": "oasis1qrtq873ddwnnjqyv66ezdc9ql2a07l37d5vae9k0"
+        },
+        "commissionRate": "0.2"
+      }
+    ]
+  }
+}
 ```
 
 ##### Oasis TVL
@@ -955,7 +967,18 @@ query OasisTVL {
 ```
 
 ```json
-
+{
+  "data": {
+    "oasisTVL": [
+      {
+        "metric": {
+          "instance": "oasis"
+        },
+        "TVL": "3843722.282591173"
+      }
+    ]
+  }
+}
 ```
 
 **This repo is in active development.**
