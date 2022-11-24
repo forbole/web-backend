@@ -598,7 +598,7 @@ query SolanaCommission {
 ##### Bonded token count on Solana
 
 ```graphql
-query SampleQuery {
+query SolanaBondedToken {
   solanaBondedToken {
     metric {
       instance
@@ -619,6 +619,240 @@ query SampleQuery {
       },
       "bondedToken": "431329"
     }
+  }
+}
+```
+
+### Elrond
+
+---
+
+8 schemas
+
+##### Elrond user count
+
+```graphql
+query ElrondUsers {
+  elrondUsers {
+    metric {
+      instance
+    }
+    usersCount
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "elrondUsers": [
+      {
+        "metric": {
+          "instance": "elrond"
+        },
+        "usersCount": "941"
+      }
+    ]
+  }
+}
+```
+
+##### Elrond TVL
+
+```graphql
+query ElrondTVL {
+  elrondTVL {
+    metric {
+      instance
+    }
+    TVL
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "elrondTVL": [
+      {
+        "metric": {
+          "instance": "elrond"
+        },
+        "TVL": "2991442878556965700000000"
+      }
+    ]
+  }
+}
+```
+
+##### Elrond APY
+
+```graphql
+query ElrondAPY {
+  elrondAPY {
+    metric {
+      instance
+      validator_address
+    }
+    APY
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "elrondAPY": [
+      {
+        "metric": {
+          "instance": "elrond",
+          "validator_address": "erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqq40llllsfjmn54"
+        },
+        "APY": "900"
+      }
+    ]
+  }
+}
+```
+
+##### Unbonding time on Elrond
+
+```graphql
+query ElrondUnbondingTime {
+  elrondUnbondingTime {
+    metric {
+      instance
+    }
+    unbondingTime
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "elrondUnbondingTime": {
+      "metric": {
+        "instance": "elrond"
+      },
+      "unbondingTime": "10 days"
+    }
+  }
+}
+```
+
+##### Elrond total supply
+
+```graphql
+query ElrondTotalSupply {
+  elrondTotalSupply {
+    metric {
+      instance
+    }
+    totalSupply
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "elrondTotalSupply": [
+      {
+        "metric": {
+          "instance": "elrond"
+        },
+        "totalSupply": "24619259"
+      }
+    ]
+  }
+}
+```
+
+##### Commission rate on Elrond
+
+```graphql
+query ElrondCommission {
+  elrondCommission {
+    metric {
+      instance
+      validator_address
+    }
+    commissionRate
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "elrondCommission": [
+      {
+        "metric": {
+          "instance": "elrond",
+          "validator_address": "erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqq40llllsfjmn54"
+        },
+        "commissionRate": "0.15"
+      }
+    ]
+  }
+}
+```
+
+##### Elrond circulating supply
+
+```graphql
+query ElrondCirculatingSupply {
+  elrondCirculatingSupply {
+    metric {
+      instance
+    }
+    circulatingSupply
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "elrondCirculatingSupply": [
+      {
+        "metric": {
+          "instance": "elrond"
+        },
+        "circulatingSupply": "23858327"
+      }
+    ]
+  }
+}
+```
+
+##### Bonded token count on Elrond
+
+```graphql
+query ElrondBondedToken {
+  elrondBondedToken {
+    metric {
+      instance
+      validator_address
+    }
+    bondedToken
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "elrondBondedToken": [
+      {
+        "metric": {
+          "instance": "elrond",
+          "validator_address": "erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqq40llllsfjmn54"
+        },
+        "bondedToken": "69600812247968570000000"
+      }
+    ]
   }
 }
 ```
