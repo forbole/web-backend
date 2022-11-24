@@ -101,7 +101,7 @@ query CosmosUsersQuery {
 }
 ```
 
-##### TVL for each chain
+##### TVL for each Cosmos SDK chain
 
 ```graphql
 query CosmosTVLQuery {
@@ -144,7 +144,7 @@ query CosmosTVLQuery {
 }
 ```
 
-##### Total TVL
+##### Total Cosmos TVL
 
 ```graphql
 query CosmosTVLQuery {
@@ -160,6 +160,43 @@ query CosmosTVLQuery {
     "allCosmosTVL": [
       {
         "cosmosTVL": "46021663.09927347"
+      }
+    ]
+  }
+}
+```
+
+##### Bonded token on each Cosmos chain
+
+```graphql
+query EachCosmosBondedToken {
+  eachCosmosBondedToken {
+    metric {
+      chain_id
+      instance
+    }
+    bondedToken
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "eachCosmosBondedToken": [
+      {
+        "metric": {
+          "chain_id": "agoric-3",
+          "instance": "agoric"
+        },
+        "bondedToken": "401404164.21453"
+      },
+      {
+        "metric": {
+          "chain_id": "akashnet-2",
+          "instance": "akash"
+        },
+        "bondedToken": "150424797.691372"
       }
     ]
   }
