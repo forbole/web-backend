@@ -16,4 +16,8 @@ export class OasisAPI extends RESTDataSource {
     async getOasisBondedToken(): Promise<any> {
         return this.get<any>(`query?query=oasis_validator_voting_power_total`);
     }
+
+    async getOasisCommission(): Promise<any> {
+        return this.get<any>(`query?query=oasis_validator_commission_rate`);
+    }
 }

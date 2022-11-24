@@ -923,4 +923,22 @@ query OasisBondedToken {
 }
 ```
 
+##### Commission rate on Oasis
+
+```graphql
+query OasisCommission {
+  oasisCommission {
+    metric {
+      instance
+      validator_address
+    }
+    commissionRate
+  }
+}
+```
+
+```json
+
+```
+
 **This repo is in active development.**
