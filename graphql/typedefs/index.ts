@@ -9,6 +9,28 @@ export const typeDefs = `#graphql
     eachCosmosCommission: [EachCosmosCommissionResult]
     eachCosmosUnbondingTime: [EachCosmosUnbondingTimeResult]
     eachCosmosAPY: [EachCosmosAPYResult]
+    eachCosmosTokenSupply: [EachCosmosTokenSupplyResult]
+    eachCosmosInflationRate: [EachCosmosInflationRateResult]
+    allRadixStakedTokens: RadixStakedTokensResult
+    allRadixTotalSupply: RadixTokenSupplyResult
+    radixUnbondingTime: RadixUnbondingTimeResult
+    elrondAPY: [ElrondAPYResult]
+    elrondTVL: [ElrondTVLResult]
+    elrondCommission: [ElrondCommissionResult]
+    elrondBondedToken: [ElrondBondedTokenResult]
+    elrondTotalSupply: [ElrondTotalSupplyResult]
+    elrondCirculatingSupply: [ElrondCirculatingSupplyResult]
+    elrondUsers: [ElrondUsersResult]
+    elrondUnbondingTime: ElrondUnbondingTimeResult
+    solanaUsers: SolanaUsersResult
+    solanaBondedToken: SolanaBondedTokenResult
+    solanaTVL: SolanaTVLResult
+    solanaCommission: SolanaCommissionResult
+    solanaUnbondingTime: SolanaUnbondingTimeResult
+    oasisUsers: [OasisUsersResult]
+    oasisBondedToken: [OasisBondedTokenResult]
+    oasisCommission: [OasisCommissionResult]
+    oasisTVL: [OasisTVLResult]
   }
 
   type UsersCountResult {
@@ -32,11 +54,11 @@ export const typeDefs = `#graphql
   }
 
   type EachCosmosBondedTokenResult {
-    metric: BondedTokenMetric
+    metric: ChainIdAndInstanceMetric
     bondedToken: String
   }
 
-  type BondedTokenMetric {
+  type ChainIdAndInstanceMetric {
     chain_id: String
     instance: String
   }
@@ -53,22 +75,132 @@ export const typeDefs = `#graphql
   }
 
   type EachCosmosUnbondingTimeResult {
-    metric: EachCosmosUnbondingTimeMetric
+    metric: ChainIdAndInstanceMetric
     unbondingTime: String
   }
 
-  type EachCosmosUnbondingTimeMetric {
-    chain_id: String
-    instance: String
-  }
-
   type EachCosmosAPYResult {
-    metric: EachCosmosAPYMetric
+    metric: ChainIdAndInstanceMetric
     APY: String
   }
 
-  type EachCosmosAPYMetric {
-    chain_id: String
+  type EachCosmosTokenSupplyResult {
+    metric: ChainIdAndInstanceMetric
+    supply: String
+  }
+
+  type EachCosmosInflationRateResult {
+    metric: ChainIdAndInstanceMetric
+    inflationRate: String 
+  }
+
+  type RadixStakedTokensResult {
+    metric: AddressAndInstanceMetric
+    bondedToken: String
+  }
+
+  type AddressAndInstanceMetric {
+    validator_address: String
     instance: String
   }
+
+  type RadixTokenSupplyResult {
+    metric: InstanceOnlyMetric
+    supply: String
+  }
+
+  type RadixUnbondingTimeResult {
+    metric: InstanceOnlyMetric
+    unbondingTime: String
+  }
+
+  type InstanceOnlyMetric {
+    instance: String
+  }
+
+  type ElrondAPYResult {
+    metric: AddressAndInstanceMetric
+    APY: String
+  }
+
+  type ElrondTVLResult {
+    metric: InstanceOnlyMetric
+    TVL: String
+  }
+
+  type ElrondCommissionResult {
+    metric: AddressAndInstanceMetric
+    commissionRate: String
+  }
+
+  type ElrondBondedTokenResult {
+    metric: AddressAndInstanceMetric
+    bondedToken: String
+  }
+
+  type ElrondTotalSupplyResult {
+    metric: InstanceOnlyMetric
+    totalSupply: String
+  }
+
+  type ElrondCirculatingSupplyResult {
+    metric: InstanceOnlyMetric
+    circulatingSupply: String
+  }
+
+  type ElrondUsersResult {
+    metric: InstanceOnlyMetric
+    usersCount: String
+  }
+
+  type ElrondUnbondingTimeResult {
+    metric: InstanceOnlyMetric
+    unbondingTime: String
+  }
+
+  type SolanaUsersResult {
+    metric: AddressAndInstanceMetric
+    usersCount: String
+  }
+
+  type SolanaBondedTokenResult {
+    metric: AddressAndInstanceMetric
+    bondedToken: String
+  }
+
+  type SolanaTVLResult {
+    metric: AddressAndInstanceMetric
+    TVL: String
+  }
+
+  type SolanaCommissionResult {
+    metric: AddressAndInstanceMetric
+    commissionRate: String
+  }
+
+  type SolanaUnbondingTimeResult {
+    metric: InstanceOnlyMetric
+    unbondingTime: String
+  }
+
+  type OasisUsersResult {
+    metric: AddressAndInstanceMetric
+    usersCount: String
+  }
+
+  type OasisBondedTokenResult {
+    metric: AddressAndInstanceMetric
+    bondedToken: String
+  }
+
+  type OasisCommissionResult {
+    metric: AddressAndInstanceMetric
+    commissionRate: String
+  }
+
+  type OasisTVLResult {
+    metric: InstanceOnlyMetric
+    TVL: String
+  }
+
 `;

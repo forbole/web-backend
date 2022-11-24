@@ -7,7 +7,7 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import http from 'http';
 import {typeDefs} from "./graphql/typedefs";
 import { resolvers } from "./graphql/resolvers";
-import { CosmosAPI } from "./graphql/routes/cosmos-api";
+import { CosmosAPI, ElrondAPI, RadixAPI, SolanaAPI, OasisAPI } from "./graphql/routes";
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
@@ -17,6 +17,10 @@ require('dotenv').config()
 interface ContextValue {
   dataSources?: {
     cosmosAPI: CosmosAPI;
+    radixAPI: RadixAPI;
+    elrondAPI: ElrondAPI;
+    solanaAPI: SolanaAPI;
+    oasisAPI: OasisAPI;
   };
 }
 
@@ -46,6 +50,10 @@ app.use('/graphql', cors<cors.CorsRequest>(), bodyParser.json(), expressMiddlewa
   return ({
     dataSources: {
       cosmosAPI: new CosmosAPI({cache}),
+      radixAPI: new RadixAPI({cache}),
+      elrondAPI: new ElrondAPI({cache}),
+      solanaAPI: new SolanaAPI({cache}),
+      oasisAPI: new OasisAPI({cache})
     },
   });
 },}))
