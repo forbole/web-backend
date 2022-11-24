@@ -168,7 +168,7 @@ query CosmosTVLQuery {
 }
 ```
 
-##### Bonded token with Forbole count on each Cosmos chain
+##### Bonded token with Forbole on each Cosmos chain
 
 ```graphql
 query CosmosBondedToken {
@@ -451,7 +451,7 @@ query RadixTotalSupply {
 }
 ```
 
-##### Bonded token with Forbole count on Radix
+##### Bonded token with Forbole on Radix
 
 ```graphql
 query RadixStakedTokens {
@@ -595,7 +595,7 @@ query SolanaCommission {
 }
 ```
 
-##### Bonded token count on Solana
+##### Bonded token with Forbole on Solana
 
 ```graphql
 query SolanaBondedToken {
@@ -827,7 +827,7 @@ query ElrondCirculatingSupply {
 }
 ```
 
-##### Bonded token count on Elrond
+##### Bonded token with Forbole on Elrond
 
 ```graphql
 query ElrondBondedToken {
@@ -887,6 +887,36 @@ query OasisUsers {
           "validator_address": "oasis1qrtq873ddwnnjqyv66ezdc9ql2a07l37d5vae9k0"
         },
         "usersCount": "135"
+      }
+    ]
+  }
+}
+```
+
+##### Bonded token with Forbole on Oasis
+
+```graphql
+query OasisBondedToken {
+  oasisBondedToken {
+    metric {
+      instance
+      validator_address
+    }
+    bondedToken
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "oasisBondedToken": [
+      {
+        "metric": {
+          "instance": "oasis",
+          "validator_address": "oasis1qrtq873ddwnnjqyv66ezdc9ql2a07l37d5vae9k0"
+        },
+        "bondedToken": "82692502.44758473"
       }
     ]
   }
