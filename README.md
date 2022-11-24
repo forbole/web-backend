@@ -103,7 +103,7 @@ query CosmosUsersQuery {
 }
 ```
 
-##### TVL for each Cosmos SDK chain
+##### TVL on each Cosmos SDK chain
 
 ```graphql
 query CosmosTVLQuery {
@@ -474,6 +474,150 @@ query RadixStakedTokens {
         "validator_address": "rv1qtkl4r2x86cn5nujyx7cnd6rup5tkuvvm7qqp0ycxa6fgv246k6d6nrq0kz"
       },
       "bondedToken": "99262229515026013586744372"
+    }
+  }
+}
+```
+
+### Solana
+
+---
+
+5 schemas
+
+##### Solana user count
+
+```graphql
+query SolanaUsers {
+  solanaUsers {
+    metric {
+      instance
+      validator_address
+    }
+    usersCount
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "solanaUsers": {
+      "metric": {
+        "instance": "solana",
+        "validator_address": "76nwV8zz8tLz97SBRXH6uwHvgHXtqJDLQfF66jZhQ857"
+      },
+      "usersCount": "566"
+    }
+  }
+}
+```
+
+##### Solana TVL
+
+```graphql
+query SolanaTVL {
+  solanaTVL {
+    metric {
+      instance
+      validator_address
+    }
+    TVL
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "solanaTVL": {
+      "metric": {
+        "instance": "solana",
+        "validator_address": "76nwV8zz8tLz97SBRXH6uwHvgHXtqJDLQfF66jZhQ857"
+      },
+      "TVL": "6288793"
+    }
+  }
+}
+```
+
+##### Unbonding time on Solana
+
+```graphql
+query SolanaUnbondingTime {
+  solanaUnbondingTime {
+    metric {
+      instance
+    }
+    unbondingTime
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "solanaUnbondingTime": {
+      "metric": {
+        "instance": "solana"
+      },
+      "unbondingTime": "10 days"
+    }
+  }
+}
+```
+
+##### Commission rate for Solana
+
+```graphql
+query SolanaCommission {
+  solanaCommission {
+    metric {
+      instance
+      validator_address
+    }
+    commissionRate
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "solanaCommission": {
+      "metric": {
+        "instance": "solana",
+        "validator_address": "76nwV8zz8tLz97SBRXH6uwHvgHXtqJDLQfF66jZhQ857"
+      },
+      "commissionRate": "0.09"
+    }
+  }
+}
+```
+
+##### Bonded token count on Solana
+
+```graphql
+query SampleQuery {
+  solanaBondedToken {
+    metric {
+      instance
+      validator_address
+    }
+    bondedToken
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "solanaBondedToken": {
+      "metric": {
+        "instance": "solana",
+        "validator_address": "76nwV8zz8tLz97SBRXH6uwHvgHXtqJDLQfF66jZhQ857"
+      },
+      "bondedToken": "431329"
     }
   }
 }
