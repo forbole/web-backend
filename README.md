@@ -58,7 +58,7 @@ In **production** environments, when `NODE_ENV` is `production`, users can query
 
 #### POST `/graphql`
 
-##### querying total no. of users staked to Forbole on all Cosmos SDK chains:
+##### Querying total no. of users staked to Forbole on all Cosmos SDK chains:
 
 ```zsh
 curl --request POST \
@@ -138,6 +138,28 @@ query CosmosTVLQuery {
           "validator_address": "akashvaloper14kn0kk33szpwus9nh8n87fjel8djx0y0uzn073"
         },
         "TVL": "2805559.7188507"
+      }
+    ]
+  }
+}
+```
+
+##### Total TVL
+
+```graphql
+query CosmosTVLQuery {
+  allCosmosTVL {
+    cosmosTVL
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "allCosmosTVL": [
+      {
+        "cosmosTVL": "46021663.09927347"
       }
     ]
   }
