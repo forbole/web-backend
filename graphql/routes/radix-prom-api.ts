@@ -19,4 +19,8 @@ export class RadixPromAPI extends RESTDataSource {
         return this.get<any>(`query?query=max_over_time(radix_validator_delegators_total[${process.env.MAX_OVER_TIME_DURATION}])`);
     }
 
+    async getStakedRadix(body): Promise<any> {
+        return this.get<any>(`query?query=max_over_time(radix_validator_staked[${process.env.MAX_OVER_TIME_DURATION}])`);
+    }
+
 }

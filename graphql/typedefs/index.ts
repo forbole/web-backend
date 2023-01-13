@@ -11,7 +11,7 @@ export const typeDefs = `#graphql
     eachCosmosAPY: [EachCosmosAPYResult]
     eachCosmosTokenSupply: [EachCosmosTokenSupplyResult]
     eachCosmosInflationRate: [EachCosmosInflationRateResult]
-    allRadixStakedTokens: RadixStakedTokensResult
+    allRadixStakedTokens: [RadixStakedTokensResult]
     allRadixTotalSupply: RadixTokenSupplyResult
     radixUnbondingTime: RadixUnbondingTimeResult
     elrondAPY: [ElrondAPYResult]
