@@ -272,6 +272,14 @@ export const resolvers = {
       const { result } = data
       const val = result.map((res) => ({ metric: { instance: "radix", validator_address: res.metric.address }, TVL: res.value[1] }))
       return val;
+    },
+    radixUsers: async (_: any, __: any, { dataSources }: any) => {
+      const response = await dataSources.radixPromAPI.getRadixUsers();
+      const { status, data } = response
+      if (status === "error") return console.log(response.error)
+      const { result } = data
+      const val = result.map((res) => ({ metric: { instance: "radix", validator_address: res.metric.address }, usersCount: res.value[1] }))
+      return val;
     }
   }
 };

@@ -32,6 +32,7 @@ export const typeDefs = `#graphql
     oasisCommission: [OasisCommissionResult]
     oasisTVL: [OasisTVLResult]
     radixTVL: [RadixTVLResult]
+    radixUsers: [RadixUsersResult]
   }
 
   type UsersCountResult {
@@ -207,6 +208,11 @@ export const typeDefs = `#graphql
   type RadixTVLResult {
     metric: AddressAndInstanceMetric
     TVL: String
+  }
+
+  type RadixUsersResult {
+    metric: AddressAndInstanceMetric
+    usersCount: String
   }
 
 `;
