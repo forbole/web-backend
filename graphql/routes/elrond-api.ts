@@ -2,6 +2,9 @@ import { RESTDataSource } from '@apollo/datasource-rest';
 // KeyValueCache is the type of Apollo server's default cache
 import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config()
+
 export class ElrondAPI extends RESTDataSource {
      override baseURL = `http://${process.env.PROMETHEUS_URL}/prometheus/api/v1/`
 
