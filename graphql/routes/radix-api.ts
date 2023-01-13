@@ -9,15 +9,6 @@ export class RadixAPI extends RESTDataSource {
         super(options); // this sends our server's `cache` through
     }
 
-    async getStakedRadix(body): Promise<any> {
-        return this.post<any>('validator', {
-            headers: {
-                'Content-Type': 'application/json',
-            }, 
-            body
-        });
-    }
-
     async getTotalRadixSupply(body): Promise<any> {
         return this.post<any>('token/native', {
             headers: {
@@ -31,5 +22,5 @@ export class RadixAPI extends RESTDataSource {
         const unbondingTime = '1-3 weeks (500 epochs)'
         return unbondingTime
     }
-    
+
 }

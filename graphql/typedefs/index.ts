@@ -11,7 +11,7 @@ export const typeDefs = `#graphql
     eachCosmosAPY: [EachCosmosAPYResult]
     eachCosmosTokenSupply: [EachCosmosTokenSupplyResult]
     eachCosmosInflationRate: [EachCosmosInflationRateResult]
-    allRadixStakedTokens: RadixStakedTokensResult
+    allRadixStakedTokens: [RadixStakedTokensResult]
     allRadixTotalSupply: RadixTokenSupplyResult
     radixUnbondingTime: RadixUnbondingTimeResult
     elrondAPY: [ElrondAPYResult]
@@ -31,6 +31,8 @@ export const typeDefs = `#graphql
     oasisBondedToken: [OasisBondedTokenResult]
     oasisCommission: [OasisCommissionResult]
     oasisTVL: [OasisTVLResult]
+    radixTVL: [RadixTVLResult]
+    radixUsers: [RadixUsersResult]
   }
 
   type UsersCountResult {
@@ -201,6 +203,16 @@ export const typeDefs = `#graphql
   type OasisTVLResult {
     metric: InstanceOnlyMetric
     TVL: String
+  }
+
+  type RadixTVLResult {
+    metric: AddressAndInstanceMetric
+    TVL: String
+  }
+
+  type RadixUsersResult {
+    metric: AddressAndInstanceMetric
+    usersCount: String
   }
 
 `;

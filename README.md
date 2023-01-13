@@ -397,7 +397,67 @@ query CosmosTokenSupply {
 
 ---
 
-3 schemas
+5 schemas
+
+##### TVL on Radix
+
+```graphql
+query RadixTVL {
+  radixTVL {
+    metric {
+      validator_address
+      instance
+    }
+    TVL
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "radixTVL": [
+      {
+        "metric": {
+          "validator_address": "rv1qtkl4r2x86cn5nujyx7cnd6rup5tkuvvm7qqp0ycxa6fgv246k6d6nrq0kz",
+          "instance": "radix"
+        },
+        "TVL": "3847550.113985192"
+      }
+    ],
+  }
+}
+```
+
+##### Users Count on Radix
+
+```graphql
+query RadixUsersCount {
+  radixUsers {
+    metric {
+      validator_address
+      instance
+    }
+    usersCount
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "radixUsers": [
+      {
+        "metric": {
+          "validator_address": "rv1qtkl4r2x86cn5nujyx7cnd6rup5tkuvvm7qqp0ycxa6fgv246k6d6nrq0kz",
+          "instance": "radix"
+        },
+        "usersCount": "1060"
+      }
+    ]
+  }
+}
+```
 
 ##### Unbonding time on Radix
 
