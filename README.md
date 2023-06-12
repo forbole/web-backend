@@ -111,7 +111,7 @@ query CosmosTVLQuery {
     metric {
       chain_id
       denom
-      instance
+      chain
       validator_address
     }
     TVL
@@ -175,7 +175,7 @@ query CosmosBondedToken {
   eachCosmosBondedToken {
     metric {
       chain_id
-      instance
+      chain
     }
     bondedToken
   }
@@ -212,7 +212,7 @@ query CosmosCommission {
   eachCosmosCommission {
     metric {
       chain_id
-      instance
+      chain
       validator_address
     }
     commissionRate
@@ -252,7 +252,7 @@ query CosmosUnbondingTime {
   eachCosmosUnbondingTime {
     metric {
       chain_id
-      instance
+      chain
     }
     unbondingTime
   }
@@ -289,7 +289,7 @@ query CosmosAPY {
   eachCosmosAPY {
     metric {
       chain_id
-      instance
+      chain
     }
     APY
   }
@@ -326,7 +326,7 @@ query CosmosInflationRate {
   eachCosmosInflationRate {
     metric {
       chain_id
-      instance
+      chain
     }
     inflationRate
   }
@@ -362,7 +362,7 @@ query CosmosInflationRate {
 query CosmosTokenSupply {
   eachCosmosTokenSupply {
     metric {
-      instance
+      chain
       chain_id
     }
     supply
@@ -406,7 +406,7 @@ query RadixTVL {
   radixTVL {
     metric {
       validator_address
-      instance
+      chain
     }
     TVL
   }
@@ -424,7 +424,7 @@ query RadixTVL {
         },
         "TVL": "3847550.113985192"
       }
-    ],
+    ]
   }
 }
 ```
@@ -436,7 +436,7 @@ query RadixUsersCount {
   radixUsers {
     metric {
       validator_address
-      instance
+      chain
     }
     usersCount
   }
@@ -465,7 +465,7 @@ query RadixUsersCount {
 query RadixUnbondingTime {
   radixUnbondingTime {
     metric {
-      instance
+      chain
     }
     unbondingTime
   }
@@ -491,7 +491,7 @@ query RadixUnbondingTime {
 query RadixTotalSupply {
   allRadixTotalSupply {
     metric {
-      instance
+      chain
     }
     supply
   }
@@ -517,7 +517,7 @@ query RadixTotalSupply {
 query RadixStakedTokens {
   allRadixStakedTokens {
     metric {
-      instance
+      chain
       validator_address
     }
     bondedToken
@@ -551,7 +551,7 @@ query RadixStakedTokens {
 query SolanaUsers {
   solanaUsers {
     metric {
-      instance
+      chain
       validator_address
     }
     usersCount
@@ -579,7 +579,7 @@ query SolanaUsers {
 query SolanaTVL {
   solanaTVL {
     metric {
-      instance
+      chain
       validator_address
     }
     TVL
@@ -607,7 +607,7 @@ query SolanaTVL {
 query SolanaUnbondingTime {
   solanaUnbondingTime {
     metric {
-      instance
+      chain
     }
     unbondingTime
   }
@@ -633,7 +633,7 @@ query SolanaUnbondingTime {
 query SolanaCommission {
   solanaCommission {
     metric {
-      instance
+      chain
       validator_address
     }
     commissionRate
@@ -661,7 +661,7 @@ query SolanaCommission {
 query SolanaBondedToken {
   solanaBondedToken {
     metric {
-      instance
+      chain
       validator_address
     }
     bondedToken
@@ -695,7 +695,7 @@ query SolanaBondedToken {
 query ElrondUsers {
   elrondUsers {
     metric {
-      instance
+      chain
     }
     usersCount
   }
@@ -723,7 +723,7 @@ query ElrondUsers {
 query ElrondTVL {
   elrondTVL {
     metric {
-      instance
+      chain
     }
     TVL
   }
@@ -751,7 +751,7 @@ query ElrondTVL {
 query ElrondAPY {
   elrondAPY {
     metric {
-      instance
+      chain
       validator_address
     }
     APY
@@ -781,7 +781,7 @@ query ElrondAPY {
 query ElrondUnbondingTime {
   elrondUnbondingTime {
     metric {
-      instance
+      chain
     }
     unbondingTime
   }
@@ -807,7 +807,7 @@ query ElrondUnbondingTime {
 query ElrondTotalSupply {
   elrondTotalSupply {
     metric {
-      instance
+      chain
     }
     totalSupply
   }
@@ -835,7 +835,7 @@ query ElrondTotalSupply {
 query ElrondCommission {
   elrondCommission {
     metric {
-      instance
+      chain
       validator_address
     }
     commissionRate
@@ -865,7 +865,7 @@ query ElrondCommission {
 query ElrondCirculatingSupply {
   elrondCirculatingSupply {
     metric {
-      instance
+      chain
     }
     circulatingSupply
   }
@@ -893,7 +893,7 @@ query ElrondCirculatingSupply {
 query ElrondBondedToken {
   elrondBondedToken {
     metric {
-      instance
+      chain
       validator_address
     }
     bondedToken
@@ -929,7 +929,7 @@ query ElrondBondedToken {
 query OasisUsers {
   oasisUsers {
     metric {
-      instance
+      chain
       validator_address
     }
     usersCount
@@ -959,7 +959,7 @@ query OasisUsers {
 query OasisBondedToken {
   oasisBondedToken {
     metric {
-      instance
+      chain
       validator_address
     }
     bondedToken
@@ -989,7 +989,7 @@ query OasisBondedToken {
 query OasisCommission {
   oasisCommission {
     metric {
-      instance
+      chain
       validator_address
     }
     commissionRate
@@ -1019,7 +1019,7 @@ query OasisCommission {
 query OasisTVL {
   oasisTVL {
     metric {
-      instance
+      chain
     }
     TVL
   }
