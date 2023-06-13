@@ -51,7 +51,7 @@ export const typeDefs = `#graphql
   type TVLMetric {
     chain_id: String
     denom: String
-    instance: String
+    chain: String
     validator_address: String
   }
 
@@ -62,7 +62,7 @@ export const typeDefs = `#graphql
 
   type ChainIdAndInstanceMetric {
     chain_id: String
-    instance: String
+    chain: String
   }
 
   type EachCosmosCommissionResult {
@@ -72,7 +72,7 @@ export const typeDefs = `#graphql
 
   type EachCosmosCommissionMetric {
     chain_id: String
-    instance: String
+    chain: String
     validator_address: String
   }
 
@@ -103,7 +103,7 @@ export const typeDefs = `#graphql
 
   type AddressAndInstanceMetric {
     validator_address: String
-    instance: String
+    chain: String
   }
 
   type RadixTokenSupplyResult {
@@ -117,7 +117,7 @@ export const typeDefs = `#graphql
   }
 
   type InstanceOnlyMetric {
-    instance: String
+    chain: String
   }
 
   type ElrondAPYResult {

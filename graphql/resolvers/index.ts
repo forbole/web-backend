@@ -22,7 +22,7 @@ export const resolvers = {
       const { status, data } = response
       if (status === "error") return console.log(response.error)
       const { result } = data
-      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, denom: res.metric.denom, instance: res.metric.instance, validator_address: res.metric.validator_address }, TVL: res.value[1] }))
+      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, denom: res.metric.denom, instance: res.metric.chain, validator_address: res.metric.validator_address }, TVL: res.value[1] }))
       return val;
     },
     eachCosmosBondedToken: async (_: any, __: any, { dataSources }: any) => {
@@ -30,7 +30,7 @@ export const resolvers = {
       const { status, data } = response
       if (status === "error") return console.log(response.error)
       const { result } = data
-      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, instance: res.metric.instance }, bondedToken: res.value[1] }))
+      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, instance: res.metric.chain }, bondedToken: res.value[1] }))
       return val;
     },
     eachCosmosCommission: async (_: any, __: any, { dataSources }: any) => {
@@ -38,7 +38,7 @@ export const resolvers = {
       const { status, data } = response
       if (status === "error") return console.log(response.error)
       const { result } = data
-      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, instance: res.metric.instance, validator_address: res.metric.validator_address }, commissionRate: res.value[1] }))
+      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, instance: res.metric.chain, validator_address: res.metric.validator_address }, commissionRate: res.value[1] }))
       return val;
     },
     eachCosmosUnbondingTime: async (_: any, __: any, { dataSources }: any) => {
@@ -46,7 +46,7 @@ export const resolvers = {
       const { status, data } = response
       if (status === "error") return console.log(response.error)
       const { result } = data
-      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, instance: res.metric.instance }, unbondingTime: `${Math.floor(res.value[1] / 86400)} days` }))
+      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, instance: res.metric.chain }, unbondingTime: `${Math.floor(res.value[1] / 86400)} days` }))
       return val;
     },
     eachCosmosAPY: async (_: any, __: any, { dataSources }: any) => {
@@ -54,7 +54,7 @@ export const resolvers = {
       const { status, data } = response
       if (status === "error") return console.log(response.error)
       const { result } = data
-      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, instance: res.metric.instance }, APY: res.value[1] }))
+      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, instance: res.metric.chain }, APY: res.value[1] }))
       return val;
     },
     eachCosmosTokenSupply: async (_: any, __: any, { dataSources }: any) => {
@@ -62,7 +62,7 @@ export const resolvers = {
       const { status, data } = response
       if (status === "error") return console.log(response.error)
       const { result } = data
-      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, instance: res.metric.instance }, supply: res.value[1] }))
+      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, instance: res.metric.chain }, supply: res.value[1] }))
       return val;
     },
     eachCosmosInflationRate: async (_: any, __: any, { dataSources }: any) => {
@@ -70,7 +70,7 @@ export const resolvers = {
       const { status, data } = response
       if (status === "error") return console.log(response.error)
       const { result } = data
-      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, instance: res.metric.instance }, inflationRate: res.value[1] }))
+      const val = result.map((res) => ({ metric: { chain_id: res.metric.chain_id, instance: res.metric.chain }, inflationRate: res.value[1] }))
       return val;
     },
     allRadixStakedTokens: async (_: any, __: any, { dataSources }: any) => {
