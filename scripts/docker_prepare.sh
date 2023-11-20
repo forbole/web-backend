@@ -10,19 +10,19 @@ SCRIPT_PATH="$(
 cd "$SCRIPT_PATH/.."
 
 docker build \
-  -t web-backed \
+  -t web-backend \
   .
 
-docker stop web-backed || true
-docker rm web-backed || true
+docker stop web-backend || true
+docker rm web-backend || true
 
 docker run \
-  --name web-backed \
+  --name web-backend \
   --restart always \
   -v $(pwd)/.env:/app/.env \
-  -p 4100:4000 \
+  -p 4000:4000 \
   -d \
-  web-backed
+  web-backend
 
 docker system prune -fa
 
