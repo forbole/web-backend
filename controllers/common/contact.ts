@@ -13,7 +13,11 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const contact = async (req: Request, res: Response, next: NextFunction) => {
+export const contact = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     if (process.env.NODE_ENV === "production") {
       await transporter.sendMail(req.body);

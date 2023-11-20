@@ -1,25 +1,25 @@
-import { Request, Response, NextFunction } from 'express';
-import { generateMockResponse, generateMockNext } from 'tests/express_mock';
-import { contact } from './contact';
+import { Request, Response, NextFunction } from "express";
+import { generateMockResponse, generateMockNext } from "tests/express_mock";
+import { contact } from "./contact";
 
-describe("Contact", function() {
-    let req: Partial<Request>;
-    let res: Partial<Response>;
-    let next: NextFunction;
+describe("Contact", function () {
+  let req: Partial<Request>;
+  let res: Partial<Response>;
+  let next: NextFunction;
 
-    beforeEach(() => {
-        req = {};
-        res = generateMockResponse();
-        next = generateMockNext();
+  beforeEach(() => {
+    req = {};
+    res = generateMockResponse();
+    next = generateMockNext();
+  });
+
+  it("should respond", function () {
+    contact(req as Request, res as Response, next);
+
+    expect(res.json).toBeCalledWith({
+      success: true,
     });
-
-    it("should respond", function() {
-        contact( req as Request, res as Response, next);
-
-        expect(res.json).toBeCalledWith({
-            success: true
-        });
-        expect(res.status).toBeCalledWith(200);
-        expect(next).toBeCalledTimes(0);
-    });
+    expect(res.status).toBeCalledWith(200);
+    expect(next).toBeCalledTimes(0);
+  });
 });
