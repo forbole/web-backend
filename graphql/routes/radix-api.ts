@@ -9,7 +9,7 @@ export class RadixAPI extends RESTDataSource {
     super(options); // this sends our server's `cache` through
   }
 
-  async getTotalRadixSupply(body): Promise<any> {
+  async getTotalRadixSupply(body: any): Promise<any> {
     return this.post<any>("token/native", {
       headers: {
         "Content-Type": "application/json",
@@ -20,6 +20,7 @@ export class RadixAPI extends RESTDataSource {
 
   async getRadixUnbondingTime(): Promise<any> {
     const unbondingTime = "1-3 weeks (500 epochs)";
+
     return unbondingTime;
   }
 }

@@ -22,6 +22,7 @@ export const contact = async (
     if (process.env.NODE_ENV === "production") {
       await transporter.sendMail(req.body);
     }
+
     return res.status(200).json({
       success: true,
     });

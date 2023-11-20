@@ -38,6 +38,7 @@ export class SolanaAPI extends RESTDataSource {
 
   async getSolanaUnbondingTime(): Promise<any> {
     const unbondingTime = 10;
+
     return unbondingTime;
   }
 }
