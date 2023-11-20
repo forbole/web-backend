@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
@@ -6,7 +5,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import type { NextFunction, Request, Response } from "express";
 import express from "express";
-import http from "http";
+import http from "node:http";
 
 import { resolvers } from "./graphql/resolvers";
 import {
@@ -21,7 +20,6 @@ import { typeDefs } from "./graphql/typedefs";
 import type { ContextValue } from "./graphql/types";
 import { v1 } from "./routers";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 require("dotenv").config();
 
 (async () => {
@@ -36,7 +34,6 @@ require("dotenv").config();
   });
   await server.start();
 
-  // middlewares
   app.use(express.json());
 
   app.use(cors());
@@ -48,7 +45,7 @@ require("dotenv").config();
     cors<cors.CorsRequest>(),
     bodyParser.json(),
     expressMiddleware(server, {
-      context: async (req) => {
+      context: async () => {
         const { cache } = server;
 
         const context: ContextValue = {
@@ -89,6 +86,7 @@ require("dotenv").config();
       error: ResponseError,
       _req: Request,
       res: Response,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       _next: NextFunction,
     ) => {
       res.status(error.status || 500).send({
@@ -106,5 +104,3 @@ require("dotenv").config();
 
   console.log(`🚀 Server ready at http://localhost:4000/graphql`);
 })();
-
-// export default app
