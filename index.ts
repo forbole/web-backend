@@ -69,7 +69,7 @@ interface ContextValue {
           },
         };
       },
-    })
+    }),
   );
 
   // health check api
@@ -94,7 +94,7 @@ interface ContextValue {
       error: ResponseError,
       _req: Request,
       res: Response,
-      _next: NextFunction
+      _next: NextFunction,
     ) => {
       res.status(error.status || 500).send({
         error: {
@@ -102,15 +102,14 @@ interface ContextValue {
           message: error.message || "Internal Server Error",
         },
       });
-    }
+    },
   );
 
   await new Promise<void>((resolve) =>
-    httpServer.listen({ port: 4000 }, resolve)
+    httpServer.listen({ port: 4000 }, resolve),
   );
 
   console.log(`🚀 Server ready at http://localhost:4000/graphql`);
 })();
 
 // export default app
-

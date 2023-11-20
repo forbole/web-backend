@@ -1,5 +1,3 @@
-import commonController from './common'
+import commonController from "./common";
 
-export {
-    commonController
-}
+export { commonController };
