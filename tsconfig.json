@@ -7,11 +7,10 @@
     "preserveConstEnums": true,
     "moduleResolution": "node",
     "sourceMap": true,
-    "target": "es6",
+    "target": "es2020",
     "outDir": "./dist",
     "baseUrl": "."
   },
-  "include": ["**/*.ts", "**/*.tsx", "index.ts"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
-

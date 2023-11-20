@@ -5,10 +5,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "dev": "NODE_ENV=development nodemon",
     "lint": "eslint . --ext .ts && prettier './**/*.{ts,js}' --check",
-    "start": "NODE_ENV=production node dist/index.js",
+    "start": "NODE_ENV=production node dist/src/index.js",
     "test": "NODE_ENV=test jest"
   },
   "keywords": [],
