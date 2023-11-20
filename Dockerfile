@@ -12,4 +12,4 @@ ENV NODE_ENV=production
 RUN npm install
 COPY --from=builer /app/dist ./dist
 RUN npm install pm2 -g
-CMD ["pm2-runtime", "dist/index.js"]
+CMD ["pm2-runtime", "dist/src/index.js"]

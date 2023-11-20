@@ -1,7 +1,6 @@
 import { RESTDataSource } from "@apollo/datasource-rest";
 import type { KeyValueCache } from "@apollo/utils.keyvaluecache";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 require("dotenv").config();
 
 export class RadixPromAPI extends RESTDataSource {
@@ -11,20 +10,20 @@ export class RadixPromAPI extends RESTDataSource {
     super(options);
   }
 
-  async getRadixTVL(): Promise<any> {
-    return this.get<any>(
+  async getRadixTVL() {
+    return this.get(
       `query?query=max_over_time(radix_validator_staked{}[${process.env.MAX_OVER_TIME_DURATION}]) * on (denom) group_left token_price`,
     );
   }
 
-  async getRadixUsers(): Promise<any> {
-    return this.get<any>(
+  async getRadixUsers() {
+    return this.get(
       `query?query=max_over_time(radix_validator_delegators_total[${process.env.MAX_OVER_TIME_DURATION}])`,
     );
   }
 
-  async getStakedRadix(_body): Promise<any> {
-    return this.get<any>(
+  async getStakedRadix() {
+    return this.get(
       `query?query=max_over_time(radix_validator_staked[${process.env.MAX_OVER_TIME_DURATION}])`,
     );
   }

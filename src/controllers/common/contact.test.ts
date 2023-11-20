@@ -1,5 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-import { generateMockResponse, generateMockNext } from "tests/express_mock";
+import type { NextFunction, Request, Response } from "express";
+import { generateMockNext, generateMockResponse } from "tests/express_mock";
+
 import { contact } from "./contact";
 
 describe("Contact", function () {

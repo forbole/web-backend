@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import type { NextFunction, Request, Response } from "express";
 import nodemailer from "nodemailer";
 
 // mailgun secrets for making POST requests via Mailgun
@@ -19,9 +19,13 @@ export const contact = async (
   next: NextFunction,
 ) => {
   try {
+    // Print a log to see if this endpoint is still used
+    console.log("src/controllers/common/contact.ts was called");
+
     if (process.env.NODE_ENV === "production") {
       await transporter.sendMail(req.body);
     }
+
     return res.status(200).json({
       success: true,
     });

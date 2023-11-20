@@ -1,5 +1,4 @@
 import { RESTDataSource } from "@apollo/datasource-rest";
-// KeyValueCache is the type of Apollo server's default cache
 import type { KeyValueCache } from "@apollo/utils.keyvaluecache";
 
 export class RadixAPI extends RESTDataSource {
@@ -9,8 +8,8 @@ export class RadixAPI extends RESTDataSource {
     super(options); // this sends our server's `cache` through
   }
 
-  async getTotalRadixSupply(body): Promise<any> {
-    return this.post<any>("token/native", {
+  async getTotalRadixSupply(body: any) {
+    return this.post("token/native", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -18,8 +17,9 @@ export class RadixAPI extends RESTDataSource {
     });
   }
 
-  async getRadixUnbondingTime(): Promise<any> {
+  async getRadixUnbondingTime() {
     const unbondingTime = "1-3 weeks (500 epochs)";
+
     return unbondingTime;
   }
 }

@@ -2,17 +2,15 @@
   // https://www.typescriptlang.org/tsconfig#compilerOptions
   "compilerOptions": {
     "module": "commonjs",
+    "strict": true,
     "esModuleInterop": true,
-    // "lib": ["es2020"],
-    // "module": "es2022",
     "preserveConstEnums": true,
     "moduleResolution": "node",
     "sourceMap": true,
-    "target": "es6",
-    // "types": ["node"],
+    "target": "es2020",
     "outDir": "./dist",
     "baseUrl": "."
   },
-  "include": ["**/*.ts", "**/*.tsx", "index.ts"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
