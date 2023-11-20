@@ -1,36 +1,28 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import express, { Request, Response, NextFunction } from "express";
-import { v1 } from "./routers";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
+import bodyParser from "body-parser";
+import cors from "cors";
+import type { NextFunction, Request, Response } from "express";
+import express from "express";
 import http from "http";
-import { typeDefs } from "./graphql/typedefs";
+
 import { resolvers } from "./graphql/resolvers";
 import {
   CosmosAPI,
   ElrondAPI,
-  RadixAPI,
-  SolanaAPI,
   OasisAPI,
+  RadixAPI,
   RadixPromAPI,
+  SolanaAPI,
 } from "./graphql/routes";
-import cors from "cors";
-import bodyParser from "body-parser";
+import { typeDefs } from "./graphql/typedefs";
+import type { ContextValue } from "./graphql/types";
+import { v1 } from "./routers";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require("dotenv").config();
-
-interface ContextValue {
-  dataSources?: {
-    cosmosAPI: CosmosAPI;
-    radixAPI: RadixAPI;
-    elrondAPI: ElrondAPI;
-    solanaAPI: SolanaAPI;
-    oasisAPI: OasisAPI;
-    radixPromAPI: RadixPromAPI;
-  };
-}
 
 (async () => {
   const app = express();
@@ -58,7 +50,8 @@ interface ContextValue {
     expressMiddleware(server, {
       context: async (req) => {
         const { cache } = server;
-        return {
+
+        const context: ContextValue = {
           dataSources: {
             cosmosAPI: new CosmosAPI({ cache }),
             radixAPI: new RadixAPI({ cache }),
@@ -68,6 +61,8 @@ interface ContextValue {
             radixPromAPI: new RadixPromAPI({ cache }),
           },
         };
+
+        return context;
       },
     }),
   );

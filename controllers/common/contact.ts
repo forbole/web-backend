@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import type { NextFunction, Request, Response } from "express";
 import nodemailer from "nodemailer";
 
 // mailgun secrets for making POST requests via Mailgun

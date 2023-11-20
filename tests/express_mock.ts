@@ -1,4 +1,4 @@
-import { Response, NextFunction } from "express";
+import type { NextFunction, Response } from "express";
 
 export const generateMockResponse = () => {
   const res: Partial<Response> = {};
@@ -7,6 +7,4 @@ export const generateMockResponse = () => {
   return res;
 };
 
-export const generateMockNext = (): NextFunction => {
-  return jest.fn();
-};
+export const generateMockNext = (): NextFunction => jest.fn();

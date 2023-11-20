@@ -1,7 +1,13 @@
+import type { ContextValue } from "../types";
+
 // A map of functions which return data for the schema.
 export const resolvers = {
   Query: {
-    cosmosUsersCount: async (_: any, __: any, { dataSources }: any) => {
+    cosmosUsersCount: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.cosmosAPI.getAllCosmosUsers();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -9,7 +15,7 @@ export const resolvers = {
       const val = result.map((res) => ({ usersCount: res.value[1] }));
       return val;
     },
-    allCosmosTVL: async (_: any, __: any, { dataSources }: any) => {
+    allCosmosTVL: async (_: any, __: any, { dataSources }: ContextValue) => {
       const response = await dataSources.cosmosAPI.getAllCosmosTVL();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -17,7 +23,7 @@ export const resolvers = {
       const val = result.map((res) => ({ cosmosTVL: res.value[1] }));
       return val;
     },
-    eachCosmosTVL: async (_: any, __: any, { dataSources }: any) => {
+    eachCosmosTVL: async (_: any, __: any, { dataSources }: ContextValue) => {
       const response = await dataSources.cosmosAPI.getEachCosmosChainTVL();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -33,7 +39,11 @@ export const resolvers = {
       }));
       return val;
     },
-    eachCosmosBondedToken: async (_: any, __: any, { dataSources }: any) => {
+    eachCosmosBondedToken: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.cosmosAPI.getEachCosmosBondedToken();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -44,7 +54,11 @@ export const resolvers = {
       }));
       return val;
     },
-    eachCosmosCommission: async (_: any, __: any, { dataSources }: any) => {
+    eachCosmosCommission: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.cosmosAPI.getEachCosmosCommission();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -59,7 +73,11 @@ export const resolvers = {
       }));
       return val;
     },
-    eachCosmosUnbondingTime: async (_: any, __: any, { dataSources }: any) => {
+    eachCosmosUnbondingTime: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.cosmosAPI.getEachCosmosUnbondingTime();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -70,7 +88,7 @@ export const resolvers = {
       }));
       return val;
     },
-    eachCosmosAPY: async (_: any, __: any, { dataSources }: any) => {
+    eachCosmosAPY: async (_: any, __: any, { dataSources }: ContextValue) => {
       const response = await dataSources.cosmosAPI.getEachCosmosAPY();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -81,7 +99,11 @@ export const resolvers = {
       }));
       return val;
     },
-    eachCosmosTokenSupply: async (_: any, __: any, { dataSources }: any) => {
+    eachCosmosTokenSupply: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.cosmosAPI.getEachCosmosTokenSupply();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -92,7 +114,11 @@ export const resolvers = {
       }));
       return val;
     },
-    eachCosmosInflationRate: async (_: any, __: any, { dataSources }: any) => {
+    eachCosmosInflationRate: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.cosmosAPI.getEachCosmosInflationRate();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -103,7 +129,11 @@ export const resolvers = {
       }));
       return val;
     },
-    allRadixStakedTokens: async (_: any, __: any, { dataSources }: any) => {
+    allRadixStakedTokens: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.radixPromAPI.getStakedRadix();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -114,7 +144,11 @@ export const resolvers = {
       }));
       return val;
     },
-    allRadixTotalSupply: async (_: any, __: any, { dataSources }: any) => {
+    allRadixTotalSupply: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const JSONbody = {
         network_identifier: {
           network: "mainnet",
@@ -129,12 +163,16 @@ export const resolvers = {
       };
       return val;
     },
-    radixUnbondingTime: async (_: any, __: any, { dataSources }: any) => {
+    radixUnbondingTime: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.radixAPI.getRadixUnbondingTime();
       const val = { metric: { instance: "radix" }, unbondingTime: response };
       return val;
     },
-    elrondAPY: async (_: any, __: any, { dataSources }: any) => {
+    elrondAPY: async (_: any, __: any, { dataSources }: ContextValue) => {
       const response = await dataSources.elrondAPI.getElrondAPY();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -148,7 +186,7 @@ export const resolvers = {
       }));
       return val;
     },
-    elrondTVL: async (_: any, __: any, { dataSources }: any) => {
+    elrondTVL: async (_: any, __: any, { dataSources }: ContextValue) => {
       const response = await dataSources.elrondAPI.getElrondTVL();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -159,7 +197,11 @@ export const resolvers = {
       }));
       return val;
     },
-    elrondCommission: async (_: any, __: any, { dataSources }: any) => {
+    elrondCommission: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.elrondAPI.getElrondCommission();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -173,7 +215,11 @@ export const resolvers = {
       }));
       return val;
     },
-    elrondBondedToken: async (_: any, __: any, { dataSources }: any) => {
+    elrondBondedToken: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.elrondAPI.getElrondBondedToken();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -187,7 +233,11 @@ export const resolvers = {
       }));
       return val;
     },
-    elrondTotalSupply: async (_: any, __: any, { dataSources }: any) => {
+    elrondTotalSupply: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.elrondAPI.getElrondTotalSupply();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -198,7 +248,11 @@ export const resolvers = {
       }));
       return val;
     },
-    elrondCirculatingSupply: async (_: any, __: any, { dataSources }: any) => {
+    elrondCirculatingSupply: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.elrondAPI.getElrondCirculatingSupply();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -209,7 +263,7 @@ export const resolvers = {
       }));
       return val;
     },
-    elrondUsers: async (_: any, __: any, { dataSources }: any) => {
+    elrondUsers: async (_: any, __: any, { dataSources }: ContextValue) => {
       const response = await dataSources.elrondAPI.getElrondUsers();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -220,7 +274,11 @@ export const resolvers = {
       }));
       return val;
     },
-    elrondUnbondingTime: async (_: any, __: any, { dataSources }: any) => {
+    elrondUnbondingTime: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.elrondAPI.getElrondUnbondingTime();
       const val = {
         metric: { instance: "elrond" },
@@ -228,7 +286,7 @@ export const resolvers = {
       };
       return val;
     },
-    solanaUsers: async (_: any, __: any, { dataSources }: any) => {
+    solanaUsers: async (_: any, __: any, { dataSources }: ContextValue) => {
       const response = await dataSources.solanaAPI.getSolanaUsers();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -246,7 +304,11 @@ export const resolvers = {
       };
       return val;
     },
-    solanaBondedToken: async (_: any, __: any, { dataSources }: any) => {
+    solanaBondedToken: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.solanaAPI.getStakedSolana();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -264,7 +326,7 @@ export const resolvers = {
       };
       return val;
     },
-    solanaTVL: async (_: any, __: any, { dataSources }: any) => {
+    solanaTVL: async (_: any, __: any, { dataSources }: ContextValue) => {
       const response = await dataSources.solanaAPI.getSolanaTVL();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -279,7 +341,11 @@ export const resolvers = {
       const val = { metric: { validator_address, instance: "solana" }, TVL };
       return val;
     },
-    solanaCommission: async (_: any, __: any, { dataSources }: any) => {
+    solanaCommission: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.solanaAPI.getSolanaCommission();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -299,7 +365,11 @@ export const resolvers = {
       };
       return val;
     },
-    solanaUnbondingTime: async (_: any, __: any, { dataSources }: any) => {
+    solanaUnbondingTime: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.solanaAPI.getSolanaUnbondingTime();
       const val = {
         metric: { instance: "solana" },
@@ -307,7 +377,7 @@ export const resolvers = {
       };
       return val;
     },
-    oasisUsers: async (_: any, __: any, { dataSources }: any) => {
+    oasisUsers: async (_: any, __: any, { dataSources }: ContextValue) => {
       const response = await dataSources.oasisAPI.getOasisUsers();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -318,7 +388,11 @@ export const resolvers = {
       }));
       return val;
     },
-    oasisBondedToken: async (_: any, __: any, { dataSources }: any) => {
+    oasisBondedToken: async (
+      _: any,
+      __: any,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.oasisAPI.getOasisBondedToken();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -329,7 +403,7 @@ export const resolvers = {
       }));
       return val;
     },
-    oasisCommission: async (_: any, __: any, { dataSources }: any) => {
+    oasisCommission: async (_: any, __: any, { dataSources }: ContextValue) => {
       const response = await dataSources.oasisAPI.getOasisCommission();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -340,7 +414,7 @@ export const resolvers = {
       }));
       return val;
     },
-    oasisTVL: async (_: any, __: any, { dataSources }: any) => {
+    oasisTVL: async (_: any, __: any, { dataSources }: ContextValue) => {
       const response = await dataSources.oasisAPI.getOasisTVL();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -351,7 +425,7 @@ export const resolvers = {
       }));
       return val;
     },
-    radixTVL: async (_: any, __: any, { dataSources }: any) => {
+    radixTVL: async (_: any, __: any, { dataSources }: ContextValue) => {
       const response = await dataSources.radixPromAPI.getRadixTVL();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -362,7 +436,7 @@ export const resolvers = {
       }));
       return val;
     },
-    radixUsers: async (_: any, __: any, { dataSources }: any) => {
+    radixUsers: async (_: any, __: any, { dataSources }: ContextValue) => {
       const response = await dataSources.radixPromAPI.getRadixUsers();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
