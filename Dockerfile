@@ -11,4 +11,5 @@ COPY package.json package-lock.json ./
 ENV NODE_ENV=production
 RUN npm install
 COPY --from=builer /app/dist ./dist
-CMD [ "npm", "start" ]
+RUN npm install pm2 -g
+CMD ["pm2-runtime", "dist/index.js"]
