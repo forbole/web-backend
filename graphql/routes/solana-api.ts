@@ -12,31 +12,31 @@ export class SolanaAPI extends RESTDataSource {
     super(options); // this sends our server's `cache` through
   }
 
-  async getSolanaUsers(): Promise<any> {
-    return this.get<any>(
+  async getSolanaUsers() {
+    return this.get(
       `query?query=max_over_time(solana_validator_delegators_count[${process.env.MAX_OVER_TIME_DURATION}])`,
     );
   }
 
-  async getStakedSolana(): Promise<any> {
-    return this.get<any>(
+  async getStakedSolana() {
+    return this.get(
       `query?query=max_over_time(solana_validator_staked[${process.env.MAX_OVER_TIME_DURATION}])`,
     );
   }
 
-  async getSolanaTVL(): Promise<any> {
-    return this.get<any>(
+  async getSolanaTVL() {
+    return this.get(
       `query?query=max_over_time(solana_validator_staked{}[${process.env.MAX_OVER_TIME_DURATION}]) * on (denom) group_left token_price`,
     );
   }
 
-  async getSolanaCommission(): Promise<any> {
-    return this.get<any>(
+  async getSolanaCommission() {
+    return this.get(
       `query?query=max_over_time(solana_validator_commission_rate[${process.env.MAX_OVER_TIME_DURATION}])`,
     );
   }
 
-  async getSolanaUnbondingTime(): Promise<any> {
+  async getSolanaUnbondingTime() {
     const unbondingTime = 10;
 
     return unbondingTime;
