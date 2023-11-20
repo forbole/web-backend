@@ -26,9 +26,11 @@ Upon the request is successful, a `200` status will br returned with the success
 
 #### Public Graphql endpoint for data querying:
 
-[An external link to our public GraphQL APIs](https://api.forbole.com/graphql)
+[An external link to our public GraphQL APIs.](https://api.forbole.com/graphql)
 
 In **non-production** environments, an embedded version of Apollo Sandbox is shown on Apollo Server 4's landing page, served at `http://localhost:4000/graphql`.
+
+[You can find the typedefs here.](src/graphql/typedefs/index.ts)
 
 ##### querying of `total no. of users staked to Forbole on all Cosmos SDK chains` on Sandbox:
 

@@ -1,6 +1,5 @@
 // The GraphQL schema
 export const typeDefs = `#graphql
-
   type Query {
     cosmosUsersCount: [UsersCountResult]
     eachCosmosTVL: [EachCosmosTVLResult]
@@ -93,7 +92,7 @@ export const typeDefs = `#graphql
 
   type EachCosmosInflationRateResult {
     metric: ChainIdAndInstanceMetric
-    inflationRate: String 
+    inflationRate: String
   }
 
   type RadixStakedTokensResult {
@@ -214,5 +213,4 @@ export const typeDefs = `#graphql
     metric: AddressAndInstanceMetric
     usersCount: String
   }
-
 `;
