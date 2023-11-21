@@ -24,6 +24,7 @@ require("dotenv").config();
 (async () => {
   const app = express();
   const httpServer = http.createServer(app);
+  const port = process.env.PORT || 4000;
 
   const server = new ApolloServer({
     typeDefs,
@@ -94,9 +95,7 @@ require("dotenv").config();
     },
   );
 
-  await new Promise<void>((resolve) =>
-    httpServer.listen({ port: 4000 }, resolve),
-  );
+  await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
 
-  console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+  console.log(`🚀 Server ready at http://localhost:${port}/graphql`);
 })();
