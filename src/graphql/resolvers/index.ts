@@ -159,12 +159,7 @@ export const resolvers = {
       __: any,
       { dataSources }: ContextValue,
     ) => {
-      const JSONbody = {
-        network_identifier: {
-          network: "mainnet",
-        },
-      };
-      const response = await dataSources.radixAPI.getTotalRadixSupply(JSONbody);
+      const response = await dataSources.radixAPI.getTotalRadixSupply();
       const { token } = response;
       const { token_supply } = token;
       const val = {

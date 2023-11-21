@@ -18,15 +18,14 @@ import {
 } from "./graphql/routes";
 import { typeDefs } from "./graphql/typedefs";
 import type { ContextValue } from "./graphql/types";
-import { v1 } from "./routers";
 
 require("dotenv").config();
 
 (async () => {
   const app = express();
   const httpServer = http.createServer(app);
+  const port = process.env.PORT || 4000;
 
-  // Set up Apollo Server
   const server = new ApolloServer({
     typeDefs,
     resolvers,
@@ -37,8 +36,6 @@ require("dotenv").config();
   app.use(express.json());
 
   app.use(cors());
-
-  app.use("/api/v1/", v1);
 
   app.use(
     "/graphql",
@@ -98,9 +95,7 @@ require("dotenv").config();
     },
   );
 
-  await new Promise<void>((resolve) =>
-    httpServer.listen({ port: 4000 }, resolve),
-  );
+  await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
 
-  console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+  console.log(`🚀 Server ready at http://localhost:${port}/graphql`);
 })();
