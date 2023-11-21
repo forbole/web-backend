@@ -48,7 +48,7 @@ In **production** environments, when `NODE_ENV` is `production`, users can query
 
 ##### Querying total no. of users staked to Forbole on all Cosmos SDK chains:
 
-```zsh
+```bash
 curl --request POST \
   --header 'content-type: application/json' \
   --url https://api.forbole.com/graphql \
