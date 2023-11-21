@@ -18,7 +18,6 @@ import {
 } from "./graphql/routes";
 import { typeDefs } from "./graphql/typedefs";
 import type { ContextValue } from "./graphql/types";
-import { v1 } from "./routers";
 
 require("dotenv").config();
 
@@ -26,7 +25,6 @@ require("dotenv").config();
   const app = express();
   const httpServer = http.createServer(app);
 
-  // Set up Apollo Server
   const server = new ApolloServer({
     typeDefs,
     resolvers,
@@ -37,8 +35,6 @@ require("dotenv").config();
   app.use(express.json());
 
   app.use(cors());
-
-  app.use("/api/v1/", v1);
 
   app.use(
     "/graphql",
