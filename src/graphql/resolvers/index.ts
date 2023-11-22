@@ -12,25 +12,32 @@ export const resolvers = {
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({ usersCount: res.value[1] }));
 
-      return val;
+      return result.map((res: any) => ({ usersCount: res.value[1] }));
     },
-    allCosmosTVL: async (_: any, __: any, { dataSources }: ContextValue) => {
+    allCosmosTVL: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.cosmosAPI.getAllCosmosTVL();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({ cosmosTVL: res.value[1] }));
 
-      return val;
+      return result.map((res: any) => ({ cosmosTVL: res.value[1] }));
     },
-    eachCosmosTVL: async (_: any, __: any, { dataSources }: ContextValue) => {
+    eachCosmosTVL: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.cosmosAPI.getEachCosmosChainTVL();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: {
           chain_id: res.metric.chain_id,
           denom: res.metric.denom,
@@ -39,35 +46,33 @@ export const resolvers = {
         },
         TVL: res.value[1],
       }));
-
-      return val;
     },
     eachCosmosBondedToken: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.cosmosAPI.getEachCosmosBondedToken();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { chain_id: res.metric.chain_id, instance: res.metric.chain },
         bondedToken: res.value[1],
       }));
-
-      return val;
     },
     eachCosmosCommission: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.cosmosAPI.getEachCosmosCommission();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: {
           chain_id: res.metric.chain_id,
           instance: res.metric.chain,
@@ -75,233 +80,236 @@ export const resolvers = {
         },
         commissionRate: res.value[1],
       }));
-
-      return val;
     },
     eachCosmosUnbondingTime: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.cosmosAPI.getEachCosmosUnbondingTime();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { chain_id: res.metric.chain_id, instance: res.metric.chain },
         unbondingTime: `${Math.floor(res.value[1] / 86400)} days`,
       }));
-
-      return val;
     },
-    eachCosmosAPY: async (_: any, __: any, { dataSources }: ContextValue) => {
+    eachCosmosAPY: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.cosmosAPI.getEachCosmosAPY();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { chain_id: res.metric.chain_id, instance: res.metric.chain },
         APY: res.value[1],
       }));
-
-      return val;
     },
     eachCosmosTokenSupply: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.cosmosAPI.getEachCosmosTokenSupply();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { chain_id: res.metric.chain_id, instance: res.metric.chain },
         supply: res.value[1],
       }));
-
-      return val;
     },
     eachCosmosInflationRate: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.cosmosAPI.getEachCosmosInflationRate();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { chain_id: res.metric.chain_id, instance: res.metric.chain },
         inflationRate: res.value[1],
       }));
-
-      return val;
     },
     allRadixStakedTokens: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.radixPromAPI.getStakedRadix();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { instance: "radix", validator_address: res.metric.address },
         bondedToken: res.value[1],
       }));
-
-      return val;
     },
     allRadixTotalSupply: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.radixAPI.getTotalRadixSupply();
       const { token } = response;
       const { token_supply } = token;
-      const val = {
+
+      return {
         metric: { instance: "radix" },
         supply: token_supply?.value,
       };
-
-      return val;
     },
     radixUnbondingTime: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.radixAPI.getRadixUnbondingTime();
-      const val = { metric: { instance: "radix" }, unbondingTime: response };
 
-      return val;
+      return { metric: { instance: "radix" }, unbondingTime: response };
     },
-    elrondAPY: async (_: any, __: any, { dataSources }: ContextValue) => {
+    elrondAPY: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.elrondAPI.getElrondAPY();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: {
           validator_address: res.metric.provider_address,
           instance: "elrond",
         },
         APY: res.value[1] * 100,
       }));
-
-      return val;
     },
-    elrondTVL: async (_: any, __: any, { dataSources }: ContextValue) => {
+    elrondTVL: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.elrondAPI.getElrondTVL();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { instance: "elrond" },
         TVL: res.value[1],
       }));
-
-      return val;
     },
     elrondCommission: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.elrondAPI.getElrondCommission();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: {
           validator_address: res.metric.provider_address,
           instance: "elrond",
         },
         commissionRate: res.value[1],
       }));
-
-      return val;
     },
     elrondBondedToken: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.elrondAPI.getElrondBondedToken();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: {
           validator_address: res.metric.provider_address,
           instance: "elrond",
         },
         bondedToken: res.value[1],
       }));
-
-      return val;
     },
     elrondTotalSupply: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.elrondAPI.getElrondTotalSupply();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { instance: "elrond" },
         totalSupply: res.value[1],
       }));
-
-      return val;
     },
     elrondCirculatingSupply: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.elrondAPI.getElrondCirculatingSupply();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { instance: "elrond" },
         circulatingSupply: res.value[1],
       }));
-
-      return val;
     },
-    elrondUsers: async (_: any, __: any, { dataSources }: ContextValue) => {
+    elrondUsers: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.elrondAPI.getElrondUsers();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { instance: "elrond" },
         usersCount: res.value[1],
       }));
-
-      return val;
     },
     elrondUnbondingTime: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.elrondAPI.getElrondUnbondingTime();
-      const val = {
+
+      return {
         metric: { instance: "elrond" },
         unbondingTime: `${response} days`,
       };
-
-      return val;
     },
-    solanaUsers: async (_: any, __: any, { dataSources }: ContextValue) => {
+    solanaUsers: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.solanaAPI.getSolanaUsers();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -314,16 +322,15 @@ export const resolvers = {
 
         return { validator_address, usersCount };
       });
-      const val = {
+
+      return {
         metric: { validator_address, instance: "solana" },
         usersCount,
       };
-
-      return val;
     },
     solanaBondedToken: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.solanaAPI.getStakedSolana();
@@ -338,14 +345,17 @@ export const resolvers = {
 
         return { validator_address, bondedToken };
       });
-      const val = {
+
+      return {
         metric: { validator_address, instance: "solana" },
         bondedToken,
       };
-
-      return val;
     },
-    solanaTVL: async (_: any, __: any, { dataSources }: ContextValue) => {
+    solanaTVL: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.solanaAPI.getSolanaTVL();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
@@ -358,13 +368,12 @@ export const resolvers = {
 
         return { validator_address, TVL };
       });
-      const val = { metric: { validator_address, instance: "solana" }, TVL };
 
-      return val;
+      return { metric: { validator_address, instance: "solana" }, TVL };
     },
     solanaCommission: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.solanaAPI.getSolanaCommission();
@@ -381,101 +390,113 @@ export const resolvers = {
 
         return { validator_address, commissionRate };
       });
-      const val = {
+
+      return {
         metric: { validator_address, instance: "solana" },
         commissionRate,
       };
-
-      return val;
     },
     solanaUnbondingTime: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.solanaAPI.getSolanaUnbondingTime();
-      const val = {
+
+      return {
         metric: { instance: "solana" },
         unbondingTime: `${response} days`,
       };
-
-      return val;
     },
-    oasisUsers: async (_: any, __: any, { dataSources }: ContextValue) => {
+    oasisUsers: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.oasisAPI.getOasisUsers();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { instance: "oasis", validator_address: res.metric.identity },
         usersCount: res.value[1],
       }));
-
-      return val;
     },
     oasisBondedToken: async (
-      _: any,
-      __: any,
+      _: unknown,
+      __: unknown,
       { dataSources }: ContextValue,
     ) => {
       const response = await dataSources.oasisAPI.getOasisBondedToken();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { instance: "oasis", validator_address: res.metric.identity },
         bondedToken: res.value[1],
       }));
-
-      return val;
     },
-    oasisCommission: async (_: any, __: any, { dataSources }: ContextValue) => {
+    oasisCommission: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.oasisAPI.getOasisCommission();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { instance: "oasis", validator_address: res.metric.identity },
         commissionRate: res.value[1],
       }));
-
-      return val;
     },
-    oasisTVL: async (_: any, __: any, { dataSources }: ContextValue) => {
+    oasisTVL: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.oasisAPI.getOasisTVL();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { instance: "oasis" },
         TVL: res.value[1],
       }));
-
-      return val;
     },
-    radixTVL: async (_: any, __: any, { dataSources }: ContextValue) => {
+    radixTVL: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.radixPromAPI.getRadixTVL();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { instance: "radix", validator_address: res.metric.address },
         TVL: res.value[1],
       }));
-
-      return val;
     },
-    radixUsers: async (_: any, __: any, { dataSources }: ContextValue) => {
+    radixUsers: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
       const response = await dataSources.radixPromAPI.getRadixUsers();
       const { status, data } = response;
       if (status === "error") return console.log(response.error);
       const { result } = data;
-      const val = result.map((res: any) => ({
+
+      return result.map((res: any) => ({
         metric: { instance: "radix", validator_address: res.metric.address },
         usersCount: res.value[1],
       }));
-
-      return val;
     },
   },
 };
