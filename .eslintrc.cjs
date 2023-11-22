@@ -19,9 +19,6 @@ module.exports = {
     "@typescript-eslint/no-use-before-define": "error",
     "@typescript-eslint/no-var-requires": "off",
 
-    // @TODO: Enable it again when ready
-    "@typescript-eslint/no-explicit-any": "off",
-
     "arrow-body-style": "error",
     "eqeqeq": "error",
     "no-else-return": "error",

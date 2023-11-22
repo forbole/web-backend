@@ -7,6 +7,14 @@ if (!RADIX_URL) {
   throw new Error("Missing RADIX_URL env var");
 }
 
+type RadixResponse = {
+  token: {
+    token_supply: {
+      value: string;
+    };
+  };
+};
+
 export class RadixAPI extends RESTDataSource {
   override baseURL = `${(RADIX_URL as string).replace(/\/$/, "")}/`;
 
@@ -14,7 +22,7 @@ export class RadixAPI extends RESTDataSource {
     super(options); // this sends our server's `cache` through
   }
 
-  async getTotalRadixSupply() {
+  async getTotalRadixSupply(): Promise<RadixResponse> {
     return this.post("token/native", {
       headers: {
         "Content-Type": "application/json",
