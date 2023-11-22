@@ -6,7 +6,7 @@ import type { KeyValueCache } from "@apollo/utils.keyvaluecache";
 require("dotenv").config();
 
 export class SolanaAPI extends RESTDataSource {
-  override baseURL = `http://${process.env.PROMETHEUS_URL}/prometheus/api/v1/`;
+  override baseURL = `${process.env.PROM_QUERY_URL}/prometheus/api/v1/`;
 
   constructor(options: { cache: KeyValueCache }) {
     super(options); // this sends our server's `cache` through
