@@ -5,15 +5,17 @@ import type {
   RadixAPI,
   RadixPromAPI,
   SolanaAPI,
+  SuiAPI,
 } from "./routes";
 
 type DataSources = {
   cosmosAPI: CosmosAPI;
-  radixAPI: RadixAPI;
   elrondAPI: ElrondAPI;
-  solanaAPI: SolanaAPI;
   oasisAPI: OasisAPI;
+  radixAPI: RadixAPI;
   radixPromAPI: RadixPromAPI;
+  solanaAPI: SolanaAPI;
+  suiAPI: SuiAPI;
 };
 
 export interface ContextValue {

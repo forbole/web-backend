@@ -1,37 +1,49 @@
 // The GraphQL schema
 export const typeDefs = `#graphql
+  enum CacheControlScope {
+    PUBLIC
+    PRIVATE
+  }
+
+  directive @cacheControl(
+    maxAge: Int
+    scope: CacheControlScope
+    inheritMaxAge: Boolean
+  ) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION
+
   type Query {
-    cosmosUsersCount: [UsersCountResult]
-    eachCosmosTVL: [EachCosmosTVLResult]
     allCosmosTVL: [CosmosTVLResult]
-    eachCosmosBondedToken: [EachCosmosBondedTokenResult]
-    eachCosmosCommission: [EachCosmosCommissionResult]
-    eachCosmosUnbondingTime: [EachCosmosUnbondingTimeResult]
-    eachCosmosAPY: [EachCosmosAPYResult]
-    eachCosmosTokenSupply: [EachCosmosTokenSupplyResult]
-    eachCosmosInflationRate: [EachCosmosInflationRateResult]
     allRadixStakedTokens: [RadixStakedTokensResult]
     allRadixTotalSupply: RadixTokenSupplyResult
-    radixUnbondingTime: RadixUnbondingTimeResult
+    cosmosUsersCount: [UsersCountResult]
+    eachCosmosAPY: [EachCosmosAPYResult]
+    eachCosmosBondedToken: [EachCosmosBondedTokenResult]
+    eachCosmosCommission: [EachCosmosCommissionResult]
+    eachCosmosInflationRate: [EachCosmosInflationRateResult]
+    eachCosmosTVL: [EachCosmosTVLResult]
+    eachCosmosTokenSupply: [EachCosmosTokenSupplyResult]
+    eachCosmosUnbondingTime: [EachCosmosUnbondingTimeResult]
     elrondAPY: [ElrondAPYResult]
-    elrondTVL: [ElrondTVLResult]
-    elrondCommission: [ElrondCommissionResult]
     elrondBondedToken: [ElrondBondedTokenResult]
-    elrondTotalSupply: [ElrondTotalSupplyResult]
     elrondCirculatingSupply: [ElrondCirculatingSupplyResult]
-    elrondUsers: [ElrondUsersResult]
+    elrondCommission: [ElrondCommissionResult]
+    elrondTVL: [ElrondTVLResult]
+    elrondTotalSupply: [ElrondTotalSupplyResult]
     elrondUnbondingTime: ElrondUnbondingTimeResult
-    solanaUsers: SolanaUsersResult
-    solanaBondedToken: SolanaBondedTokenResult
-    solanaTVL: SolanaTVLResult
-    solanaCommission: SolanaCommissionResult
-    solanaUnbondingTime: SolanaUnbondingTimeResult
-    oasisUsers: [OasisUsersResult]
+    elrondUsers: [ElrondUsersResult]
     oasisBondedToken: [OasisBondedTokenResult]
     oasisCommission: [OasisCommissionResult]
     oasisTVL: [OasisTVLResult]
+    oasisUsers: [OasisUsersResult]
     radixTVL: [RadixTVLResult]
+    radixUnbondingTime: RadixUnbondingTimeResult
     radixUsers: [RadixUsersResult]
+    solanaBondedToken: SolanaBondedTokenResult
+    solanaCommission: SolanaCommissionResult
+    solanaTVL: SolanaTVLResult
+    solanaUnbondingTime: SolanaUnbondingTimeResult
+    solanaUsers: SolanaUsersResult
+    suiBondedToken: SuiBondedTokenResult
   }
 
   type UsersCountResult {
@@ -172,6 +184,10 @@ export const typeDefs = `#graphql
   type SolanaTVLResult {
     metric: AddressAndInstanceMetric
     TVL: String
+  }
+
+  type SuiBondedTokenResult @cacheControl(maxAge: 3600) {
+    bondedToken: String
   }
 
   type SolanaCommissionResult {

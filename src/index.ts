@@ -1,4 +1,5 @@
 import { ApolloServer } from "@apollo/server";
+import responseCachePlugin from "@apollo/server-plugin-response-cache";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import bodyParser from "body-parser";
@@ -15,6 +16,7 @@ import {
   RadixAPI,
   RadixPromAPI,
   SolanaAPI,
+  SuiAPI,
 } from "./graphql/routes";
 import { typeDefs } from "./graphql/typedefs";
 import type { ContextValue } from "./graphql/types";
@@ -29,7 +31,10 @@ require("dotenv").config();
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    plugins: [
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      responseCachePlugin(),
+    ],
   });
   await server.start();
 
@@ -48,11 +53,12 @@ require("dotenv").config();
         const context: ContextValue = {
           dataSources: {
             cosmosAPI: new CosmosAPI({ cache }),
-            radixAPI: new RadixAPI({ cache }),
             elrondAPI: new ElrondAPI({ cache }),
-            solanaAPI: new SolanaAPI({ cache }),
             oasisAPI: new OasisAPI({ cache }),
+            radixAPI: new RadixAPI({ cache }),
             radixPromAPI: new RadixPromAPI({ cache }),
+            solanaAPI: new SolanaAPI({ cache }),
+            suiAPI: new SuiAPI({ cache }),
           },
         };
 

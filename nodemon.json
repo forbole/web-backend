@@ -1,3 +1,5 @@
 {
-  "exec": "ts-node --files --project tsconfig.json src/index.ts"
+  "exec": "ts-node --files --project tsconfig.json src/index.ts",
+  "ext": "js, ts",
+  "watch": ["src/"]
 }
