@@ -400,11 +400,9 @@ export const resolvers = {
 
       let validator_address: string | undefined = "";
       let TVL = 0;
-      result.map((res, i: number) => {
+      result.forEach((res, i: number) => {
         TVL += parseInt(res.value[1]);
         if (i === 1) ({ validator_address } = res.metric);
-
-        return { validator_address, TVL };
       });
 
       return { metric: { validator_address, instance: "solana" }, TVL };
@@ -544,6 +542,17 @@ export const resolvers = {
         metric: { instance: "radix", validator_address: res.metric.address },
         usersCount: res.value[1],
       }));
+    },
+    suiBondedToken: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
+      const response = await dataSources.suiAPI.getSuiBondedToken();
+
+      if (response.status === "error") return;
+
+      return response.data;
     },
   },
 };
