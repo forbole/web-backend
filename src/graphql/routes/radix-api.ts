@@ -1,5 +1,4 @@
 import { RESTDataSource } from "@apollo/datasource-rest";
-import type { KeyValueCache } from "@apollo/utils.keyvaluecache";
 
 const { RADIX_URL } = process.env;
 
@@ -17,10 +16,6 @@ type RadixResponse = {
 
 export class RadixAPI extends RESTDataSource {
   override baseURL = `${(RADIX_URL as string).replace(/\/$/, "")}/`;
-
-  constructor(options: { cache: KeyValueCache }) {
-    super(options); // this sends our server's `cache` through
-  }
 
   async getTotalRadixSupply(): Promise<RadixResponse> {
     return this.post("token/native", {

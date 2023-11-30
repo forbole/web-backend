@@ -1,14 +1,7 @@
 import { RESTDataSource } from "@apollo/datasource-rest";
-import type { KeyValueCache } from "@apollo/utils.keyvaluecache";
-
-require("dotenv").config();
 
 export class RadixPromAPI extends RESTDataSource {
   override baseURL = `${process.env.PROM_QUERY_URL}/prometheus/api/v1/`;
-
-  constructor(options: { cache: KeyValueCache }) {
-    super(options);
-  }
 
   async getRadixTVL() {
     return this.get(

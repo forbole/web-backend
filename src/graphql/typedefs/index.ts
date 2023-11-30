@@ -43,6 +43,7 @@ export const typeDefs = `#graphql
     solanaTVL: SolanaTVLResult
     solanaUnbondingTime: SolanaUnbondingTimeResult
     solanaUsers: SolanaUsersResult
+    suiAPY: SuiAPYResult
     suiBondedToken: SuiBondedTokenResult
   }
 
@@ -184,6 +185,10 @@ export const typeDefs = `#graphql
   type SolanaTVLResult {
     metric: AddressAndInstanceMetric
     TVL: String
+  }
+
+  type SuiAPYResult @cacheControl(maxAge: 3600) {
+    APY: String
   }
 
   type SuiBondedTokenResult @cacheControl(maxAge: 3600) {

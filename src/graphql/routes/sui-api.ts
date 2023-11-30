@@ -1,9 +1,4 @@
 import { RESTDataSource } from "@apollo/datasource-rest";
-// KeyValueCache is the type of Apollo server's default cache
-import type { KeyValueCache } from "@apollo/utils.keyvaluecache";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require("dotenv").config();
 
 if (!process.env.DEVTOOLS_API_KEY) {
   throw new Error("DEVTOOLS_API_KEY is not set");
@@ -17,10 +12,6 @@ const validatorAddress =
 export class SuiAPI extends RESTDataSource {
   override baseURL = `https://rpc-mainnet-sui.forbole.com`;
 
-  constructor(options: { cache: KeyValueCache }) {
-    super(options); // this sends our server's `cache` through
-  }
-
   private getRequestContent(body: unknown) {
     return {
       headers: {
@@ -28,6 +19,36 @@ export class SuiAPI extends RESTDataSource {
         "content-type": "application/json",
       },
       body: JSON.stringify(body),
+    };
+  }
+
+  async getSuiAPY() {
+    const response = await this.post(
+      `/`,
+      this.getRequestContent({
+        id: 1,
+        jsonrpc: "2.0",
+        method: "suix_getValidatorsApy",
+        params: [],
+      }),
+    );
+
+    const apyObj = response.result.apys.find(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (apyItem: any) => apyItem.address === validatorAddress,
+    );
+
+    if (!apyObj) {
+      return {
+        status: "error",
+      };
+    }
+
+    return {
+      status: "success",
+      data: {
+        APY: apyObj.apy,
+      },
     };
   }
 
