@@ -1,9 +1,4 @@
 import { RESTDataSource } from "@apollo/datasource-rest";
-// KeyValueCache is the type of Apollo server's default cache
-import type { KeyValueCache } from "@apollo/utils.keyvaluecache";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require("dotenv").config();
 
 if (!process.env.DEVTOOLS_API_KEY) {
   throw new Error("DEVTOOLS_API_KEY is not set");
@@ -16,10 +11,6 @@ const validatorAddress =
 // https://docs.sui.io/
 export class SuiAPI extends RESTDataSource {
   override baseURL = `https://rpc-mainnet-sui.forbole.com`;
-
-  constructor(options: { cache: KeyValueCache }) {
-    super(options); // this sends our server's `cache` through
-  }
 
   private getRequestContent(body: unknown) {
     return {
