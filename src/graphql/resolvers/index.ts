@@ -543,6 +543,13 @@ export const resolvers = {
         usersCount: res.value[1],
       }));
     },
+    suiAPY: async (_: unknown, __: unknown, { dataSources }: ContextValue) => {
+      const response = await dataSources.suiAPI.getSuiAPY();
+
+      if (response.status === "error") return;
+
+      return response.data;
+    },
     suiBondedToken: async (
       _: unknown,
       __: unknown,
