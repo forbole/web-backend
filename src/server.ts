@@ -9,15 +9,14 @@ import express from "express";
 import http from "node:http";
 
 import { resolvers } from "./graphql/resolvers";
-import {
-  CosmosAPI,
-  ElrondAPI,
-  OasisAPI,
-  RadixAPI,
-  RadixPromAPI,
-  SolanaAPI,
-  SuiAPI,
-} from "./graphql/routes";
+import { ArchwayAPI } from "./graphql/routes/archway-api";
+import { CosmosAPI } from "./graphql/routes/cosmos-api";
+import { ElrondAPI } from "./graphql/routes/elrond-api";
+import { OasisAPI } from "./graphql/routes/oasis-api";
+import { RadixAPI } from "./graphql/routes/radix-api";
+import { RadixPromAPI } from "./graphql/routes/radix-prom-api";
+import { SolanaAPI } from "./graphql/routes/solana-api";
+import { SuiAPI } from "./graphql/routes/sui-api";
 import { typeDefs } from "./graphql/typedefs";
 import type { ContextValue } from "./graphql/types";
 
@@ -50,6 +49,7 @@ export const setupServer = async () => {
 
         const context: ContextValue = {
           dataSources: {
+            archwayAPI: new ArchwayAPI({ cache }),
             cosmosAPI: new CosmosAPI({ cache }),
             elrondAPI: new ElrondAPI({ cache }),
             oasisAPI: new OasisAPI({ cache }),
