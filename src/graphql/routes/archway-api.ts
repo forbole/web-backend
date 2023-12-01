@@ -6,7 +6,7 @@ const validatorAddress =
 // GET https://api.mainnet.archway.io/cosmos/bank/v1beta1/denoms_metadata
 const decimalsOfAArchwayBondenToken = 18;
 
-// https://rpc.mainnet.archway.io/
+// https://api.mainnet.archway.io/swagger/
 export class ArchwayAPI extends RESTDataSource {
   override baseURL = `https://api.mainnet.archway.io`;
 
