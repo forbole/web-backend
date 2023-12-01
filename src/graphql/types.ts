@@ -1,14 +1,14 @@
-import type {
-  CosmosAPI,
-  ElrondAPI,
-  OasisAPI,
-  RadixAPI,
-  RadixPromAPI,
-  SolanaAPI,
-  SuiAPI,
-} from "./routes";
+import type { ArchwayAPI } from "./routes/archway-api";
+import type { CosmosAPI } from "./routes/cosmos-api";
+import type { ElrondAPI } from "./routes/elrond-api";
+import type { OasisAPI } from "./routes/oasis-api";
+import type { RadixAPI } from "./routes/radix-api";
+import type { RadixPromAPI } from "./routes/radix-prom-api";
+import type { SolanaAPI } from "./routes/solana-api";
+import type { SuiAPI } from "./routes/sui-api";
 
 type DataSources = {
+  archwayAPI: ArchwayAPI;
   cosmosAPI: CosmosAPI;
   elrondAPI: ElrondAPI;
   oasisAPI: OasisAPI;
