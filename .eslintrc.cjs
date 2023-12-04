@@ -11,7 +11,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["@typescript-eslint", "prettier"],
+  plugins: ["@typescript-eslint", "prettier", "@stylistic"],
   rules: {
     "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/no-shadow": "error",
@@ -33,7 +33,7 @@ module.exports = {
     "prefer-template": "error",
     "quote-props": ["error", "consistent-as-needed"],
 
-    "padding-line-between-statements": [
+    "@stylistic/padding-line-between-statements": [
       "error",
       { blankLine: "always", prev: "*", next: "return" },
     ],

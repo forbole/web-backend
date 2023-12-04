@@ -1,3 +1,6 @@
+// In seconds
+const defaultMaxAge = 3600;
+
 // The GraphQL schema
 export const typeDefs = `#graphql
   enum CacheControlScope {
@@ -15,7 +18,9 @@ export const typeDefs = `#graphql
     allCosmosTVL: [CosmosTVLResult]
     allRadixStakedTokens: [RadixStakedTokensResult]
     allRadixTotalSupply: RadixTokenSupplyResult
+    archwayAPY: CommonAPYResult
     archwayBondedToken: CommonBondedTokenResult
+    archwayTVL: CommonTVLResult
     cosmosUsersCount: [UsersCountResult]
     eachCosmosAPY: [EachCosmosAPYResult]
     eachCosmosBondedToken: [EachCosmosBondedTokenResult]
@@ -44,8 +49,9 @@ export const typeDefs = `#graphql
     solanaTVL: SolanaTVLResult
     solanaUnbondingTime: SolanaUnbondingTimeResult
     solanaUsers: SolanaUsersResult
-    suiAPY: SuiAPYResult
+    suiAPY: CommonAPYResult
     suiBondedToken: CommonBondedTokenResult
+    suiTVL: CommonTVLResult
   }
 
   type UsersCountResult {
@@ -57,11 +63,11 @@ export const typeDefs = `#graphql
   }
 
   type EachCosmosTVLResult {
-    metric: TVLMetric
+    metric: CosmosTVLMetric
     TVL: String
   }
 
-  type TVLMetric {
+  type CosmosTVLMetric {
     chain_id: String
     denom: String
     instance: String
@@ -188,12 +194,16 @@ export const typeDefs = `#graphql
     TVL: String
   }
 
-  type SuiAPYResult @cacheControl(maxAge: 3600) {
+  type CommonAPYResult @cacheControl(maxAge: ${defaultMaxAge}) {
     APY: String
   }
 
-  type CommonBondedTokenResult @cacheControl(maxAge: 3600) {
+  type CommonBondedTokenResult @cacheControl(maxAge: ${defaultMaxAge}) {
     bondedToken: String
+  }
+
+  type CommonTVLResult @cacheControl(maxAge: ${defaultMaxAge}) {
+    TVL: String
   }
 
   type SolanaCommissionResult {

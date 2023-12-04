@@ -12,25 +12,34 @@ const commonHandler = (response: Response) => {
   return data.result;
 };
 
-// A map of functions which return data for the schema.
 export const resolvers = {
   Query: {
-    archwayBondedToken: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
-      const response = await dataSources.archwayAPI.getArchwayBondenToken();
+    archwayAPY: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
+      const response = await dataSources.archwayAPI.getAPY();
 
       if (response.status === "error") return;
 
       return response.data;
     },
-    cosmosUsersCount: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    archwayBondedToken: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
+      const response = await dataSources.archwayAPI.getBondedToken();
+
+      if (response.status === "error") return;
+
+      return response.data;
+    },
+    archwayTVL: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
+      const response = await dataSources.archwayAPI.getTVL();
+
+      if (response.status === "error") return;
+
+      return response.data;
+    },
+    cosmosUsersCount: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         await dataSources.cosmosAPI.getAllCosmosUsers(),
       );
@@ -41,11 +50,8 @@ export const resolvers = {
         usersCount: res.value[1],
       }));
     },
-    allCosmosTVL: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    allCosmosTVL: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         await dataSources.cosmosAPI.getAllCosmosTVL(),
       );
@@ -54,11 +60,8 @@ export const resolvers = {
 
       return result.map((res) => ({ cosmosTVL: res.value[1] }));
     },
-    eachCosmosTVL: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    eachCosmosTVL: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.cosmosAPI.getEachCosmosChainTVL()) as Response,
       );
@@ -75,11 +78,8 @@ export const resolvers = {
         TVL: res.value[1],
       }));
     },
-    eachCosmosBondedToken: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    eachCosmosBondedToken: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.cosmosAPI.getEachCosmosBondedToken()) as Response,
       );
@@ -91,11 +91,8 @@ export const resolvers = {
         bondedToken: res.value[1],
       }));
     },
-    eachCosmosCommission: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    eachCosmosCommission: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.cosmosAPI.getEachCosmosCommission()) as Response,
       );
@@ -111,11 +108,8 @@ export const resolvers = {
         commissionRate: res.value[1],
       }));
     },
-    eachCosmosUnbondingTime: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    eachCosmosUnbondingTime: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.cosmosAPI.getEachCosmosUnbondingTime()) as Response,
       );
@@ -127,11 +121,8 @@ export const resolvers = {
         unbondingTime: `${Math.floor(Number(res.value[1]) / 86400)} days`,
       }));
     },
-    eachCosmosAPY: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    eachCosmosAPY: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.cosmosAPI.getEachCosmosAPY()) as Response,
       );
@@ -143,11 +134,8 @@ export const resolvers = {
         APY: res.value[1],
       }));
     },
-    eachCosmosTokenSupply: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    eachCosmosTokenSupply: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.cosmosAPI.getEachCosmosTokenSupply()) as Response,
       );
@@ -159,11 +147,8 @@ export const resolvers = {
         supply: res.value[1],
       }));
     },
-    eachCosmosInflationRate: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    eachCosmosInflationRate: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.cosmosAPI.getEachCosmosInflationRate()) as Response,
       );
@@ -175,11 +160,8 @@ export const resolvers = {
         inflationRate: res.value[1],
       }));
     },
-    allRadixStakedTokens: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    allRadixStakedTokens: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.radixPromAPI.getStakedRadix()) as Response,
       );
@@ -191,11 +173,8 @@ export const resolvers = {
         bondedToken: res.value[1],
       }));
     },
-    allRadixTotalSupply: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    allRadixTotalSupply: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = await dataSources.radixAPI.getTotalRadixSupply();
 
       const { token } = result;
@@ -206,20 +185,14 @@ export const resolvers = {
         supply: token_supply?.value,
       };
     },
-    radixUnbondingTime: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    radixUnbondingTime: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const unbondingTime = await dataSources.radixAPI.getRadixUnbondingTime();
 
       return { metric: { instance: "radix" }, unbondingTime };
     },
-    elrondAPY: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    elrondAPY: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.elrondAPI.getElrondAPY()) as Response,
       );
@@ -234,11 +207,8 @@ export const resolvers = {
         APY: Number(res.value[1]) * 100,
       }));
     },
-    elrondTVL: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    elrondTVL: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.elrondAPI.getElrondTVL()) as Response,
       );
@@ -250,11 +220,8 @@ export const resolvers = {
         TVL: res.value[1],
       }));
     },
-    elrondCommission: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    elrondCommission: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.elrondAPI.getElrondCommission()) as Response,
       );
@@ -269,11 +236,8 @@ export const resolvers = {
         commissionRate: res.value[1],
       }));
     },
-    elrondBondedToken: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    elrondBondedToken: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.elrondAPI.getElrondBondedToken()) as Response,
       );
@@ -288,11 +252,8 @@ export const resolvers = {
         bondedToken: res.value[1],
       }));
     },
-    elrondTotalSupply: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    elrondTotalSupply: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.elrondAPI.getElrondTotalSupply()) as Response,
       );
@@ -304,11 +265,8 @@ export const resolvers = {
         totalSupply: res.value[1],
       }));
     },
-    elrondCirculatingSupply: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    elrondCirculatingSupply: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.elrondAPI.getElrondCirculatingSupply()) as Response,
       );
@@ -320,11 +278,8 @@ export const resolvers = {
         circulatingSupply: res.value[1],
       }));
     },
-    elrondUsers: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    elrondUsers: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.elrondAPI.getElrondUsers()) as Response,
       );
@@ -336,11 +291,8 @@ export const resolvers = {
         usersCount: res.value[1],
       }));
     },
-    elrondUnbondingTime: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    elrondUnbondingTime: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const response = await dataSources.elrondAPI.getElrondUnbondingTime();
 
       return {
@@ -348,11 +300,8 @@ export const resolvers = {
         unbondingTime: `${response} days`,
       };
     },
-    solanaUsers: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    solanaUsers: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.solanaAPI.getSolanaUsers()) as Response,
       );
@@ -374,11 +323,8 @@ export const resolvers = {
         usersCount,
       };
     },
-    solanaBondedToken: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    solanaBondedToken: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.solanaAPI.getStakedSolana()) as Response,
       );
@@ -398,11 +344,8 @@ export const resolvers = {
         bondedToken,
       };
     },
-    solanaTVL: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    solanaTVL: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.solanaAPI.getSolanaTVL()) as Response,
       );
@@ -418,11 +361,8 @@ export const resolvers = {
 
       return { metric: { validator_address, instance: "solana" }, TVL };
     },
-    solanaCommission: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    solanaCommission: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.solanaAPI.getSolanaCommission()) as Response,
       );
@@ -446,11 +386,8 @@ export const resolvers = {
         commissionRate,
       };
     },
-    solanaUnbondingTime: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    solanaUnbondingTime: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const response = await dataSources.solanaAPI.getSolanaUnbondingTime();
 
       return {
@@ -458,11 +395,8 @@ export const resolvers = {
         unbondingTime: `${response} days`,
       };
     },
-    oasisUsers: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    oasisUsers: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.oasisAPI.getOasisUsers()) as Response,
       );
@@ -474,11 +408,8 @@ export const resolvers = {
         usersCount: res.value[1],
       }));
     },
-    oasisBondedToken: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    oasisBondedToken: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.oasisAPI.getOasisBondedToken()) as Response,
       );
@@ -490,11 +421,8 @@ export const resolvers = {
         bondedToken: res.value[1],
       }));
     },
-    oasisCommission: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    oasisCommission: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.oasisAPI.getOasisCommission()) as Response,
       );
@@ -506,11 +434,8 @@ export const resolvers = {
         commissionRate: res.value[1],
       }));
     },
-    oasisTVL: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    oasisTVL: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.oasisAPI.getOasisTVL()) as Response,
       );
@@ -522,11 +447,8 @@ export const resolvers = {
         TVL: res.value[1],
       }));
     },
-    radixTVL: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    radixTVL: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.radixPromAPI.getRadixTVL()) as Response,
       );
@@ -538,11 +460,8 @@ export const resolvers = {
         TVL: res.value[1],
       }));
     },
-    radixUsers: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
+    radixUsers: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
       const result = commonHandler(
         (await dataSources.radixPromAPI.getRadixUsers()) as Response,
       );
@@ -554,19 +473,25 @@ export const resolvers = {
         usersCount: res.value[1],
       }));
     },
-    suiAPY: async (_: unknown, __: unknown, { dataSources }: ContextValue) => {
-      const response = await dataSources.suiAPI.getSuiAPY();
+    suiAPY: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
+      const response = await dataSources.suiAPI.getAPY();
 
       if (response.status === "error") return;
 
       return response.data;
     },
-    suiBondedToken: async (
-      _: unknown,
-      __: unknown,
-      { dataSources }: ContextValue,
-    ) => {
-      const response = await dataSources.suiAPI.getSuiBondedToken();
+    suiBondedToken: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
+      const response = await dataSources.suiAPI.getBondedToken();
+
+      if (response.status === "error") return;
+
+      return response.data;
+    },
+    suiTVL: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
+      const response = await dataSources.suiAPI.getTVL();
 
       if (response.status === "error") return;
 
