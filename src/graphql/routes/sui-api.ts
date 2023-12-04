@@ -45,7 +45,7 @@ export class SuiAPI extends RESTDataSource {
     }
 
     return {
-      status: "success",
+      status: "ok",
       data: {
         APY: apyObj.apy,
       },
@@ -93,7 +93,7 @@ export class SuiAPI extends RESTDataSource {
     const bondedToken = validator?.stakingPoolSuiBalance / 10 ** decimals;
 
     return {
-      status: "success",
+      status: "ok",
       data: {
         bondedToken,
       },

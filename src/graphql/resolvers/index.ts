@@ -15,6 +15,17 @@ const commonHandler = (response: Response) => {
 // A map of functions which return data for the schema.
 export const resolvers = {
   Query: {
+    archwayAPY: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
+      const response = await dataSources.archwayAPI.getArchwayAPY();
+
+      if (response.status === "error") return;
+
+      return response.data;
+    },
     archwayBondedToken: async (
       _: unknown,
       __: unknown,

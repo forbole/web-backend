@@ -15,6 +15,7 @@ export const typeDefs = `#graphql
     allCosmosTVL: [CosmosTVLResult]
     allRadixStakedTokens: [RadixStakedTokensResult]
     allRadixTotalSupply: RadixTokenSupplyResult
+    archwayAPY: CommonAPYResult
     archwayBondedToken: CommonBondedTokenResult
     cosmosUsersCount: [UsersCountResult]
     eachCosmosAPY: [EachCosmosAPYResult]
@@ -44,7 +45,7 @@ export const typeDefs = `#graphql
     solanaTVL: SolanaTVLResult
     solanaUnbondingTime: SolanaUnbondingTimeResult
     solanaUsers: SolanaUsersResult
-    suiAPY: SuiAPYResult
+    suiAPY: CommonAPYResult
     suiBondedToken: CommonBondedTokenResult
   }
 
@@ -188,7 +189,7 @@ export const typeDefs = `#graphql
     TVL: String
   }
 
-  type SuiAPYResult @cacheControl(maxAge: 3600) {
+  type CommonAPYResult @cacheControl(maxAge: 3600) {
     APY: String
   }
 
