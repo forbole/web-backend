@@ -1,3 +1,6 @@
+// In seconds
+const defaultMaxAge = 3600;
+
 // The GraphQL schema
 export const typeDefs = `#graphql
   enum CacheControlScope {
@@ -60,11 +63,11 @@ export const typeDefs = `#graphql
   }
 
   type EachCosmosTVLResult {
-    metric: TVLMetric
+    metric: CosmosTVLMetric
     TVL: String
   }
 
-  type TVLMetric {
+  type CosmosTVLMetric {
     chain_id: String
     denom: String
     instance: String
@@ -191,15 +194,15 @@ export const typeDefs = `#graphql
     TVL: String
   }
 
-  type CommonAPYResult @cacheControl(maxAge: 3600) {
+  type CommonAPYResult @cacheControl(maxAge: ${defaultMaxAge}) {
     APY: String
   }
 
-  type CommonBondedTokenResult @cacheControl(maxAge: 3600) {
+  type CommonBondedTokenResult @cacheControl(maxAge: ${defaultMaxAge}) {
     bondedToken: String
   }
 
-  type CommonTVLResult @cacheControl(maxAge: 3600) {
+  type CommonTVLResult @cacheControl(maxAge: ${defaultMaxAge}) {
     TVL: String
   }
 

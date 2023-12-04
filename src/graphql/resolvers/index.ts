@@ -12,7 +12,6 @@ const commonHandler = (response: Response) => {
   return data.result;
 };
 
-// A map of functions which return data for the schema.
 export const resolvers = {
   Query: {
     archwayAPY: async (...params: unknown[]) => {

@@ -53,7 +53,20 @@ export class SuiAPI extends RESTDataSource {
   }
 
   async getAPY() {
-    const validatorItem = await this.getValidator();
+    const response = await this.post(
+      `/`,
+      this.getRequestContent({
+        id: 1,
+        jsonrpc: "2.0",
+        method: "suix_getValidatorsApy",
+        params: [],
+      }),
+    );
+
+    const validatorItem = response.result.apys.find(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (v: any) => v.address === validatorAddress,
+    );
 
     if (!validatorItem) {
       return {
