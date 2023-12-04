@@ -1,4 +1,7 @@
+import type { DataSourceConfig } from "@apollo/datasource-rest";
 import { RESTDataSource } from "@apollo/datasource-rest";
+
+import { CoinGeckoDataSource } from "../utils/coingecko-data";
 
 const validatorAddress =
   "archwayvaloper1esg4kluvdkfcxl0atcf2us2p9m9y9sjjsu04ex";
@@ -9,8 +12,41 @@ const decimalsOfAArchwayBondenToken = 18;
 // https://api.mainnet.archway.io/swagger/
 export class ArchwayAPI extends RESTDataSource {
   override baseURL = `https://api.mainnet.archway.io`;
+  private gecko: CoinGeckoDataSource;
 
-  async getArchwayAPY() {
+  constructor(options: DataSourceConfig) {
+    super(options);
+
+    this.gecko = new CoinGeckoDataSource(options);
+  }
+
+  async getTVL() {
+    const [validatorResponse, coinPrice] = await Promise.all([
+      this.get(`/staking/validators/${validatorAddress}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+      this.gecko.getCoinPrice("archway"),
+    ]);
+
+    // https://github.com/forbole/cosmos-exporter/blob/8e78b8ea5a37d113f3448c423540df4edb1f4ebb/collector/validator_status.go#L40C72-L40C72
+    // Validator.DelegatorShares
+    const tokens =
+      Number(validatorResponse.result.delegator_shares) /
+      10 ** decimalsOfAArchwayBondenToken;
+
+    const TVL = tokens * Number(coinPrice);
+
+    return {
+      status: "ok",
+      data: {
+        TVL,
+      },
+    };
+  }
+
+  async getAPY() {
     const [inflationResponse, validatorResponse, supplyResponse] =
       await Promise.all([
         this.get(`/minting/inflation`, {
@@ -23,7 +59,7 @@ export class ArchwayAPI extends RESTDataSource {
             "Content-Type": "application/json",
           },
         }),
-        this.get(`/cosmos/bank/v1beta1/supply`, {
+        this.get(`/cosmos/bank/v1beta1/supply/aarch`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -31,15 +67,26 @@ export class ArchwayAPI extends RESTDataSource {
       ]);
 
     const inflation = inflationResponse?.result;
-    const supplyDenom = supplyResponse.supply.find(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (item: any) => item.denom === "aarch",
-    );
 
     const bondedToken =
       validatorResponse?.result?.tokens / 10 ** decimalsOfAArchwayBondenToken;
     const supplyNormalized =
-      Number(supplyDenom?.amount) / 10 ** decimalsOfAArchwayBondenToken;
+      Number(supplyResponse?.amount?.amount) /
+      10 ** decimalsOfAArchwayBondenToken;
+
+    if (
+      !inflation ||
+      Number.isNaN(inflation) ||
+      !bondedToken ||
+      Number.isNaN(bondedToken) ||
+      !supplyNormalized ||
+      Number.isNaN(supplyNormalized)
+    ) {
+      return {
+        status: "error",
+        error: "inflation, bondedToken or supplyNormalized is not a number",
+      };
+    }
 
     const APY = (Number(inflation) * 0.01) / (bondedToken / supplyNormalized);
 
@@ -51,7 +98,7 @@ export class ArchwayAPI extends RESTDataSource {
     };
   }
 
-  async getArchwayBondenToken() {
+  async getBondedToken() {
     const result = await this.get(`/staking/validators/${validatorAddress}`, {
       headers: {
         "Content-Type": "application/json",

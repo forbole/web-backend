@@ -20,7 +20,7 @@ export const resolvers = {
       __: unknown,
       { dataSources }: ContextValue,
     ) => {
-      const response = await dataSources.archwayAPI.getArchwayAPY();
+      const response = await dataSources.archwayAPI.getAPY();
 
       if (response.status === "error") return;
 
@@ -31,7 +31,18 @@ export const resolvers = {
       __: unknown,
       { dataSources }: ContextValue,
     ) => {
-      const response = await dataSources.archwayAPI.getArchwayBondenToken();
+      const response = await dataSources.archwayAPI.getBondedToken();
+
+      if (response.status === "error") return;
+
+      return response.data;
+    },
+    archwayTVL: async (
+      _: unknown,
+      __: unknown,
+      { dataSources }: ContextValue,
+    ) => {
+      const response = await dataSources.archwayAPI.getTVL();
 
       if (response.status === "error") return;
 
@@ -566,7 +577,7 @@ export const resolvers = {
       }));
     },
     suiAPY: async (_: unknown, __: unknown, { dataSources }: ContextValue) => {
-      const response = await dataSources.suiAPI.getSuiAPY();
+      const response = await dataSources.suiAPI.getAPY();
 
       if (response.status === "error") return;
 
@@ -577,7 +588,14 @@ export const resolvers = {
       __: unknown,
       { dataSources }: ContextValue,
     ) => {
-      const response = await dataSources.suiAPI.getSuiBondedToken();
+      const response = await dataSources.suiAPI.getBondedToken();
+
+      if (response.status === "error") return;
+
+      return response.data;
+    },
+    suiTVL: async (_: unknown, __: unknown, { dataSources }: ContextValue) => {
+      const response = await dataSources.suiAPI.getTVL();
 
       if (response.status === "error") return;
 
