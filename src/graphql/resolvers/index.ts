@@ -449,16 +449,18 @@ export const resolvers = {
     },
     radixTVL: async (...params: unknown[]) => {
       const { dataSources } = params[2] as ContextValue;
-      const result = commonHandler(
-        (await dataSources.radixPromAPI.getRadixTVL()) as Response,
-      );
+      const { status, data } = await dataSources.radixAPI.getRadixTVL();
 
-      if (!result) return;
+      if (status === "error") return;
 
-      return result.map((res) => ({
-        metric: { instance: "radix", validator_address: res.metric.address },
-        TVL: res.value[1],
-      }));
+      const { address, TVL } = data as NonNullable<typeof data>;
+
+      return [
+        {
+          metric: { instance: "radix", validator_address: address },
+          TVL,
+        },
+      ];
     },
     radixUsers: async (...params: unknown[]) => {
       const { dataSources } = params[2] as ContextValue;
