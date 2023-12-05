@@ -236,7 +236,7 @@ export const typeDefs = `#graphql
     TVL: String
   }
 
-  type RadixTVLResult {
+  type RadixTVLResult @cacheControl(maxAge: ${defaultMaxAge}) {
     metric: AddressAndInstanceMetric
     TVL: String
   }
