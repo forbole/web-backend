@@ -451,9 +451,9 @@ export const resolvers = {
       const { dataSources } = params[2] as ContextValue;
       const { status, data } = await dataSources.radixAPI.getRadixTVL();
 
-      if (status === "error") return;
+      if (status === "error" || !data) return;
 
-      const { address, TVL } = data as NonNullable<typeof data>;
+      const { address, TVL } = data;
 
       return [
         {

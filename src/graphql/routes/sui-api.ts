@@ -1,15 +1,12 @@
 import type { DataSourceConfig } from "@apollo/datasource-rest";
 import { RESTDataSource } from "@apollo/datasource-rest";
 
+import { suiValidatorAddress } from "../utils/addresses";
 import { CoinGeckoDataSource } from "../utils/coingecko-data";
 
 if (!process.env.DEVTOOLS_API_KEY) {
   throw new Error("DEVTOOLS_API_KEY is not set");
 }
-
-// https://suiexplorer.com/validator/0x1e1985024aafe50a8e4eafc5a89eb7ecd58ba08c39f37688bee00bd55c8b2059
-const validatorAddress =
-  "0x1e1985024aafe50a8e4eafc5a89eb7ecd58ba08c39f37688bee00bd55c8b2059";
 
 const coinDecimals = 9;
 
@@ -48,7 +45,7 @@ export class SuiAPI extends RESTDataSource {
 
     return response.result.activeValidators.find(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (v: any) => v.suiAddress === validatorAddress,
+      (v: any) => v.suiAddress === suiValidatorAddress,
     );
   }
 
@@ -65,7 +62,7 @@ export class SuiAPI extends RESTDataSource {
 
     const validatorItem = response.result.apys.find(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (v: any) => v.address === validatorAddress,
+      (v: any) => v.address === suiValidatorAddress,
     );
 
     if (!validatorItem) {

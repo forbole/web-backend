@@ -1,10 +1,8 @@
 import type { DataSourceConfig } from "@apollo/datasource-rest";
 import { RESTDataSource } from "@apollo/datasource-rest";
 
+import { archwayValidatorAddress } from "../utils/addresses";
 import { CoinGeckoDataSource } from "../utils/coingecko-data";
-
-const validatorAddress =
-  "archwayvaloper1esg4kluvdkfcxl0atcf2us2p9m9y9sjjsu04ex";
 
 // GET https://api.mainnet.archway.io/cosmos/bank/v1beta1/denoms_metadata
 const decimalsOfAArchwayBondenToken = 18;
@@ -22,7 +20,7 @@ export class ArchwayAPI extends RESTDataSource {
 
   async getTVL() {
     const [validatorResponse, coinPrice] = await Promise.all([
-      this.get(`/staking/validators/${validatorAddress}`, {
+      this.get(`/staking/validators/${archwayValidatorAddress}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -54,7 +52,7 @@ export class ArchwayAPI extends RESTDataSource {
             "Content-Type": "application/json",
           },
         }),
-        this.get(`/staking/validators/${validatorAddress}`, {
+        this.get(`/staking/validators/${archwayValidatorAddress}`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -99,11 +97,14 @@ export class ArchwayAPI extends RESTDataSource {
   }
 
   async getBondedToken() {
-    const result = await this.get(`/staking/validators/${validatorAddress}`, {
-      headers: {
-        "Content-Type": "application/json",
+    const result = await this.get(
+      `/staking/validators/${archwayValidatorAddress}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
 
     const bondedToken =
       result?.result?.tokens / 10 ** decimalsOfAArchwayBondenToken;

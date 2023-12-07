@@ -1,6 +1,7 @@
 import type { DataSourceConfig } from "@apollo/datasource-rest";
 import { RESTDataSource } from "@apollo/datasource-rest";
 
+import { radixValidatorAddress } from "../utils/addresses";
 import { CoinGeckoDataSource } from "../utils/coingecko-data";
 
 const { RADIX_URL } = process.env;
@@ -16,9 +17,6 @@ type RadixResponse = {
     };
   };
 };
-
-const validatorAddress =
-  "validator_rdx1swkmn6yvrqjzpaytvug5fp0gzfy9zdzq7j7nlxe8wgjpg76vdcma8p";
 
 // https://dashboard.radixdlt.com/network-staking
 // https://radix-babylon-gateway-api.redoc.ly/#tag/Status
@@ -58,7 +56,7 @@ export class RadixAPI extends RESTDataSource {
             network: "mainnet",
           },
           validator_identifier: {
-            address: validatorAddress,
+            address: radixValidatorAddress,
           },
         }),
       }),
@@ -67,7 +65,7 @@ export class RadixAPI extends RESTDataSource {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const validator = radixResponse.validators.items.find((i: any) =>
-      (i.address as string).includes(validatorAddress),
+      (i.address as string).includes(radixValidatorAddress),
     );
 
     if (!validator) {
@@ -89,7 +87,7 @@ export class RadixAPI extends RESTDataSource {
       status: "ok",
       data: {
         TVL,
-        address: validatorAddress,
+        address: radixValidatorAddress,
       },
     };
   }
