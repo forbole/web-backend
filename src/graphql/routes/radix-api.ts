@@ -79,6 +79,12 @@ export class RadixAPI extends RESTDataSource {
     const lockedUnit = validator.locked_owner_stake_unit_vault.balance;
     const TVL = lockedUnit * Number(coinPrice);
 
+    if (Number.isNaN(TVL)) {
+      return {
+        status: "error",
+      };
+    }
+
     return {
       status: "ok",
       data: {
