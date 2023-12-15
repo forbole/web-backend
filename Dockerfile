@@ -1,15 +1,17 @@
 FROM node:20-alpine as builer
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn ./.yarn
+RUN yarn --immutable
 COPY . /app
-RUN npm run build
+RUN yarn build
 
 FROM node:20-alpine
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn ./.yarn
 ENV NODE_ENV=production
-RUN npm install
+RUN yarn --immutable
 COPY --from=builer /app/dist ./dist
-RUN npm install pm2 -g
+RUN npm i --global pm2
 CMD ["pm2-runtime", "dist/index.js"]

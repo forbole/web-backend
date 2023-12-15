@@ -9,8 +9,8 @@ jobs:
         with:
           node-version: 20
 
-      - run: npm ci
+      - run: yarn --immutable
 
-      - run: npm run lint
-      - run: npm run test
-      - run: npm run build
+      - run: yarn lint
+      - run: yarn test
+      - run: yarn build
