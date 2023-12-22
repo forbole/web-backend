@@ -33,6 +33,7 @@ export const setupServer = async () => {
       responseCachePlugin(),
     ],
   });
+
   await server.start();
 
   app.use(express.json());
@@ -77,6 +78,7 @@ export const setupServer = async () => {
   // 404 middleware
   app.use((_req, _res, next) => {
     const error = new Error("Not found") as ResponseError;
+
     error.status = 404;
     next(error);
   });
