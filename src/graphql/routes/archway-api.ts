@@ -68,6 +68,7 @@ export class ArchwayAPI extends RESTDataSource {
 
     const bondedToken =
       validatorResponse?.result?.tokens / 10 ** decimalsOfAArchwayBondenToken;
+
     const supplyNormalized =
       Number(supplyResponse?.amount?.amount) /
       10 ** decimalsOfAArchwayBondenToken;

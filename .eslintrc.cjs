@@ -1,3 +1,31 @@
+const paddingLineBetweenStatements = [
+  "error",
+  { blankLine: "always", prev: "*", next: "return" },
+]
+  .concat(
+    [
+      "multiline-block-like",
+      "multiline-expression",
+      "multiline-const",
+      "const",
+      "type",
+      "interface",
+      "if",
+    ]
+      .map((item) => [
+        { blankLine: "always", prev: item, next: "*" },
+        { blankLine: "always", prev: "*", next: item },
+      ])
+      .flat(),
+  )
+  .concat([
+    {
+      blankLine: "any",
+      prev: ["singleline-const"],
+      next: ["singleline-const"],
+    },
+  ]);
+
 module.exports = {
   env: {
     es2021: true,
@@ -33,9 +61,6 @@ module.exports = {
     "prefer-template": "error",
     "quote-props": ["error", "consistent-as-needed"],
 
-    "@stylistic/padding-line-between-statements": [
-      "error",
-      { blankLine: "always", prev: "*", next: "return" },
-    ],
+    "@stylistic/padding-line-between-statements": paddingLineBetweenStatements,
   },
 };
