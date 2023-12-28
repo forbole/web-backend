@@ -1,6 +1,6 @@
 const paddingLineBetweenStatements = [
   "error",
-  { blankLine: "always", prev: "*", next: "return" },
+  { blankLine: "always", next: "return", prev: "*" },
 ]
   .concat(
     [
@@ -13,16 +13,16 @@ const paddingLineBetweenStatements = [
       "if",
     ]
       .map((item) => [
-        { blankLine: "always", prev: item, next: "*" },
-        { blankLine: "always", prev: "*", next: item },
+        { blankLine: "always", next: "*", prev: item },
+        { blankLine: "always", next: item, prev: "*" },
       ])
       .flat(),
   )
   .concat([
     {
       blankLine: "any",
-      prev: ["singleline-const"],
       next: ["singleline-const"],
+      prev: ["singleline-const"],
     },
   ]);
 
@@ -39,8 +39,10 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["@typescript-eslint", "prettier", "@stylistic"],
+  plugins: ["@typescript-eslint", "prettier", "@stylistic", "perfectionist"],
   rules: {
+    "@stylistic/padding-line-between-statements": paddingLineBetweenStatements,
+
     "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-unused-vars": "error",
@@ -55,12 +57,18 @@ module.exports = {
     "no-useless-return": "error",
     "object-shorthand": "error",
     "operator-assignment": "error",
+
+    "perfectionist/sort-enums": "error",
+    "perfectionist/sort-exports": "error",
+    "perfectionist/sort-interfaces": "error",
+    "perfectionist/sort-object-types": "error",
+    "perfectionist/sort-objects": "error",
+    "perfectionist/sort-union-types": "error",
+
     "prefer-const": "error",
     "prefer-destructuring": ["error"],
     "prefer-spread": "error",
     "prefer-template": "error",
     "quote-props": ["error", "consistent-as-needed"],
-
-    "@stylistic/padding-line-between-statements": paddingLineBetweenStatements,
   },
 };

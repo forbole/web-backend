@@ -23,11 +23,11 @@ export class SuiAPI extends RESTDataSource {
 
   private getRequestContent(body: unknown) {
     return {
+      body: JSON.stringify(body),
       headers: {
         "apikey": `${process.env.DEVTOOLS_API_KEY}`,
         "content-type": "application/json",
       },
-      body: JSON.stringify(body),
     };
   }
 
@@ -72,10 +72,10 @@ export class SuiAPI extends RESTDataSource {
     }
 
     return {
-      status: "ok",
       data: {
         APY: validatorItem.apy,
       },
+      status: "ok",
     };
   }
 
@@ -86,10 +86,10 @@ export class SuiAPI extends RESTDataSource {
     const bondedToken = validator?.stakingPoolSuiBalance / 10 ** coinDecimals;
 
     return {
-      status: "ok",
       data: {
         bondedToken,
       },
+      status: "ok",
     };
   }
 
@@ -102,10 +102,10 @@ export class SuiAPI extends RESTDataSource {
     const tokens = validator?.poolTokenBalance / 10 ** coinDecimals;
 
     return {
-      status: "ok",
       data: {
         TVL: tokens * Number(coinPrice),
       },
+      status: "ok",
     };
   }
 }

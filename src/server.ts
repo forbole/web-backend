@@ -26,12 +26,12 @@ export const setupServer = async () => {
   const port = process.env.PORT || 4000;
 
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
       responseCachePlugin(),
     ],
+    resolvers,
+    typeDefs,
   });
 
   await server.start();
@@ -94,8 +94,8 @@ export const setupServer = async () => {
     ) => {
       res.status(error.status || 500).send({
         error: {
-          status: error.status || 500,
           message: error.message || "Internal Server Error",
+          status: error.status || 500,
         },
       });
     },

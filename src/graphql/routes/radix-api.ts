@@ -34,23 +34,20 @@ export class RadixAPI extends RESTDataSource {
 
   async getTotalRadixSupply(): Promise<RadixResponse> {
     return this.post("token/native", {
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({
         network_identifier: {
           network: "mainnet",
         },
       }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   }
 
   async getRadixTVL() {
     const [radixResponse, coinPrice] = await Promise.all([
       this.post(`${this.baseGatewayURL}state/validators/list`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({
           network_identifier: {
             network: "mainnet",
@@ -59,6 +56,9 @@ export class RadixAPI extends RESTDataSource {
             address: radixValidatorAddress,
           },
         }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }),
       this.gecko.getCoinPrice("radix"),
     ]);
@@ -84,11 +84,11 @@ export class RadixAPI extends RESTDataSource {
     }
 
     return {
-      status: "ok",
       data: {
-        TVL,
         address: radixValidatorAddress,
+        TVL,
       },
+      status: "ok",
     };
   }
 
