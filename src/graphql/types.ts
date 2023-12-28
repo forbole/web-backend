@@ -23,7 +23,6 @@ export interface ContextValue {
 }
 
 type ResultCommon = {
-  value: [number, string];
   metric: {
     address?: string;
     chain?: string;
@@ -34,17 +33,18 @@ type ResultCommon = {
     provider_address?: string;
     validator_address?: string;
   };
+  value: [number, string];
 };
 
 export type Response =
   | {
-      data: unknown;
-      error: string;
-      status: "error";
-    }
-  | {
-      status: "ok";
       data: {
         result: ResultCommon[];
       };
+      status: "ok";
+    }
+  | {
+      data: unknown;
+      error: string;
+      status: "error";
     };

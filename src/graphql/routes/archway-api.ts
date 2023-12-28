@@ -37,10 +37,10 @@ export class ArchwayAPI extends RESTDataSource {
     const TVL = tokens * Number(coinPrice);
 
     return {
-      status: "ok",
       data: {
         TVL,
       },
+      status: "ok",
     };
   }
 
@@ -82,18 +82,18 @@ export class ArchwayAPI extends RESTDataSource {
       Number.isNaN(supplyNormalized)
     ) {
       return {
-        status: "error",
         error: "inflation, bondedToken or supplyNormalized is not a number",
+        status: "error",
       };
     }
 
     const APY = (Number(inflation) * 0.01) / (bondedToken / supplyNormalized);
 
     return {
-      status: "ok",
       data: {
         APY,
       },
+      status: "ok",
     };
   }
 
@@ -112,16 +112,16 @@ export class ArchwayAPI extends RESTDataSource {
 
     if (!bondedToken || Number.isNaN(bondedToken)) {
       return {
-        status: "error",
         error: "bondedToken is not a number",
+        status: "error",
       };
     }
 
     return {
-      status: "ok",
       data: {
         bondedToken: bondedToken.toFixed(0),
       },
+      status: "ok",
     };
   }
 }
