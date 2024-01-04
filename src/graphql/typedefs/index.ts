@@ -1,5 +1,5 @@
 // In seconds
-const defaultMaxAge = 3600;
+const defaultMaxAge = 60 * 60 * 24;
 
 // The GraphQL schema
 export const typeDefs = `#graphql
@@ -16,7 +16,6 @@ export const typeDefs = `#graphql
 
   type Query {
     allCosmosTVL: [CosmosTVLResult]
-    allRadixStakedTokens: [RadixStakedTokensResult]
     allRadixTotalSupply: RadixTokenSupplyResult
     archwayAPY: CommonAPYResult
     archwayBondedToken: CommonBondedTokenResult
@@ -41,6 +40,8 @@ export const typeDefs = `#graphql
     oasisCommission: [OasisCommissionResult]
     oasisTVL: [OasisTVLResult]
     oasisUsers: [OasisUsersResult]
+    radixAPY: [RadixAPYResult]
+    radixBondedToken: [RadixBondedTokenResult]
     radixTVL: [RadixTVLResult]
     radixUnbondingTime: RadixUnbondingTimeResult
     radixUsers: [RadixUsersResult]
@@ -113,11 +114,6 @@ export const typeDefs = `#graphql
   type EachCosmosInflationRateResult {
     metric: ChainIdAndInstanceMetric
     inflationRate: String
-  }
-
-  type RadixStakedTokensResult {
-    metric: AddressAndInstanceMetric
-    bondedToken: String
   }
 
   type AddressAndInstanceMetric {
@@ -234,6 +230,16 @@ export const typeDefs = `#graphql
   type OasisTVLResult {
     metric: InstanceOnlyMetric
     TVL: String
+  }
+
+  type RadixAPYResult @cacheControl(maxAge: ${defaultMaxAge}) {
+    APY: String
+    metric: AddressAndInstanceMetric
+  }
+
+  type RadixBondedTokenResult @cacheControl(maxAge: ${defaultMaxAge}) {
+    bondedToken: String
+    metric: AddressAndInstanceMetric
   }
 
   type RadixTVLResult @cacheControl(maxAge: ${defaultMaxAge}) {
