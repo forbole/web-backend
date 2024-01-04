@@ -8,6 +8,7 @@
     "build": "rm -rf dist && tsc",
     "dev": "NODE_ENV=development nodemon",
     "lint": "eslint . --ext .ts && prettier './**/*.{ts,js}' --check",
+    "postinstall": "husky install",
     "start": "NODE_ENV=production node dist/index.js",
     "test": "echo No tests"
   },
@@ -24,6 +25,8 @@
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
     "@stylistic/eslint-plugin": "^1.5.1",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/cors": "^2.8.17",
@@ -38,6 +41,7 @@
     "eslint-plugin-perfectionist": "^2.5.0",
     "eslint-plugin-prettier": "^5.1.2",
     "graphql": "^16.8.1",
+    "husky": "^8.0.3",
     "nodemon": "^3.0.2",
     "prettier": "^3.1.1",
     "ts-node": "^10.9.2",
