@@ -300,14 +300,12 @@ export const resolvers = {
     oasisBondedToken: async (...params: unknown[]) => {
       const { dataSources } = params[2] as ContextValue;
 
-      const result = commonHandler(
-        (await dataSources.oasisAPI.getOasisBondedToken()) as Response,
-      );
+      const result = await dataSources.oasisAPI.getOasisBondedToken();
 
       if (!result) return;
 
       return result.map((res) => ({
-        bondedToken: res.value[1],
+        bondedToken: res.value,
         metric: { instance: "oasis", validator_address: res.metric.identity },
       }));
     },
@@ -328,29 +326,25 @@ export const resolvers = {
     oasisTVL: async (...params: unknown[]) => {
       const { dataSources } = params[2] as ContextValue;
 
-      const result = commonHandler(
-        (await dataSources.oasisAPI.getOasisTVL()) as Response,
-      );
+      const result = await dataSources.oasisAPI.getOasisTVL();
 
       if (!result) return;
 
       return result.map((res) => ({
         metric: { instance: "oasis" },
-        TVL: res.value[1],
+        TVL: res.value,
       }));
     },
     oasisUsers: async (...params: unknown[]) => {
       const { dataSources } = params[2] as ContextValue;
 
-      const result = commonHandler(
-        (await dataSources.oasisAPI.getOasisUsers()) as Response,
-      );
+      const result = await dataSources.oasisAPI.getOasisUsers();
 
       if (!result) return;
 
       return result.map((res) => ({
         metric: { instance: "oasis", validator_address: res.metric.identity },
-        usersCount: res.value[1],
+        usersCount: res.value,
       }));
     },
     radixAPY: async (...params: unknown[]) => {

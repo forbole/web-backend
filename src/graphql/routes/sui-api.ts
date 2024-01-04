@@ -11,6 +11,7 @@ if (!process.env.DEVTOOLS_API_KEY) {
 const coinDecimals = 9;
 
 // https://docs.sui.io/
+// https://suiexplorer.com/validator/0x1e1985024aafe50a8e4eafc5a89eb7ecd58ba08c39f37688bee00bd55c8b2059
 export class SuiAPI extends RESTDataSource {
   override baseURL = `https://rpc-mainnet-sui.forbole.com`;
   private gecko: CoinGeckoDataSource;

@@ -54,6 +54,7 @@ export class RadixAPI extends RESTDataSource {
 
   async getRadixAPY() {
     // https://dashboard.radixdlt.com/network-staking/validator_rdx1swkmn6yvrqjzpaytvug5fp0gzfy9zdzq7j7nlxe8wgjpg76vdcma8p
+    // @hardcoded
     const APY = 0.0783;
 
     return {
