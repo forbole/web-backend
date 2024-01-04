@@ -9,27 +9,9 @@ export class ElrondAPI extends RESTDataSource {
     );
   }
 
-  async getElrondTVL() {
-    return this.get(
-      `query?query=max_over_time(elrond_provider_locked[${process.env.MAX_OVER_TIME_DURATION}]) * on (denom) token_price`,
-    );
-  }
-
-  async getElrondCommission() {
-    return this.get(
-      `query?query=max_over_time(elrond_provider_service_fee[${process.env.MAX_OVER_TIME_DURATION}])`,
-    );
-  }
-
   async getElrondBondedToken() {
     return this.get(
       `query?query=max_over_time(elrond_provider_locked[${process.env.MAX_OVER_TIME_DURATION}])`,
-    );
-  }
-
-  async getElrondTotalSupply() {
-    return this.get(
-      `query?query=max_over_time(elrond_total_supply[${process.env.MAX_OVER_TIME_DURATION}])`,
     );
   }
 
@@ -39,9 +21,21 @@ export class ElrondAPI extends RESTDataSource {
     );
   }
 
-  async getElrondUsers() {
+  async getElrondCommission() {
     return this.get(
-      `query?query=max_over_time(elrond_provider_num_users[${process.env.MAX_OVER_TIME_DURATION}])`,
+      `query?query=max_over_time(elrond_provider_service_fee[${process.env.MAX_OVER_TIME_DURATION}])`,
+    );
+  }
+
+  async getElrondTotalSupply() {
+    return this.get(
+      `query?query=max_over_time(elrond_total_supply[${process.env.MAX_OVER_TIME_DURATION}])`,
+    );
+  }
+
+  async getElrondTVL() {
+    return this.get(
+      `query?query=max_over_time(elrond_provider_locked[${process.env.MAX_OVER_TIME_DURATION}]) * on (denom) token_price`,
     );
   }
 
@@ -49,5 +43,11 @@ export class ElrondAPI extends RESTDataSource {
     const unbondingTime = 10;
 
     return unbondingTime;
+  }
+
+  async getElrondUsers() {
+    return this.get(
+      `query?query=max_over_time(elrond_provider_num_users[${process.env.MAX_OVER_TIME_DURATION}])`,
+    );
   }
 }

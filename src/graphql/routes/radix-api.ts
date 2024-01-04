@@ -42,27 +42,14 @@ class GatewayDataSource extends RESTDataSource {
 
 export class RadixAPI extends RESTDataSource {
   override baseURL = `${(RADIX_URL as string).replace(/\/$/, "")}/`;
-  private gecko: CoinGeckoDataSource;
   private gateway: GatewayDataSource;
+  private gecko: CoinGeckoDataSource;
 
   constructor(options: DataSourceConfig) {
     super(options);
 
     this.gecko = new CoinGeckoDataSource(options);
     this.gateway = new GatewayDataSource(options);
-  }
-
-  async getTotalRadixSupply(): Promise<RadixResponse> {
-    return this.post("token/native", {
-      body: JSON.stringify({
-        network_identifier: {
-          network: "mainnet",
-        },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
   }
 
   async getRadixAPY() {
@@ -142,5 +129,18 @@ export class RadixAPI extends RESTDataSource {
     const unbondingTime = "1-3 weeks (500 epochs)";
 
     return unbondingTime;
+  }
+
+  async getTotalRadixSupply(): Promise<RadixResponse> {
+    return this.post("token/native", {
+      body: JSON.stringify({
+        network_identifier: {
+          network: "mainnet",
+        },
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
 }

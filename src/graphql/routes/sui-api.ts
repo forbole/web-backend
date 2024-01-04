@@ -21,34 +21,6 @@ export class SuiAPI extends RESTDataSource {
     this.gecko = new CoinGeckoDataSource(options);
   }
 
-  private getRequestContent(body: unknown) {
-    return {
-      body: JSON.stringify(body),
-      headers: {
-        "apikey": `${process.env.DEVTOOLS_API_KEY}`,
-        "content-type": "application/json",
-      },
-    };
-  }
-
-  private async getValidator() {
-    const response = await this.post(
-      `/`,
-      this.getRequestContent({
-        id: 1,
-        jsonrpc: "2.0",
-        // This is the same method used by the official explorer
-        method: "suix_getLatestSuiSystemState",
-        params: [],
-      }),
-    );
-
-    return response.result.activeValidators.find(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (v: any) => v.suiAddress === suiValidatorAddress,
-    );
-  }
-
   async getAPY() {
     const response = await this.post(
       `/`,
@@ -93,6 +65,16 @@ export class SuiAPI extends RESTDataSource {
     };
   }
 
+  private getRequestContent(body: unknown) {
+    return {
+      body: JSON.stringify(body),
+      headers: {
+        "apikey": `${process.env.DEVTOOLS_API_KEY}`,
+        "content-type": "application/json",
+      },
+    };
+  }
+
   async getTVL() {
     const [validator, coinPrice] = await Promise.all([
       this.getValidator(),
@@ -107,5 +89,23 @@ export class SuiAPI extends RESTDataSource {
       },
       status: "ok",
     };
+  }
+
+  private async getValidator() {
+    const response = await this.post(
+      `/`,
+      this.getRequestContent({
+        id: 1,
+        jsonrpc: "2.0",
+        // This is the same method used by the official explorer
+        method: "suix_getLatestSuiSystemState",
+        params: [],
+      }),
+    );
+
+    return response.result.activeValidators.find(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (v: any) => v.suiAddress === suiValidatorAddress,
+    );
   }
 }

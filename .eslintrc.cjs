@@ -58,6 +58,7 @@ module.exports = {
     "object-shorthand": "error",
     "operator-assignment": "error",
 
+    "perfectionist/sort-classes": "error",
     "perfectionist/sort-enums": "error",
     "perfectionist/sort-exports": "error",
     "perfectionist/sort-interfaces": "error",
