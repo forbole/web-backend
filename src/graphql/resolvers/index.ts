@@ -25,20 +25,6 @@ export const resolvers = {
 
       return result.map((res) => ({ cosmosTVL: res.value[1] }));
     },
-    allRadixStakedTokens: async (...params: unknown[]) => {
-      const { dataSources } = params[2] as ContextValue;
-
-      const result = commonHandler(
-        (await dataSources.radixPromAPI.getStakedRadix()) as Response,
-      );
-
-      if (!result) return;
-
-      return result.map((res) => ({
-        bondedToken: res.value[1],
-        metric: { instance: "radix", validator_address: res.metric.address },
-      }));
-    },
     allRadixTotalSupply: async (...params: unknown[]) => {
       const { dataSources } = params[2] as ContextValue;
       const result = await dataSources.radixAPI.getTotalRadixSupply();
@@ -366,6 +352,36 @@ export const resolvers = {
         metric: { instance: "oasis", validator_address: res.metric.identity },
         usersCount: res.value[1],
       }));
+    },
+    radixAPY: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
+      const { data, status } = await dataSources.radixAPI.getRadixAPY();
+
+      if (status === "error" || !data) return;
+
+      const { address, APY } = data;
+
+      return [
+        {
+          APY,
+          metric: { instance: "radix", validator_address: address },
+        },
+      ];
+    },
+    radixBondedToken: async (...params: unknown[]) => {
+      const { dataSources } = params[2] as ContextValue;
+      const { data, status } = await dataSources.radixAPI.getRadixBondedToken();
+
+      if (status === "error" || !data) return;
+
+      const { address, bondedToken } = data;
+
+      return [
+        {
+          bondedToken,
+          metric: { instance: "radix", validator_address: address },
+        },
+      ];
     },
     radixTVL: async (...params: unknown[]) => {
       const { dataSources } = params[2] as ContextValue;

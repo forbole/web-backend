@@ -18,25 +18,16 @@ type RadixResponse = {
   };
 };
 
-// https://dashboard.radixdlt.com/network-staking
-// https://radix-babylon-gateway-api.redoc.ly/#tag/Status
-
-export class RadixAPI extends RESTDataSource {
-  override baseURL = `${(RADIX_URL as string).replace(/\/$/, "")}/`;
-  private baseGatewayURL = "https://mainnet-gateway.radixdlt.com/";
-  private gecko: CoinGeckoDataSource;
-
-  constructor(options: DataSourceConfig) {
-    super(options);
-
-    this.gecko = new CoinGeckoDataSource(options);
-  }
-
-  async getTotalRadixSupply(): Promise<RadixResponse> {
-    return this.post("token/native", {
+class GatewayDataSource extends RESTDataSource {
+  override baseURL = "https://mainnet-gateway.radixdlt.com/";
+  getValidator() {
+    return this.post(`state/validators/list`, {
       body: JSON.stringify({
         network_identifier: {
           network: "mainnet",
+        },
+        validator_identifier: {
+          address: radixValidatorAddress,
         },
       }),
       headers: {
@@ -44,22 +35,64 @@ export class RadixAPI extends RESTDataSource {
       },
     });
   }
+}
+
+// https://dashboard.radixdlt.com/network-staking
+// https://radix-babylon-gateway-api.redoc.ly/#tag/Status
+
+export class RadixAPI extends RESTDataSource {
+  override baseURL = `${(RADIX_URL as string).replace(/\/$/, "")}/`;
+  private gateway: GatewayDataSource;
+  private gecko: CoinGeckoDataSource;
+
+  constructor(options: DataSourceConfig) {
+    super(options);
+
+    this.gecko = new CoinGeckoDataSource(options);
+    this.gateway = new GatewayDataSource(options);
+  }
+
+  async getRadixAPY() {
+    // https://dashboard.radixdlt.com/network-staking/validator_rdx1swkmn6yvrqjzpaytvug5fp0gzfy9zdzq7j7nlxe8wgjpg76vdcma8p
+    const APY = 0.0783;
+
+    return {
+      data: {
+        address: radixValidatorAddress,
+        APY,
+      },
+      status: "ok",
+    };
+  }
+
+  async getRadixBondedToken() {
+    const radixResponse = await this.gateway.getValidator();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const validator = radixResponse.validators.items.find((i: any) =>
+      (i.address as string).includes(radixValidatorAddress),
+    );
+
+    if (!validator) {
+      return {
+        status: "error",
+      };
+    }
+
+    const bondedToken = validator.active_in_epoch.stake;
+
+    return {
+      data: {
+        address: radixValidatorAddress,
+        bondedToken,
+      },
+      status: "ok",
+    };
+  }
 
   async getRadixTVL() {
     const [radixResponse, coinPrice] = await Promise.all([
-      this.post(`${this.baseGatewayURL}state/validators/list`, {
-        body: JSON.stringify({
-          network_identifier: {
-            network: "mainnet",
-          },
-          validator_identifier: {
-            address: radixValidatorAddress,
-          },
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }),
+      this.gateway.getValidator(),
       this.gecko.getCoinPrice("radix"),
     ]);
 
@@ -74,7 +107,7 @@ export class RadixAPI extends RESTDataSource {
       };
     }
 
-    const lockedUnit = validator.locked_owner_stake_unit_vault.balance;
+    const lockedUnit = Number(validator.locked_owner_stake_unit_vault.balance);
     const TVL = lockedUnit * Number(coinPrice);
 
     if (Number.isNaN(TVL)) {
@@ -96,5 +129,18 @@ export class RadixAPI extends RESTDataSource {
     const unbondingTime = "1-3 weeks (500 epochs)";
 
     return unbondingTime;
+  }
+
+  async getTotalRadixSupply(): Promise<RadixResponse> {
+    return this.post("token/native", {
+      body: JSON.stringify({
+        network_identifier: {
+          network: "mainnet",
+        },
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
 }

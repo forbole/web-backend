@@ -18,32 +18,6 @@ export class ArchwayAPI extends RESTDataSource {
     this.gecko = new CoinGeckoDataSource(options);
   }
 
-  async getTVL() {
-    const [validatorResponse, coinPrice] = await Promise.all([
-      this.get(`/staking/validators/${archwayValidatorAddress}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }),
-      this.gecko.getCoinPrice("archway"),
-    ]);
-
-    // https://github.com/forbole/cosmos-exporter/blob/8e78b8ea5a37d113f3448c423540df4edb1f4ebb/collector/validator_status.go#L40C72-L40C72
-    // Validator.DelegatorShares
-    const tokens =
-      Number(validatorResponse.result.delegator_shares) /
-      10 ** decimalsOfAArchwayBondenToken;
-
-    const TVL = tokens * Number(coinPrice);
-
-    return {
-      data: {
-        TVL,
-      },
-      status: "ok",
-    };
-  }
-
   async getAPY() {
     const [inflationResponse, validatorResponse, supplyResponse] =
       await Promise.all([
@@ -120,6 +94,32 @@ export class ArchwayAPI extends RESTDataSource {
     return {
       data: {
         bondedToken: bondedToken.toFixed(0),
+      },
+      status: "ok",
+    };
+  }
+
+  async getTVL() {
+    const [validatorResponse, coinPrice] = await Promise.all([
+      this.get(`/staking/validators/${archwayValidatorAddress}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+      this.gecko.getCoinPrice("archway"),
+    ]);
+
+    // https://github.com/forbole/cosmos-exporter/blob/8e78b8ea5a37d113f3448c423540df4edb1f4ebb/collector/validator_status.go#L40C72-L40C72
+    // Validator.DelegatorShares
+    const tokens =
+      Number(validatorResponse.result.delegator_shares) /
+      10 ** decimalsOfAArchwayBondenToken;
+
+    const TVL = tokens * Number(coinPrice);
+
+    return {
+      data: {
+        TVL,
       },
       status: "ok",
     };
