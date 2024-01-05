@@ -92,11 +92,24 @@ export class RadixAPI extends RESTDataSource {
   }
 
   async getRadixTVL() {
-    // @hardcoded
-    const tokens = 57_164_450.3;
-    const coinPrice = await this.gecko.getCoinPrice("radix");
+    const [radixResponse, coinPrice] = await Promise.all([
+      this.gateway.getValidator(),
+      this.gecko.getCoinPrice("radix"),
+    ]);
 
-    const TVL = tokens * Number(coinPrice);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const validator = radixResponse.validators.items.find((i: any) =>
+      (i.address as string).includes(radixValidatorAddress),
+    );
+
+    if (!validator) {
+      return {
+        status: "error",
+      };
+    }
+
+    const lockedUnit = Number(validator.locked_owner_stake_unit_vault.balance);
+    const TVL = lockedUnit * Number(coinPrice);
 
     if (Number.isNaN(TVL)) {
       return {
