@@ -36,7 +36,7 @@ export class OasisAPI extends RESTDataSource {
 
   async getOasisTVL() {
     // @hardcoded
-    const base = 932608;
+    const base = 57_164_450.3;
     const price = await this.gecko.getCoinPrice("rose");
 
     return [
