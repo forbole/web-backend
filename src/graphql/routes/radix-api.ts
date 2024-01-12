@@ -108,7 +108,7 @@ export class RadixAPI extends RESTDataSource {
       };
     }
 
-    const lockedUnit = Number(validator.locked_owner_stake_unit_vault.balance);
+    const lockedUnit = Number(validator.active_in_epoch.stake);
     const TVL = lockedUnit * Number(coinPrice);
 
     if (Number.isNaN(TVL)) {
